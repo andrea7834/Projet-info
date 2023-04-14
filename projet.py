@@ -148,10 +148,14 @@ class Championnat:
         for i in range(self.nb_journees):
             self.jouer_journee()
 
-if __name__ == "main":
-    # Exemples d'utilisation
+if __name__ == "__main__":
     club1 = Club("PSG")
     club2 = Club("OM")
+    club3 = Club("AC Ajaccio")
+    club4 = Club("Anger")
+    club5 = Club("Auxerre")
+    club6 = Club("Brest")
+    club7 = Club("Clermont")
     joueur1 = Joueur("Neymar", 8.5)
     joueur2 = Joueur("Mbappé", 8.0)
     club1.ajouter_joueur(joueur1)
@@ -159,7 +163,6 @@ if __name__ == "main":
     match = Match(club1, club2)
     match.jouer()
     print(f"Score final : {club1} {match.buts_dom} - {match.buts_ext} {club2}")
-
 
     # Tests unitaires
     # def test_club():
