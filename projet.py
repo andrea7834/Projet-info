@@ -112,7 +112,7 @@ class Championnat:
     def __init__(self, clubs):
         """On définit la classe Chapionnat regroupant les matchs d'une journée et le récapitulatif de la saison
 
-        Input : le nom de tous les clubs (str)
+        Input : le nom de tous les clubs (list)
         Output : None
         """
         self.nom = "Ligue 1"
@@ -149,6 +149,7 @@ class Championnat:
             self.jouer_journee()
 
 if __name__ == "__main__":
+
     club1 = Club("PSG")
     club2 = Club("OM")
     club3 = Club("AC Ajaccio")
@@ -163,10 +164,24 @@ if __name__ == "__main__":
     club12 = Club("Marseilles")
     club13 = Club("Monaco")
     club14 = Club("Montpellier")
-    joueur1 = Joueur("Neymar", 8.5)
-    joueur2 = Joueur("Mbappé", 8.0)
-    club1.ajouter_joueur(joueur1)
-    club1.ajouter_joueur(joueur2)
+    club15 = Club("Nantes")
+    club16 = Club("Nice")
+    club17 = Club("PSG")
+    club18 = Club("Reims")
+    club19 = Club("Rennes")
+    club20 = Club("Strasbourg")
+    club21 = Club("Toulouse")
+    club22 = Club("Troyes")
+
+    clubs = [club1, club2, club3, club4, club5, club6, club7, club8, club9, club10, club11,
+             club12, club13, club14, club15, club16, club17, club18, club19, club20, club21, club22]
+
+    i = 0
+    for club in clubs:
+        for i in range(1, 23):
+            joueur = Joueur(str(i), random.randint(0, 20))
+            club.ajouter_joueur(joueur)
+
     match = Match(club1, club2)
     match.jouer()
     print(f"Score final : {club1} {match.buts_dom} - {match.buts_ext} {club2}")
