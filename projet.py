@@ -1,4 +1,5 @@
 import random
+import numpy as np
 from math import exp
 from math import factorial
 
