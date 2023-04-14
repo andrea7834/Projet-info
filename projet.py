@@ -150,34 +150,56 @@ class Championnat:
 
 if __name__ == "__main__":
 
-    club1 =  Club("AC Ajaccio")
-    club2 = Club("Anger")
+    club1 =  Club("Ajaccio")
+    joueurs1 = ["Leroy", "Michelin", "Alphonse", "Lebas", "Diallo", "Vidal", "Gonzalez", "N'Diaye", "Silla", "Roure", "Hamouma"]
+    club2 = Club("Angers")
+    joueurs2 = ["Borne", "Doumbia", "Camara", "Mendy", "Masson", "Capelle", "Guillaume", "Alioui", "Sima", "Corduan", "Bamba"]
     club3 = Club("Auxerre")
+    joueurs3 = ["De Percin", "Lipinski", "Pellenard", "Jeanvier", "Bain", "Dembélé", "Da Costa", "Danois", "Autret", "Dugimont","Merdji"]
     club4 = Club("Brest")
+    joueurs4 = ["Blasquez", "Duverne", "Brassier", "Chardonnet", "Magnetti", "Del Castillo", "Le Douaron", "Lemaréchal", "Tavarès", "Mounié", "Elis"]
     club5 = Club("Clermont")
+    joueurs5 = ["Margueron", "Boyer", "Borges", "Wieteska", "Cissé", "Versini", "Maurer", "Massolin", "Rajot", "Bayo", "Gastien"]
     club6 = Club("Lens")
+    joueurs6 = ["Vincensini", "Ganiou", "Sylla", "Medina", "Fortès", "Boura", "Gradit", "Le Cardinal", "Pereira", "Varane", "Valencia"]
     club7 = Club("Lille")
+    joueurs7 = ["Chevalier", "Burlet", "Ribeiro", "Fonte", "Yoro", "Gudmundsson", "Martin", "Cabella", "Gomes", "André",  "David"]
     club8 = Club("Lorient")
+    joueurs8 = ["Pattier", "Silva", "Talbi", "Matsima", "Laporte", "Le Goff", "Kroupi", "Pelon", "Innocent", "Ponceau", "Le Fée"]
     club9 = Club("OL")
+    joueurs9 = ["Lopès", "Gusto", "Tagliafico", "Sanchez", "Caqueret", "Lepenant", "Tolisso", "Lega", "Bercola", "Aouar", "Cherki"]
     club10 = Club("OM")
-    club11 = Club("Monaco")
+    joueurs10 = ["Blanco", "Bailly", "Gigot", "Balerdi", "Clauss", "Lopez", "Payet", "Harit", "Kaboré", "Rongier", "Ounahi"]
+    club11 = Club("AS Monaco")
+    joueurs11 = ["Lienard", "Serrano", "Maripan", "Sibidé", "Jakobs", "Embolo", "Pelé", "Henrique", "Aguilar", "Ben Yedder", "Ben Seguir"]
     club12 = Club("Montpellier")
+    joueurs12 = ["Lecomte", "Sainte-Luce", "Tchato", "Sakho", "Mavididi", "Savanier", "Maouassa", "Nordin", "Germain", "Wahi", "Khazri"]
     club13 = Club("Nantes")
+    joueurs13 = ["Descamps", "Girotto", "Guessand", "Blas", "Coco", "Ganago", "Mollet", "Simon", "Delort", "Castelletto", "Pallois"]
     club14 = Club("Nice")
+    joueurs14 = ["Guarrido", "Dante", "Bryan", "Attal", "Beka Beka", "Laborde", "Pépé", "Moffi", "Diop", "Brahimi", "Thuram"]
     club15 = Club("PSG")
+    joueurs15 = ["Letellier", "Kipembé", "Ramos", "Mbappé", "Messi", "Verrati", "Neymar", "Mendès", "Sanchès", "Soler", "Ruiz"]
     club16 = Club("Reims")
+    joueurs16 = ["Lemaître", "Abdelhamid", "Lopy", "Cajuste", "Ito", "Zeneli", "Balogin", "Flips", "Serhuis", "Munetsi", "Moalida"]
     club17 = Club("Rennes")
+    joueurs17 = ["Salin", "Rodon", "Theate", "Wooh", "Assignon", "Traoré", "Terrier", "Santamaria", "Kalimuendo", "Gouiri", "Majer"]
     club18 = Club("Strasbourg")
+    joueurs18 = ["Sels", "Perrin", "Le Marchand", "H.Diallo", "Mothiba", "Gameiro", "Djiku", "Bellegarde", "Liénard", "Sanson", "Delaine"]
     club19 = Club("Toulouse")
+    joueurs19 = ["Himeur", "Dallinga", "Chaïbi", "Ratao", "Onaiwu", "Healey", "Spierings", "Aboukhlal", "Van den Boomen", "Dejaegere", "Desler"]
     club20 = Club("Troyes")
+    joueurs20 = ["Moulin", "Baldé", "Ugbo", "Ripart", "Lopez", "Odobert", "Chavalerin", "Conté", "Palaversa", "Porozo", "Salmier"]
 
     clubs = [club1, club2, club3, club4, club5, club6, club7, club8, club9, club10,
              club11, club12, club13, club14, club15, club16, club17, club18, club19, club20]
+    joueurs =  [joueurs1, joueurs2, joueurs3, joueurs4, joueurs5, joueurs6, joueurs7,
+                joueurs8, joueurs9, joueurs10, joueurs11, joueurs12, joueurs13, joueurs14,
+                joueurs15, joueurs16, joueurs17, joueurs18, joueurs19, joueurs20]
 
-    i = 0
     for club in clubs:
-        for i in range(1, 21):
-            joueur = Joueur(str(i), random.randint(0, 20))
+        for joueur in joueurs:
+            Joueur(joueur, random.randint(0, 20))
             club.ajouter_joueur(joueur)
 
     match = Match(club1, club2)
