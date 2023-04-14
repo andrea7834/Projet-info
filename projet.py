@@ -1,7 +1,9 @@
 import random
+from math import exp
+from math import factorial
 
 class Club:
-    def __init__(self, nom):
+    def __init__(self, nom, niveau):
         """ On définit la classe Club qui regroupe le nom de chaque club, ses joueurs,
         son nombre de points et le nombre de buts marqués lors de la saison
 
@@ -9,6 +11,7 @@ class Club:
         Output : None
         """
         self.nom = nom
+        self.niveau = niveau
         self.joueurs = []
         self.points = 0
         self.buts_marques = 0
@@ -31,13 +34,16 @@ class Club:
         """
         if buts_marques > buts_encaisses:
             self.points += 3
+        elif buts_marques < buts_encaisses:
+            adversaire.points += 3
         elif buts_marques == buts_encaisses:
             self.points += 1
             adversaire.points += 1
-        elif buts_marques < buts_encaisses:
-            adversaire.points += 3
+
         self.buts_marques += buts_marques
         adversaire.buts_marques += buts_encaisses
+
+
 
     def __str__(self):
         """On définit __str__ la fonction retournant une chaine de caractères avec le nom du club
@@ -84,19 +90,32 @@ class Match:
         self.equipe_ext = equipe_ext
         self.buts_dom = 0
         self.buts_ext = 0
+        self.niveau_dom = 0
+        self.niveau_ext = 0
+        self.proba_dom = 1
+        self.proba_ext = 1
 
-    def jouer(self):
+    def jouer(self, adversaire):
         """On définit la fonction jouer permettant de simuler un match joué
 
         Input : None
         Output : None
         """
 
-        # Simulation du match (génération aléatoire des buts marqués)
-        self.buts_dom = random.randint(0, 5)
-        self.buts_ext = random.randint(0, 5)
+        #Simule un match entre le club et son adversaire
+        niveau_dom = self.niveau
+        niveau_ext = adversaire.niveau
 
-        # Mise à jour des joueurs et des clubs
+        # Calcule la probabilité de marquer des buts pour chaque club en utilisant leur niveau
+        proba_dom = self.proba_dom * self.proba_ext * self.niveau_dom
+        proba_ext = self.proba_dom * self.proba_ext * self.niveau_ext
+
+        #génération aléatoires des buts en suivant une loi de poisson
+        buts_dom = int(np.random.poisson(proba_dom))
+        buts_ext = int(np.random.poisson(proba_ext))
+
+
+        # Mise à jour des statistiques des joueurs et des clubs
         for joueur in self.equipe_dom.joueurs:
             joueur.marquer_but()
         for joueur in self.equipe_ext.joueurs:
@@ -106,7 +125,6 @@ class Match:
 
     def __str__(self):
         print(f"{self.equipe_dom.nom} : {self.buts_dom}  VS {self.buts_ext} {self.equipe_ext.nom} ")
-
 
 class Championnat:
     def __init__(self, clubs):
@@ -147,6 +165,76 @@ class Championnat:
             """
         for i in range(self.nb_journees):
             self.jouer_journee()
+
+class test():
+
+    ##tests obligatoires
+    def test_victoire_implique_plus_de_buts(club1, club2, score1, score2):
+        if score1 > score2:
+            assert club1.buts_marques > club2.buts_marques
+        elif score2 > score1:
+            assert club2.buts_marques > club1.buts_marques
+        else:
+            # Match nul
+            assert club1.buts_marques == club2.buts_marques
+
+    def test_nombre_points_par_journee(journee):
+        nb_matchs = len(journee.matchs)
+        nb_points = sum([match.nb_points_gagnes() for match in journee.matchs])
+        assert 2 * nb_matchs <= nb_points <= 3 * nb_matchs
+
+    def test_nombre_matchs_par_journee(journee, nb_clubs):
+        nb_matchs = len(journee.matchs)
+        assert nb_matchs == nb_clubs // 2
+
+    ##tests supplémentaires
+
+    def test_creer_club(self):
+        c = Club("Paris Saint-Germain")
+        assert str(c) == "Paris Saint-Germain"
+        assert len(c.joueurs) == 0
+        assert c.points == 0
+        assert c.buts_marques == 0
+
+    def test_creer_joueurs(self):
+        j = Joueur("Mbappé")
+        assert str(j) == "Mbappé"
+        assert j.note == 0
+        assert j.buts_marques == 0
+
+    def test_creer_match(self):
+        c1 = Club("Paris Saint-Germain")
+        c2 = Club("Olympique de Marseille")
+        m = Match(c1, c2)
+        assert str(m) == "Paris Saint-Germain 0 - 0 Olympique de Marseille"
+        assert m.buts_dom == 0
+        assert m.buts_ext == 0
+
+    def test_jouer_match(self):
+        c1 = Club("Paris Saint-Germain")
+        c2 = Club("Olympique de Marseille")
+        m = Match(c1, c2)
+        m.jouer()
+        assert m.buts_dom != 0 or m.buts_ext != 0
+        assert m.buts_dom + m.buts_ext > 0
+        assert m.equipe_dom.points + m.equipe_ext.points == 3 or m.equipe_dom.points + m.equipe_ext.points == 2
+
+    def test_creer_championnat(self):
+        c1 = Club("Paris Saint-Germain")
+        c2 = Club("Olympique de Marseille")
+        ch = Championnat([c1, c2])
+        assert str(ch) == "Championnat avec 2 clubs"
+        assert len(ch.matchs) == 0
+        assert ch.nb_journees == 0
+
+    def test_jourdematch(self):
+        c1 = Club("Paris Saint-Germain")
+        c2 = Club("Olympique de Marseille")
+        ch = Championnat([c1, c2])
+        ch.jouer_journee()
+        assert len(ch.matchs) == 1
+        assert ch.nb_journees == 1
+        assert c1.points + c2.points >= 2
 
 if __name__ == "__main__":
 
