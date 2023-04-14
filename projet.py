@@ -150,35 +150,33 @@ class Championnat:
 
 if __name__ == "__main__":
 
-    club1 = Club("PSG")
-    club2 = Club("OM")
-    club3 = Club("AC Ajaccio")
-    club4 = Club("Anger")
-    club5 = Club("Auxerre")
-    club6 = Club("Brest")
-    club7 = Club("Clermont")
-    club8 = Club("Lens")
-    club9 = Club("Lille")
-    club10 = Club("Lorient")
-    club11 = Club("Lyon")
-    club12 = Club("Marseilles")
-    club13 = Club("Monaco")
-    club14 = Club("Montpellier")
-    club15 = Club("Nantes")
-    club16 = Club("Nice")
-    club17 = Club("PSG")
-    club18 = Club("Reims")
-    club19 = Club("Rennes")
-    club20 = Club("Strasbourg")
-    club21 = Club("Toulouse")
-    club22 = Club("Troyes")
+    club1 =  Club("AC Ajaccio")
+    club2 = Club("Anger")
+    club3 = Club("Auxerre")
+    club4 = Club("Brest")
+    club5 = Club("Clermont")
+    club6 = Club("Lens")
+    club7 = Club("Lille")
+    club8 = Club("Lorient")
+    club9 = Club("OL")
+    club10 = Club("OM")
+    club11 = Club("Monaco")
+    club12 = Club("Montpellier")
+    club13 = Club("Nantes")
+    club14 = Club("Nice")
+    club15 = Club("PSG")
+    club16 = Club("Reims")
+    club17 = Club("Rennes")
+    club18 = Club("Strasbourg")
+    club19 = Club("Toulouse")
+    club20 = Club("Troyes")
 
-    clubs = [club1, club2, club3, club4, club5, club6, club7, club8, club9, club10, club11,
-             club12, club13, club14, club15, club16, club17, club18, club19, club20, club21, club22]
+    clubs = [club1, club2, club3, club4, club5, club6, club7, club8, club9, club10,
+             club11, club12, club13, club14, club15, club16, club17, club18, club19, club20]
 
     i = 0
     for club in clubs:
-        for i in range(1, 23):
+        for i in range(1, 21):
             joueur = Joueur(str(i), random.randint(0, 20))
             club.ajouter_joueur(joueur)
 
