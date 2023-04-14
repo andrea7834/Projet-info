@@ -91,12 +91,10 @@ class Match:
         self.equipe_ext = equipe_ext
         self.buts_dom = 0
         self.buts_ext = 0
-        self.niveau_dom = 0
-        self.niveau_ext = 0
         self.proba_dom = 1
         self.proba_ext = 1
 
-    def jouer(self, adversaire):
+    def jouer(self):
         """On définit la fonction jouer permettant de simuler un match joué
 
         Input : None
@@ -104,12 +102,12 @@ class Match:
         """
 
         #Simule un match entre le club et son adversaire
-        niveau_dom = self.niveau
-        niveau_ext = adversaire.niveau
+        niveau_dom = self.equipe_dom.niveau
+        niveau_ext = self.equipe_ext.niveau
 
         # Calcule la probabilité de marquer des buts pour chaque club en utilisant leur niveau
-        proba_dom = self.proba_dom * self.proba_ext * self.niveau_dom
-        proba_ext = self.proba_dom * self.proba_ext * self.niveau_ext
+        proba_dom = self.proba_dom * self.proba_ext * niveau_dom
+        proba_ext = self.proba_dom * self.proba_ext * niveau_ext
 
         #génération aléatoires des buts en suivant une loi de poisson
         buts_dom = int(np.random.poisson(proba_dom))
@@ -191,29 +189,29 @@ class test():
     ##tests supplémentaires
 
     def test_creer_club(self):
-        c = Club("Paris Saint-Germain")
+        c = Club("Paris Saint-Germain", 5)
         assert str(c) == "Paris Saint-Germain"
         assert len(c.joueurs) == 0
         assert c.points == 0
         assert c.buts_marques == 0
 
     def test_creer_joueurs(self):
-        j = Joueur("Mbappé")
+        j = Joueur("Mbappé", 8.5)
         assert str(j) == "Mbappé"
         assert j.note == 0
         assert j.buts_marques == 0
 
     def test_creer_match(self):
-        c1 = Club("Paris Saint-Germain")
-        c2 = Club("Olympique de Marseille")
+        c1 = Club("Paris Saint-Germain", 5)
+        c2 = Club("Olympique de Marseille", 4.5)
         m = Match(c1, c2)
         assert str(m) == "Paris Saint-Germain 0 - 0 Olympique de Marseille"
         assert m.buts_dom == 0
         assert m.buts_ext == 0
 
     def test_jouer_match(self):
-        c1 = Club("Paris Saint-Germain")
-        c2 = Club("Olympique de Marseille")
+        c1 = Club("Paris Saint-Germain", 5)
+        c2 = Club("Olympique de Marseille", 4.5)
         m = Match(c1, c2)
         m.jouer()
         assert m.buts_dom != 0 or m.buts_ext != 0
@@ -221,16 +219,16 @@ class test():
         assert m.equipe_dom.points + m.equipe_ext.points == 3 or m.equipe_dom.points + m.equipe_ext.points == 2
 
     def test_creer_championnat(self):
-        c1 = Club("Paris Saint-Germain")
-        c2 = Club("Olympique de Marseille")
+        c1 = Club("Paris Saint-Germain", 5)
+        c2 = Club("Olympique de Marseille", 4.5)
         ch = Championnat([c1, c2])
         assert str(ch) == "Championnat avec 2 clubs"
         assert len(ch.matchs) == 0
         assert ch.nb_journees == 0
 
     def test_jourdematch(self):
-        c1 = Club("Paris Saint-Germain")
-        c2 = Club("Olympique de Marseille")
+        c1 = Club("Paris Saint-Germain", 5)
+        c2 = Club("Olympique de Marseille", 4.5)
         ch = Championnat([c1, c2])
         ch.jouer_journee()
         assert len(ch.matchs) == 1
@@ -239,61 +237,44 @@ class test():
 
 if __name__ == "__main__":
 
-    club1 =  Club("Ajaccio")
-    joueurs1 = ["Leroy", "Michelin", "Alphonse", "Lebas", "Diallo", "Vidal", "Gonzalez", "N'Diaye", "Silla", "Roure", "Hamouma"]
-    club2 = Club("Angers")
-    joueurs2 = ["Borne", "Doumbia", "Camara", "Mendy", "Masson", "Capelle", "Guillaume", "Alioui", "Sima", "Corduan", "Bamba"]
-    club3 = Club("Auxerre")
-    joueurs3 = ["De Percin", "Lipinski", "Pellenard", "Jeanvier", "Bain", "Dembélé", "Da Costa", "Danois", "Autret", "Dugimont","Merdji"]
-    club4 = Club("Brest")
-    joueurs4 = ["Blasquez", "Duverne", "Brassier", "Chardonnet", "Magnetti", "Del Castillo", "Le Douaron", "Lemaréchal", "Tavarès", "Mounié", "Elis"]
-    club5 = Club("Clermont")
-    joueurs5 = ["Margueron", "Boyer", "Borges", "Wieteska", "Cissé", "Versini", "Maurer", "Massolin", "Rajot", "Bayo", "Gastien"]
-    club6 = Club("Lens")
-    joueurs6 = ["Vincensini", "Ganiou", "Sylla", "Medina", "Fortès", "Boura", "Gradit", "Le Cardinal", "Pereira", "Varane", "Valencia"]
-    club7 = Club("Lille")
-    joueurs7 = ["Chevalier", "Burlet", "Ribeiro", "Fonte", "Yoro", "Gudmundsson", "Martin", "Cabella", "Gomes", "André",  "David"]
-    club8 = Club("Lorient")
-    joueurs8 = ["Pattier", "Silva", "Talbi", "Matsima", "Laporte", "Le Goff", "Kroupi", "Pelon", "Innocent", "Ponceau", "Le Fée"]
-    club9 = Club("OL")
-    joueurs9 = ["Lopès", "Gusto", "Tagliafico", "Sanchez", "Caqueret", "Lepenant", "Tolisso", "Lega", "Bercola", "Aouar", "Cherki"]
-    club10 = Club("OM")
-    joueurs10 = ["Blanco", "Bailly", "Gigot", "Balerdi", "Clauss", "Lopez", "Payet", "Harit", "Kaboré", "Rongier", "Ounahi"]
-    club11 = Club("AS Monaco")
-    joueurs11 = ["Lienard", "Serrano", "Maripan", "Sibidé", "Jakobs", "Embolo", "Pelé", "Henrique", "Aguilar", "Ben Yedder", "Ben Seguir"]
-    club12 = Club("Montpellier")
-    joueurs12 = ["Lecomte", "Sainte-Luce", "Tchato", "Sakho", "Mavididi", "Savanier", "Maouassa", "Nordin", "Germain", "Wahi", "Khazri"]
-    club13 = Club("Nantes")
-    joueurs13 = ["Descamps", "Girotto", "Guessand", "Blas", "Coco", "Ganago", "Mollet", "Simon", "Delort", "Castelletto", "Pallois"]
-    club14 = Club("Nice")
-    joueurs14 = ["Guarrido", "Dante", "Bryan", "Attal", "Beka Beka", "Laborde", "Pépé", "Moffi", "Diop", "Brahimi", "Thuram"]
-    club15 = Club("PSG")
-    joueurs15 = ["Letellier", "Kipembé", "Ramos", "Mbappé", "Messi", "Verrati", "Neymar", "Mendès", "Sanchès", "Soler", "Ruiz"]
-    club16 = Club("Reims")
-    joueurs16 = ["Lemaître", "Abdelhamid", "Lopy", "Cajuste", "Ito", "Zeneli", "Balogin", "Flips", "Serhuis", "Munetsi", "Moalida"]
-    club17 = Club("Rennes")
-    joueurs17 = ["Salin", "Rodon", "Theate", "Wooh", "Assignon", "Traoré", "Terrier", "Santamaria", "Kalimuendo", "Gouiri", "Majer"]
-    club18 = Club("Strasbourg")
-    joueurs18 = ["Sels", "Perrin", "Le Marchand", "H.Diallo", "Mothiba", "Gameiro", "Djiku", "Bellegarde", "Liénard", "Sanson", "Delaine"]
-    club19 = Club("Toulouse")
-    joueurs19 = ["Himeur", "Dallinga", "Chaïbi", "Ratao", "Onaiwu", "Healey", "Spierings", "Aboukhlal", "Van den Boomen", "Dejaegere", "Desler"]
-    club20 = Club("Troyes")
-    joueurs20 = ["Moulin", "Baldé", "Ugbo", "Ripart", "Lopez", "Odobert", "Chavalerin", "Conté", "Palaversa", "Porozo", "Salmier"]
 
-    clubs = [club1, club2, club3, club4, club5, club6, club7, club8, club9, club10,
-             club11, club12, club13, club14, club15, club16, club17, club18, club19, club20]
-    joueurs =  [joueurs1, joueurs2, joueurs3, joueurs4, joueurs5, joueurs6, joueurs7,
-                joueurs8, joueurs9, joueurs10, joueurs11, joueurs12, joueurs13, joueurs14,
-                joueurs15, joueurs16, joueurs17, joueurs18, joueurs19, joueurs20]
+    noms_clubs = ["Ajaccio", "Angers", "Auxerre", "Brest", "Clermont", "Lens", "Lille", "Lorient",
+                  "OL", "OM", "AS Monaco", "Montpellier", "Nantes", "Nice", "PSG", "Reims",
+                  "Rennes", "Strasbourg", "Toulouse", "Troyes"]
+    scores = [0.5, 0.25, 1.5, 1.25, 2.5, 4.75, 4, 2.75,
+              3.5, 4.5, 4.25, 2, 1.75, 3, 5, 3.25,
+              3.75, 1, 2.25, 0.75]
+    clubs = []
 
-    for club in clubs:
-        for joueur in joueurs:
-            Joueur(joueur, random.randint(0, 20))
-            club.ajouter_joueur(joueur)
+    for i in range (len(noms_clubs)):
+        clubs.append(Club(noms_clubs[i], scores[i]))
 
-    match = Match(club1, club2)
-    match.jouer()
-    print(f"Score final : {club1} {match.buts_dom} - {match.buts_ext} {club2}")
+    tableau_joueurs = [
+        ["Leroy", "Michelin", "Alphonse", "Lebas", "Diallo", "Vidal", "Gonzalez", "N'Diaye", "Silla", "Roure", "Hamouma"],
+        ["Borne", "Doumbia", "Camara", "Mendy", "Masson", "Capelle", "Guillaume", "Alioui", "Sima", "Corduan", "Bamba"],
+        ["De Percin", "Lipinski", "Pellenard", "Jeanvier", "Bain", "Dembélé", "Da Costa", "Danois", "Autret", "Dugimont", "Merdji"],
+        ["Blasquez", "Duverne", "Brassier", "Chardonnet", "Magnetti", "Del Castillo", "Le Douaron", "Lemaréchal", "Tavarès", "Mounié", "Elis"],
+        ["Margueron", "Boyer", "Borges", "Wieteska", "Cissé", "Versini", "Maurer", "Massolin", "Rajot", "Bayo", "Gastien"],
+        ["Vincensini", "Ganiou", "Sylla", "Medina", "Fortès", "Boura", "Gradit", "Le Cardinal", "Pereira", "Varane", "Valencia"],
+        ["Chevalier", "Burlet", "Ribeiro", "Fonte", "Yoro", "Gudmundsson", "Martin", "Cabella", "Gomes", "André",  "David"],
+        ["Pattier", "Silva", "Talbi", "Matsima", "Laporte", "Le Goff", "Kroupi", "Pelon", "Innocent", "Ponceau", "Le Fée"],
+        ["Lopès", "Gusto", "Tagliafico", "Sanchez", "Caqueret", "Lepenant", "Tolisso", "Lega", "Bercola", "Aouar", "Cherki"],
+        ["Blanco", "Bailly", "Gigot", "Balerdi", "Clauss", "Lopez", "Payet", "Harit", "Kaboré", "Rongier", "Ounahi"],
+        ["Lienard", "Serrano", "Maripan", "Sibidé", "Jakobs", "Embolo", "Pelé", "Henrique", "Aguilar", "Ben Yedder", "Ben Seguir"],
+        ["Lecomte", "Sainte-Luce", "Tchato", "Sakho", "Mavididi", "Savanier", "Maouassa", "Nordin", "Germain", "Wahi", "Khazri"],
+        ["Descamps", "Girotto", "Guessand", "Blas", "Coco", "Ganago", "Mollet", "Simon", "Delort", "Castelletto", "Pallois"],
+        ["Guarrido", "Dante", "Bryan", "Attal", "Beka Beka", "Laborde", "Pépé", "Moffi", "Diop", "Brahimi", "Thuram"],
+        ["Letellier", "Kipembé", "Ramos", "Mbappé", "Messi", "Verrati", "Neymar", "Mendès", "Sanchès", "Soler", "Ruiz"],
+        ["Lemaître", "Abdelhamid", "Lopy", "Cajuste", "Ito", "Zeneli", "Balogin", "Flips", "Serhuis", "Munetsi", "Moalida"],
+        ["Salin", "Rodon", "Theate", "Wooh", "Assignon", "Traoré", "Terrier", "Santamaria", "Kalimuendo", "Gouiri", "Majer"],
+        ["Sels", "Perrin", "Le Marchand", "H.Diallo", "Mothiba", "Gameiro", "Djiku", "Bellegarde", "Liénard", "Sanson", "Delaine"],
+        ["Himeur", "Dallinga", "Chaïbi", "Ratao", "Onaiwu", "Healey", "Spierings", "Aboukhlal", "Van den Boomen", "Dejaegere", "Desler"],
+        ["Moulin", "Baldé", "Ugbo", "Ripart", "Lopez", "Odobert", "Chavalerin", "Conté", "Palaversa", "Porozo", "Salmier"]
+    ]
+
+    # match = Match(club1, club2)
+    # match.jouer()
+    # print(f"Score final : {club1} {match.buts_dom} - {match.buts_ext} {club2}")
 
     # Tests unitaires
     # def test_club():
