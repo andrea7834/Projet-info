@@ -245,32 +245,22 @@ if __name__ == "__main__":
               3.5, 4.5, 4.25, 2, 1.75, 3, 5, 3.25,
               3.75, 1, 2.25, 0.75]
     clubs = []
+    lieux = []
 
     for i in range (len(noms_clubs)):
         clubs.append(Club(noms_clubs[i], scores[i]))
 
-    tableau_joueurs = [
-        ["Leroy", "Michelin", "Alphonse", "Lebas", "Diallo", "Vidal", "Gonzalez", "N'Diaye", "Silla", "Roure", "Hamouma"],
-        ["Borne", "Doumbia", "Camara", "Mendy", "Masson", "Capelle", "Guillaume", "Alioui", "Sima", "Corduan", "Bamba"],
-        ["De Percin", "Lipinski", "Pellenard", "Jeanvier", "Bain", "Dembélé", "Da Costa", "Danois", "Autret", "Dugimont", "Merdji"],
-        ["Blasquez", "Duverne", "Brassier", "Chardonnet", "Magnetti", "Del Castillo", "Le Douaron", "Lemaréchal", "Tavarès", "Mounié", "Elis"],
-        ["Margueron", "Boyer", "Borges", "Wieteska", "Cissé", "Versini", "Maurer", "Massolin", "Rajot", "Bayo", "Gastien"],
-        ["Vincensini", "Ganiou", "Sylla", "Medina", "Fortès", "Boura", "Gradit", "Le Cardinal", "Pereira", "Varane", "Valencia"],
-        ["Chevalier", "Burlet", "Ribeiro", "Fonte", "Yoro", "Gudmundsson", "Martin", "Cabella", "Gomes", "André",  "David"],
-        ["Pattier", "Silva", "Talbi", "Matsima", "Laporte", "Le Goff", "Kroupi", "Pelon", "Innocent", "Ponceau", "Le Fée"],
-        ["Lopès", "Gusto", "Tagliafico", "Sanchez", "Caqueret", "Lepenant", "Tolisso", "Lega", "Bercola", "Aouar", "Cherki"],
-        ["Blanco", "Bailly", "Gigot", "Balerdi", "Clauss", "Lopez", "Payet", "Harit", "Kaboré", "Rongier", "Ounahi"],
-        ["Lienard", "Serrano", "Maripan", "Sibidé", "Jakobs", "Embolo", "Pelé", "Henrique", "Aguilar", "Ben Yedder", "Ben Seguir"],
-        ["Lecomte", "Sainte-Luce", "Tchato", "Sakho", "Mavididi", "Savanier", "Maouassa", "Nordin", "Germain", "Wahi", "Khazri"],
-        ["Descamps", "Girotto", "Guessand", "Blas", "Coco", "Ganago", "Mollet", "Simon", "Delort", "Castelletto", "Pallois"],
-        ["Guarrido", "Dante", "Bryan", "Attal", "Beka Beka", "Laborde", "Pépé", "Moffi", "Diop", "Brahimi", "Thuram"],
-        ["Letellier", "Kipembé", "Ramos", "Mbappé", "Messi", "Verrati", "Neymar", "Mendès", "Sanchès", "Soler", "Ruiz"],
-        ["Lemaître", "Abdelhamid", "Lopy", "Cajuste", "Ito", "Zeneli", "Balogin", "Flips", "Serhuis", "Munetsi", "Moalida"],
-        ["Salin", "Rodon", "Theate", "Wooh", "Assignon", "Traoré", "Terrier", "Santamaria", "Kalimuendo", "Gouiri", "Majer"],
-        ["Sels", "Perrin", "Le Marchand", "H.Diallo", "Mothiba", "Gameiro", "Djiku", "Bellegarde", "Liénard", "Sanson", "Delaine"],
-        ["Himeur", "Dallinga", "Chaïbi", "Ratao", "Onaiwu", "Healey", "Spierings", "Aboukhlal", "Van den Boomen", "Dejaegere", "Desler"],
-        ["Moulin", "Baldé", "Ugbo", "Ripart", "Lopez", "Odobert", "Chavalerin", "Conté", "Palaversa", "Porozo", "Salmier"]
-    ]
+    fichier = open("C:\Projet-info\\noms_joueurs.txt", "r")
+    equipe = []
+    ligne = fichier.readline()
+    while ligne != "":
+        noms = ligne.split('"')
+        noms = ligne.strip(',')
+        noms = ligne.strip('\n')
+        equipe.append([noms])
+        ligne = fichier.readline()
+    print(equipe)
+    fichier.close()
 
     # match = Match(club1, club2)
     # match.jouer()
