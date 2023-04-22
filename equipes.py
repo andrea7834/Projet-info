@@ -45,7 +45,7 @@ class Club(list):
             self.points += 3
         elif buts_marques < buts_encaisses:
             adversaire.points += 3
-        elif buts_marques == buts_encaisses:
+        else:
             self.points += 1
             adversaire.points += 1
 

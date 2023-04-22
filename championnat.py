@@ -3,8 +3,6 @@
 from equipes import  Club, Joueur
 import random
 import numpy as np
-from math import exp
-from math import factorial
 
 """
 Ce module contient la définition de la classe principale servant à créer le championnat
@@ -32,11 +30,10 @@ class Match:
         Output : None
         """
 
-        #Simule un match entre le club et son adversaire
         niveau_dom = self.equipe_dom.niveau
         niveau_ext = self.equipe_ext.niveau
 
-        # Calcule la probabilité de marquer des buts pour chaque club en utilisant leur niveau
+        # Calcule le nombre de buts moyen pour chaque club en utilisant leur niveau
         self.proba_dom = int(niveau_dom) + self.proba_dom
         self.proba_ext = self.proba_ext + int(niveau_ext)
 
@@ -61,7 +58,7 @@ class Match:
         Input : None
         Output : None
             """
-        return(f"{self.equipe_dom.nom} : {self.buts_dom}  VS {self.buts_ext} {self.equipe_ext.nom} ")
+        return(f"{self.equipe_dom.nom} : {self.buts_dom} VS {self.buts_ext} : {self.equipe_ext.nom}")
 
 class Championnat:
     def __init__(self, clubs):
@@ -94,7 +91,7 @@ class Championnat:
         for match in matchs:
             match.jouer()
         #self.clubs.sort(key=lambda x: (x.points, x.buts_marques), reverse=True)
-        Classement.classement_recursive(self, clubs)
+        Classement.classement_recursive(self,self.clubs)
 
     def jouer_saison(self):
         """ On définit la méthode jouer_saison le récapitulatif des matchs joués sur la saison
@@ -132,8 +129,8 @@ class Classement(Club):
         droite = clubs[milieu:]
 
         #Trier chaque partie en appelant la fonction: récursivité
-        gauche_triee = Classement.classement_recursive(gauche)
-        droite_triee = Classement.classement_recursive(droite)
+        gauche_triee = Classement.classement_recursive(self, gauche)
+        droite_triee = Classement.classement_recursive(self, droite)
 
         # Fusionnez les deux listes classées obtenues à partir des appels récursifs en une seule liste triée
         clubs_tries = []
