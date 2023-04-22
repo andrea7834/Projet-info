@@ -1,4 +1,4 @@
-from projet import Club, Joueur, Match, Championnat
+from championnat import Club, Joueur, Match, Championnat
 class test():
 
     ##tests obligatoires

@@ -1,9 +1,15 @@
+# -*- coding: utf-8 -*-
+
 import random
 import numpy as np
 from math import exp
 from math import factorial
 
-class Club:
+"""
+Ce module contient la définition de la classe principale servant à créer le jeu
+"""
+
+class Club(list):
     def __init__(self, nom, niveau, lieu):
         """ On définit la classe Club qui regroupe le nom de chaque club, ses joueurs,
         son nombre de points et le nombre de buts marqués lors de la saison
@@ -13,6 +19,7 @@ class Club:
                   lieu (str)
         Output : None
         """
+        super().__init__()
         self.nom = nom
         self.niveau = niveau
         self.lieu = lieu
@@ -98,8 +105,8 @@ class Match:
         self.equipe_ext = equipe_ext
         self.buts_dom = 0
         self.buts_ext = 0
-        self.proba_dom = 1
-        self.proba_ext = 1
+        self.proba_dom = 1.0
+        self.proba_ext = 1.0
 
     def jouer(self):
         """On définit la méthode jouer permettant de simuler un match joué
