@@ -50,7 +50,7 @@ class Club:
 
 
     def __str__(self):
-        """On définit __str__ la fonction retournant une chaine de caractères avec le nom du club
+        """On définit __str__ la méthode retournant une chaine de caractères avec le nom du club
         Input : None
         Output : None
         """
@@ -70,7 +70,7 @@ class Joueur:
         self.buts_marques = 0
 
     def marquer_but(self):
-        """On définit la fonction marquer_but mettant à jour le nombre de buts marqués
+        """On définit la méthode marquer_but mettant à jour le nombre de buts marqués
         par le joueur lorsqu'il marque un but
 
         Input : None
@@ -79,7 +79,7 @@ class Joueur:
         self.buts_marques += 1
 
     def __str__(self):
-        """On définit __str__ la fonction retournant une chaine de caractères avec le nom du joueur
+        """On définit __str__ la méthode retournant une chaine de caractères avec le nom du joueur
             Input : None
             Output : None
             """
@@ -102,7 +102,7 @@ class Match:
         self.proba_ext = 1
 
     def jouer(self):
-        """On définit la fonction jouer permettant de simuler un match joué
+        """On définit la méthode jouer permettant de simuler un match joué
 
         Input : None
         Output : None
@@ -130,11 +130,17 @@ class Match:
         self.equipe_ext.jouer_match(self.equipe_dom, self.buts_ext, self.buts_dom)
 
     def __str__(self):
+        """On définit __str__ la méthode retournant une chaine de caractères avec le nom des deux équipes qui
+        se sont affrontées lors du match ainsi que leur score final respectif.
+
+        Input : None
+        Output : None
+            """
         print(f"{self.equipe_dom.nom} : {self.buts_dom}  VS {self.buts_ext} {self.equipe_ext.nom} ")
 
 class Championnat:
     def __init__(self, clubs):
-        """On définit la classe Chapionnat regroupant les matchs d'une journée et le récapitulatif de la saison
+        """On définit la classe Championnat regroupant les matchs d'une journée et le récapitulatif de la saison
 
         Input : le nom de tous les clubs (list)
         Output : None
@@ -146,7 +152,7 @@ class Championnat:
         self.nb_journees = 0
 
     def jouer_journee(self):
-        """ On définit la fonction jouer_journee le récapitulatif des matchs joués en une journée
+        """ On définit la méthode jouer_journee le récapitulatif des matchs joués en une journée
 
         Input : None
         Output : None
@@ -164,7 +170,7 @@ class Championnat:
         self.clubs.sort(key=lambda x: (x.points, x.buts_marques), reverse=True)
 
     def jouer_saison(self):
-        """ On définit la fonction jouer_saison le récapitulatif des matchs joués sur la saison
+        """ On définit la méthode jouer_saison le récapitulatif des matchs joués sur la saison
 
             Input : None
             Output : None
