@@ -9,7 +9,8 @@ class Club:
         son nombre de points et le nombre de buts marqués lors de la saison
 
         Input : nom du club (str)
-                   niveau (float)
+                  niveau (float)
+                  lieu (str)
         Output : None
         """
         self.nom = nom
@@ -20,14 +21,15 @@ class Club:
         self.buts_marques = 0
 
     def ajouter_joueur(self, joueur):
-        """On définit la fonction ajouter_joueur permettant d'ajouter un joueur dans l'équipe du club
+        """On définit la méthode ajouter_joueur permettant d'ajouter un joueur dans l'équipe du club
 
+        Input : nom du joueur appartennat au club (str)
         Output : None
         """
         self.joueurs.append(joueur)
 
     def jouer_match(self, adversaire, buts_marques, buts_encaisses):
-        """On définit la fonction jouer_match ajoutant un match dans le tableau des matchs
+        """On définit la méthode jouer_match ajoutant un match dans le tableau des matchs
 
         Inputs : adversaire (str)
                     buts_marques (int)
@@ -77,6 +79,10 @@ class Joueur:
         self.buts_marques += 1
 
     def __str__(self):
+        """On définit __str__ la fonction retournant une chaine de caractères avec le nom du joueur
+            Input : None
+            Output : None
+            """
         return self.nom
 
 
