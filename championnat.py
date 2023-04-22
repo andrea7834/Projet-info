@@ -6,7 +6,7 @@ from math import exp
 from math import factorial
 
 """
-Ce module contient la définition de la classe principale servant à créer le jeu
+Ce module contient la définition de la classe principale servant à créer le championnat
 """
 
 class Club(list):

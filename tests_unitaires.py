@@ -1,4 +1,9 @@
 from championnat import Club, Joueur, Match, Championnat
+
+"""
+Ce module contient les tests unitaires 
+"""
+
 class test():
 
     ##tests obligatoires
