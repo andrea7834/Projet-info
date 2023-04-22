@@ -58,7 +58,7 @@ class Club:
 
 
 class Joueur:
-    def __init__(self, nom, note):
+    def __init__(self, nom):
         """On définit la classe Joueur définissant les caractéristiques d'un joueur
 
         Input  :  nom du joueur (str)
@@ -66,7 +66,7 @@ class Joueur:
         Output : None
         """
         self.nom = nom
-        self.note = note
+        self.note = 0
         self.buts_marques = 0
 
     def marquer_but(self):
