@@ -37,12 +37,12 @@ class Match:
         niveau_ext = self.equipe_ext.niveau
 
         # Calcule la probabilité de marquer des buts pour chaque club en utilisant leur niveau
-        proba_dom = self.proba_dom * self.proba_ext * niveau_dom
-        proba_ext = self.proba_dom * self.proba_ext * niveau_ext
+        self.proba_dom = int(niveau_dom) + self.proba_dom
+        self.proba_ext = self.proba_ext + int(niveau_ext)
 
         #génération aléatoires des buts en suivant une loi de poisson
-        buts_dom = int(np.random.poisson(proba_dom))
-        buts_ext = int(np.random.poisson(proba_ext))
+        buts_dom = int(np.random.poisson(self.proba_dom))
+        buts_ext = int(np.random.poisson(self.proba_ext))
 
 
         # Mise à jour des statistiques des joueurs et des clubs
@@ -53,6 +53,7 @@ class Match:
         self.equipe_dom.jouer_match(self.equipe_ext, self.buts_dom, self.buts_ext)
         self.equipe_ext.jouer_match(self.equipe_dom, self.buts_ext, self.buts_dom)
 
+
     def __str__(self):
         """On définit __str__ la méthode retournant une chaine de caractères avec le nom des deux équipes qui
         se sont affrontées lors du match ainsi que leur score final respectif.
@@ -60,7 +61,7 @@ class Match:
         Input : None
         Output : None
             """
-        print(f"{self.equipe_dom.nom} : {self.buts_dom}  VS {self.buts_ext} {self.equipe_ext.nom} ")
+        return(f"{self.equipe_dom.nom} : {self.buts_dom}  VS {self.buts_ext} {self.equipe_ext.nom} ")
 
 class Championnat:
     def __init__(self, clubs):
@@ -77,7 +78,7 @@ class Championnat:
         self.nb_journees = 0
 
     def jouer_journee(self):
-        """ On définit la méthode jouer_journee le récapitulatif des matchs joués en une journée
+        """ On définit la méthode jouer_journee qui donne le récapitulatif des matchs joués en une journée
 
         Input : None
         Output : None
@@ -92,7 +93,8 @@ class Championnat:
         # Jouer les matchs et mettre à jour le classement
         for match in matchs:
             match.jouer()
-        self.clubs.sort(key=lambda x: (x.points, x.buts_marques), reverse=True)
+        #self.clubs.sort(key=lambda x: (x.points, x.buts_marques), reverse=True)
+        Classement.classement_recursive(self, clubs)
 
     def jouer_saison(self):
         """ On définit la méthode jouer_saison le récapitulatif des matchs joués sur la saison
@@ -102,6 +104,47 @@ class Championnat:
             """
         for i in range(self.nb_journees):
             self.jouer_journee()
+
+class Classement(Club):
+
+    def __init__(self,clubs,points):
+        '''
+        On définit la classe Classement pour actualiser le classement général du championnat
+
+        Input : le nom de tous les clubs (list)
+                les points des clubs (int)
+        Output : None
+        '''
+
+        super().__init__(noms_clubs, lieux)
+        self.clubs = clubs
+        self.points = points
+
+    def classement_recursive(self, clubs):
+        '''fonction qui classe les clubs par ordre décroissants de points'''
+        # Cas de base : une liste d'un seul élément est déjà triée
+        if len(clubs) == 1:
+            return clubs
+
+        # Divisez la liste de clubs en deux parties égales
+        milieu = len(clubs) // 2
+        gauche = clubs[:milieu]
+        droite = clubs[milieu:]
+
+        #Trier chaque partie en appelant la fonction: récursivité
+        gauche_triee = Classement.classement_recursive(gauche)
+        droite_triee = Classement.classement_recursive(droite)
+
+        # Fusionnez les deux listes classées obtenues à partir des appels récursifs en une seule liste triée
+        clubs_tries = []
+        while gauche_triee and droite_triee:
+            if gauche_triee[0].points <= droite_triee[0].points:
+                clubs_tries.append(gauche_triee.pop(0))
+            else:
+                clubs_tries.append(droite_triee.pop(0))
+
+        clubs_tries.extend(gauche_triee)
+        clubs_tries.extend(droite_triee)
 
 
 if __name__ == "__main__":
@@ -118,7 +161,7 @@ if __name__ == "__main__":
                   "Rennes", "Strasbourg", "Toulouse", "Troyes"]
 
     for i in range (len(noms_clubs)):
-        clubs.append(Club(noms_clubs[i], scores[i], lieux[i]))
+        clubs.append(Club(noms_clubs[i], lieux[i], scores[i]))
 
     fichier = open("C:\Projet-info\\noms_joueurs.txt", "r")
     equipe = []
