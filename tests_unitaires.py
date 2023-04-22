@@ -1,4 +1,5 @@
-from championnat import Club, Joueur, Match, Championnat
+from championnat import Match, Championnat
+from equipes import  Club, Joueur
 
 """
 Ce module contient les tests unitaires 
