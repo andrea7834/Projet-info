@@ -69,6 +69,7 @@ class Championnat:
         Input : le nom de tous les clubs (list)
         Output : None
         """
+        super().__init__()
         self.nom = "Ligue 1"
         self.clubs = clubs
         self.matchs = []

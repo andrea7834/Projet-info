@@ -10,7 +10,7 @@ Ce module contient la définition des classe Joueurs et Clubs permettant la cré
 """
 
 class Club(list):
-    def __init__(self, nom, niveau, lieu):
+    def __init__(self, nom, lieu, niveau=0):
         """ On définit la classe Club qui regroupe le nom de chaque club, ses joueurs,
         son nombre de points et le nombre de buts marqués lors de la saison
 
