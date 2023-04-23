@@ -2,6 +2,8 @@
 
 import random
 import numpy as np
+from math import exp
+from math import factorial
 
 """
 Ce module contient la définition des classe Joueurs et Clubs permettant la création des équipes
@@ -45,7 +47,7 @@ class Club(list):
             self.points += 3
         elif buts_marques < buts_encaisses:
             adversaire.points += 3
-        else:
+        elif buts_marques == buts_encaisses:
             self.points += 1
             adversaire.points += 1
 
@@ -57,10 +59,9 @@ class Club(list):
     def __str__(self):
         """On définit __str__ la méthode retournant une chaine de caractères avec le nom du club
         Input : None
-        Output : Nom et points du club (str)
-
+        Output : None
         """
-        return "{} : {} points".format(self.nom, self.points)
+        return self.nom
 
 
 class Joueur:
@@ -91,13 +92,12 @@ class Joueur:
             Input : None
             Output : None
             """
-        self.note = np.max(20.0, self.note + 20 * random.random())
+        self.note = np.max(20.0, self.note + 20*random.random())
         # Lorsque le joueur a atteint la note de 20, il ne peut pas avoir plus
 
     def __str__(self):
         """On définit __str__ la méthode retournant une chaine de caractères avec le nom du joueur
             Input : None
-            Output : Nom et note du joueur
-
+            Output : None
             """
-        return "{} ({})".format(self.nom, self.note)
+        return self.nom

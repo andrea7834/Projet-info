@@ -1,8 +1,10 @@
+# -*- coding: utf-8 -*-
+
 from championnat import Match, Championnat
 from equipes import  Club, Joueur
 import unittest
 """
-Ce module contient les tests unitaires 
+Ce module contient les tests unitaires. 
 """
 
 class testClub(unittest.TestCase):
