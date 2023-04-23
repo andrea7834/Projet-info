@@ -12,17 +12,19 @@ class Match(Club):
     def __init__(self):
         """On définit la classe Match récapitulant le match joué par deux équipes
 
-        Input : équipe jouant à domicile (str)
-                  équipe jouant à l'extérieur (str)
+        Input : None
         Output : None
         """
         super().__init__()
         self.equipe_dom = ""
         self.equipe_ext = ""
-        self.buts_dom = 0
-        self.buts_ext = 0
-        self.proba_dom = 1.0
-        self.proba_ext = 1.0
+        self.buts_dom = np.zeros((1, 10)) # Il y a 10 matchs par jours
+        self.buts_ext = np.zeros((1, 10))
+        self.proba_dom = np.ones((1, 10))
+        self.proba_ext = np.ones((1, 10))
+
+    def equipes_dom(self):
+
 
     def jouer_match(self, equipeA, equipeB):
         """On définit la méthode jouer_match ajoutant un match dans le tableau des matchs
@@ -31,6 +33,13 @@ class Match(Club):
                     equipeB (str)
         Output : None
         """
+        # Calcule le nombre de buts moyen pour chaque club en utilisant leur niveau
+        self.proba_dom = int(niveau_dom) + self.proba_dom
+        self.proba_ext = self.proba_ext + int(niveau_ext)
+
+        #génération aléatoires des buts en suivant une loi de poisson
+        buts_dom = int(np.random.poisson(self.proba_dom))
+        buts_ext = int(np.random.poisson(self.proba_ext))
 
         # On définit le nombre de buts marqués et encaissés en fonction du niveau de l'équipe
         buts_marquesA = int(self.niveau * np.random.randint(0, 5))
