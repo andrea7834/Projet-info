@@ -9,7 +9,7 @@ from math import factorial
 Ce module contient la définition des classe Joueurs et Clubs permettant la création des équipes
 """
 
-class Joueur:
+class Joueur(list):
     def __init__(self):
         """On définit la classe Joueur définissant les caractéristiques des joueurs
         On initialise tout par des listes vides
@@ -17,6 +17,7 @@ class Joueur:
         Input : None
         Output : None
         """
+        super().__init__()
         self.noms_joueurs = []
         self.notes = []
         self.buts_marques = []
