@@ -76,9 +76,7 @@ class Club(Joueur):
         """ On définit la classe Club qui regroupe le nom de chaque club, ses joueurs,
         son nombre de points et le nombre de buts marqués lors de la saison
 
-        Input : nom du club (list)
-                  lieux (list)
-                  niveau (list)
+        Input : None
         Output : None
         """
         super().__init__()
@@ -88,6 +86,8 @@ class Club(Joueur):
         self.joueurs = []
         self.points = []
         self.buts_marques = []
+        self.adversaires_a_domicile = []
+        self.adversaires_a_l_ext = []
 
     def creer_club(self, nom_club, niveau, lieu, noms_joueurs):
         """On définit la méthode gagner_match augmentant le nombre de points de 3 de l'équipe gagnante
@@ -102,7 +102,6 @@ class Club(Joueur):
         self.niveau.append(niveau)
         self.lieux.append(lieu)
         self.joueurs.append(noms_joueurs)
-
 
     def gagner_match(self, nom_club):
         """On définit la méthode gagner_match augmentant le nombre de points de 3 de l'équipe gagnante

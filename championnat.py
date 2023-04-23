@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from equipes import Club, Joueur
+from scipy import special
 import random
 import numpy as np
 
@@ -16,15 +17,6 @@ class Match(Club):
         Output : None
         """
         super().__init__()
-        self.equipe_dom = ""
-        self.equipe_ext = ""
-        self.buts_dom = np.zeros((1, 10)) # Il y a 10 matchs par jours
-        self.buts_ext = np.zeros((1, 10))
-        self.proba_dom = np.ones((1, 10))
-        self.proba_ext = np.ones((1, 10))
-
-    def equipes_dom(self):
-
 
     def jouer_match(self, equipeA, equipeB):
         """On définit la méthode jouer_match ajoutant un match dans le tableau des matchs
@@ -33,13 +25,6 @@ class Match(Club):
                     equipeB (str)
         Output : None
         """
-        # Calcule le nombre de buts moyen pour chaque club en utilisant leur niveau
-        self.proba_dom = int(niveau_dom) + self.proba_dom
-        self.proba_ext = self.proba_ext + int(niveau_ext)
-
-        #génération aléatoires des buts en suivant une loi de poisson
-        buts_dom = int(np.random.poisson(self.proba_dom))
-        buts_ext = int(np.random.poisson(self.proba_ext))
 
         # On définit le nombre de buts marqués et encaissés en fonction du niveau de l'équipe
         buts_marquesA = int(self.niveau * np.random.randint(0, 5))
@@ -60,57 +45,84 @@ class Match(Club):
         self.buts_marques[j] += buts_marquesB
 
         for nb_butsA in range(buts_marquesA + 1):
-            indice_buteur = np.random.randint(1,
-                                              12)  # On prend un buteur au hasard dans l'équipe (sauf le gardien d'indice 0)
+            indice_buteur = np.random.randint(1,12)
+            # On prend un buteur au hasard dans l'équipe (sauf le gardien d'indice 0)
             buteur = self.noms_joueurs()[i + indice_buteur]
             self.marquer_but(buteur)
             self.actualiser_note(buteur)
 
         for nb_butsB in range(buts_marquesB + 1):
-            indice_buteur = np.random.randint(1,
-                                              12)  # On prend un buteur au hasard dans l'équipe (sauf le gardien d'indice 0)
+            indice_buteur = np.random.randint(1, 12)
+            # On prend un buteur au hasard dans l'équipe (sauf le gardien d'indice 0)
             buteur = self.noms_joueurs()[j + indice_buteur]
             self.marquer_but(buteur)
             self.actualiser_note(buteur)
 
-    def jouer(self):
-        """On définit la méthode jouer permettant de simuler un match joué
+        return buts_marquesA, buts_marquesB
 
-        Input : None
+
+class Journee(Match):
+
+    def __init__(self):
+        super().__init__()
+        self.nb_rencontres = 10  # Comme il y a 20 équipes alors il y a 10 matchs par jour puisque toutes les équipes jouent une fois
+        self.domicile = []  # On définit les équipes jouant à domicile ou à l'extérieur
+        self.exterieur = []
+        self.buts_dom = [np.zeros((1, 10))]  # Il y a 10 matchs par jours
+        self.buts_ext = np.zeros((1, 10))
+        self.nb_jours_restants = 38  # il y a 19 rencontres aller et 19 rencontres retour
+
+    def numero_journee(self):
+        """On définit la méthode numero_journee déterminant le numéro de la journée de match
+        Inputs : None
         Output : None
         """
+        return 39 - self.nb_jours_restants
 
-        niveau_dom = self.equipe_dom.niveau
-        niveau_ext = self.equipe_ext.niveau
-
-        # Calcule le nombre de buts moyen pour chaque club en utilisant leur niveau
-        self.proba_dom = int(niveau_dom) + self.proba_dom
-        self.proba_ext = self.proba_ext + int(niveau_ext)
-
-        #génération aléatoires des buts en suivant une loi de poisson
-        buts_dom = int(np.random.poisson(self.proba_dom))
-        buts_ext = int(np.random.poisson(self.proba_ext))
-
-
-        # Mise à jour des statistiques des joueurs et des clubs
-        for joueur in self.equipe_dom.joueurs:
-            joueur.marquer_but()
-        for joueur in self.equipe_ext.joueurs:
-            joueur.marquer_but()
-        self.equipe_dom.jouer_match(self.equipe_ext, self.buts_dom, self.buts_ext)
-        self.equipe_ext.jouer_match(self.equipe_dom, self.buts_ext, self.buts_dom)
-
-
-    def __str__(self):
-        """On définit __str__ la méthode retournant une chaine de caractères avec le nom des deux équipes qui
-        se sont affrontées lors du match ainsi que leur score final respectif.
-
-        Input : None
+    def rencontres_journee(self):
+        """On définit la méthode rencontres_journee décidant des rencontres de la journee
+        Inputs : None
         Output : None
-            """
-        return(f"{self.equipe_dom.nom} : {self.buts_dom} VS {self.buts_ext} : {self.equipe_ext.nom}")
+        """
+        self.nb_jours_restants -= 1
+        if self.nb_jours_restants > 0:  # On vérifie bien que ce n'est pas la fin de la saison
+            equipes = self.noms_clubs
 
-class Championnat:
+            while self.nb_rencontres > 0:
+                for i in range(len(equipes) + 1):
+                    for j in range(len(equipes) + 1):
+                        # On vérifie que ces deux équipes ne se sont pas affrontées au domicile de l'équipe i
+                        if equipe[j] not in self.adversaires_a_domicile[i] and equipe[i] not in self.adversaires_a_l_ext[j]:
+                            self.domicile.append(equipe[i])
+                            self.exterieur.append(equipe[j])
+                            self.adversaires_a_domicile[i].append(equipe[j])
+                            self.adversaires_a_l_ext[j].append(equipe[i])
+                            self.nb_rencontres -= 1
+
+    def simuler_journee(self):
+        """On définit la méthode simuler_journee simulant les résultats de la journée à l'aide
+        de la fonction jouer_match de la classe Match
+        Inputs : None
+        Output : None
+        """
+        domicile = self.rencontres_journee()[0]
+        score_dom = []
+        exterieur = self.rencontres_journee()[1]
+        score_ext = []
+        for i in range(11): # Il y a 10 matchs par jour puisqu'il y a 20 équipes différentes
+            equipeA = domicile[i]
+            equipeB = exterieur[i]
+            butsA, butsB = self.jouer_match(equipeA, equipeB)
+            score_dom.append(butsA)
+            score_ext.append(butsB)
+        domicile = np.array(domicile).reshape(10,)
+        exterieur = np.array(exterieur).reshape(10,)
+        score_dom = np.array(score_dom).reshape(10,)
+        score_ext = np.array(score_ext).reshape(10,)
+        return np.array(domicile, score_dom, score_ext, exterieur)
+
+
+class Saison(Journee):
     def __init__(self, clubs):
         """On définit la classe Championnat regroupant les matchs d'une journée et le récapitulatif de la saison
 
