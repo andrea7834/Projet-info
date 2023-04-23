@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from equipes import Club, Joueur
+from equipes import Club
 import numpy as np
+import sys
 
 """
 Ce module contient la définition de la classe principale servant à créer le championnat
@@ -43,11 +44,11 @@ class Journee(Club):
                 for i in range(len(equipes) + 1):
                     for j in range(len(equipes) + 1):
                         # On vérifie que ces deux équipes ne se sont pas affrontées au domicile de l'équipe i
-                        if equipe[j] not in self.adversaires_a_domicile[i] and equipe[i] not in self.adversaires_a_l_ext[j]:
-                            self.domicile.append(equipe[i])
-                            self.exterieur.append(equipe[j])
-                            self.adversaires_a_domicile[i].append(equipe[j])
-                            self.adversaires_a_l_ext[j].append(equipe[i])
+                        if equipes[j] not in self.adversaires_a_domicile[i] and equipes[i] not in self.adversaires_a_l_ext[j]:
+                            self.domicile.append(equipes[i])
+                            self.exterieur.append(equipes[j])
+                            self.adversaires_a_domicile[i].append(equipes[j])
+                            self.adversaires_a_l_ext[j].append(equipes[i])
                             self.nb_rencontres -= 1
 
     def simuler_journee(self):
@@ -63,11 +64,13 @@ class Journee(Club):
             butsA, butsB = self.jouer_match(equipeA, equipeB)
             self.buts_dom.append(butsA)
             self.buts_ext.append(butsB)
+
         domicile = np.array(self.domicile).reshape(10,)
         exterieur = np.array(self.exterieur).reshape(10,)
         score_dom = np.array(self.buts_dom).reshape(10,)
         score_ext = np.array(self.buts_ext).reshape(10,)
-        return np.array(domicile, score_dom, score_ext, exterieur)
+
+        return np.array(domicile, score_dom), np.array(exterieur,score_ext)
 
 
 class Saison(Journee):
@@ -83,32 +86,14 @@ class Saison(Journee):
         self.matchs = []
         self.nb_journees = 0
 
-    def classement_recursive(self, clubs):
-        '''fonction qui classe les clubs par ordre décroissants de points'''
-
-        # Cas de base : une liste d'un seul élément est déjà triée
-        if len(clubs) == 1:
-            return clubs
-        else:
-            # Divisez la liste de clubs en deux parties égales
-            milieu = len(clubs) // 2
-            gauche = clubs[:milieu]
-            droite = clubs[milieu:]
-
-            # Trier chaque partie en appelant la fonction récursive
-            gauche_triee = self.classement_recursive(gauche)
-            droite_triee = self.classement_recursive(droite)
-
-            # Fusionnez les deux listes classées obtenues à partir des appels récursifs en une seule liste triée
-            clubs_tries = []
-            while gauche_triee and droite_triee:
-                if gauche_triee[0].points <= droite_triee[0].points:
-                    clubs_tries.append(gauche_triee.pop(0))
-                else:
-                    clubs_tries.append(droite_triee.pop(0))
-
-            clubs_tries.extend(gauche_triee)
-            clubs_tries.extend(droite_triee)
+    def tri(self,tab):
+        tab1 = tab.copy()
+        tab_trie = []
+        while tab1 != []:
+            arg_min = np.argmin(tab[:, 1])
+            tab_trie.append(tab1[arg_min])
+            tab1.pop(arg_min)
+        return tab_trie
 
     def jouer_journee(self):
         """ On définit la méthode jouer_journee qui donne le récapitulatif des matchs joués en une journée
@@ -116,11 +101,11 @@ class Saison(Journee):
         Input : None
         Output : None
         """
-        self.nb_journees += 1
-        resultats_journee = self.simuler_journee()
+        tab_dom, tab_ext = self.simuler_journee()
+        scores_totaux = np.array(tab_dom, tab_ext).reshape((20, 2))
+        classement_journee = self.tri(scores_totaux)
+        return classement_journee
 
-        #self.clubs.sort(key=lambda x: (x.points, x.buts_marques), reverse=True)
-        self.classement_recursive(self.clubs)
 
     def jouer_saison(self):
         """ On définit la méthode jouer_saison le récapitulatif des matchs joués sur la saison
@@ -128,8 +113,17 @@ class Saison(Journee):
             Input : None
             Output : None
             """
-        for i in range(self.nb_journees):
-            self.jouer_journee()
+        classement_saison = np.zeros((20, 3)) # Tableau récapitulatif de la saison
+        classement_saison[:, 0] = self.noms_clubs  # La 1ère colonne correspond au nom des clubs
+        classement_saison[:, 1] = self.points # La 2ème colonne correspond à leur nombre de points
+        for i in range(self.nb_journees + 1):
+            classement_journee = self.jouer_journee()
+            j = 0
+            for club in self.noms_clubs:
+                indice = classement_journee[:, 0].index(club)
+                classement_saison[j, 2] += [indice, 2]  # La 3ème colonne correspond à leur nombre de buts
+                j += 1
+        return classement_saison
 
 if __name__ == "__main__":
 
@@ -143,26 +137,34 @@ if __name__ == "__main__":
     lieux = ["Ajaccio", "Angers", "Auxerre", "Brest", "Clermont", "Lens", "Lille", "Lorient",
                   "Lyon", "Marseilles", "Monaco", "Montpellier", "Nantes", "Nice", "Paris", "Reims",
                   "Rennes", "Strasbourg", "Toulouse", "Troyes"]
+    equipes = []
 
-
-    fichier = open("C:\Projet-info\\noms_joueurs.txt", "r")
-    equipe = []
-    ligne = fichier.readline()
-    while ligne != "":
-        noms = ligne.split('"')
-        noms = ligne.strip(',')
-        noms = ligne.strip('\n')
-        equipe.append([noms])
-        ligne = fichier.readline()
-    print(equipe)
-    fichier.close()
+    try:
+        f = open("noms_joueurs.txt", 'r')
+    except IOError as e:
+        print("Ouverture du fichier impossible \n", e)
+        sys.exit(1)
+    else:
+        # Mettre le curseur au début du fichier
+        f.seek(0)
+        # Lecture du fichier ligne par ligne avec une boucle for
+        for ligne in f:
+            equipe_club = []
+            noms = ligne.strip()
+            noms = noms.strip(",")
+            noms = noms.strip(" \n")
+            noms = noms.strip(" ")
+            noms = noms.split('"')
+            for nom in noms:
+                equipe_club.append(nom)
+            equipes.append(equipe_club)
+        print(equipes)
+        # Fermeture du fichier après lecture
+        f.close()
 
     for i in range (len(noms_clubs)):
-        Club.creer_club(noms_clubs[i],  scores[i], lieux[i], equipe[i])
-
-    i = 0
-    for team in equipe:
-        for nom_joueur in team :
-            joueur = Joueur(nom_joueur)
-            clubs[i].ajouter_joueur(nom_joueur)
-        i += 1
+        noms_joueurs = equipes[i]
+        print(noms_joueurs)
+        Club.creer_club(noms_clubs[i],  scores[i], lieux[i],noms_joueurs)
+    saison = Saison()
+    print(saison.jouer_saison())
