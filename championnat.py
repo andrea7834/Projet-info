@@ -37,7 +37,7 @@ class Match(Club):
         elif buts_marquesA < buts_marquesB:
             self.gagner_match(equipeB)
             self.perdre_match(equipeA)
-        elif buts_marquesA < buts_marquesB:
+        elif buts_marquesA == buts_marquesB:
             self.match_nul(equipeA, equipeB)
         i = self.noms_clubs.index(equipeA)
         j = self.noms_clubs.index(equipeB)
@@ -171,7 +171,7 @@ class Classement(Club):
         On définit la classe Classement pour actualiser le classement général du championnat
 
         Input : le nom de tous les clubs (list)
-                les points des clubs (int)
+                les points des clubs (float)
         Output : None
         '''
 

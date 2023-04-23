@@ -2,8 +2,7 @@
 
 import random
 import numpy as np
-from math import exp
-from math import factorial
+
 
 """
 Ce module contient la définition des classe Joueurs et Clubs permettant la création des équipes
@@ -66,7 +65,7 @@ class Joueur(list):
     def __str__(self):
         """On définit __str__ la méthode retournant une chaine de caractères avec les noms des joueurs
             Input : None
-            Output : None
+            Output : nom du joueur (str)
             """
         return self.noms_joueurs()
 
@@ -137,6 +136,6 @@ class Club(Joueur):
     def __str__(self):
         """On définit __str__ la méthode retournant une chaine de caractères avec le nom des clubs
         Input : None
-        Output : None
+        Output : nom du club (str)
         """
         return self.noms_clubs
