@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from equipes import Club
+from equipes import Club, Joueur
 import numpy as np
 import sys
 
 """
 Ce module contient la définition de la classe principale servant à créer le championnat
 """
+
 
 class Journee(Club):
 
@@ -17,7 +18,8 @@ class Journee(Club):
         Output : None
         """
         super().__init__()
-        self.nb_rencontres = 10  # Comme il y a 20 équipes alors il y a 10 matchs par jour puisque toutes les équipes jouent une fois
+        self.nb_rencontres = 10
+        # Comme il y a 20 équipes alors il y a 10 matchs par jour puisque toutes les équipes jouent une fois
         self.domicile = []  # On définit les équipes jouant à domicile ou à l'extérieur
         self.exterieur = []
         self.buts_dom = []  # Il y a 10 matchs par jours
@@ -44,7 +46,8 @@ class Journee(Club):
                 for i in range(len(equipes) + 1):
                     for j in range(len(equipes) + 1):
                         # On vérifie que ces deux équipes ne se sont pas affrontées au domicile de l'équipe i
-                        if equipes[j] not in self.adversaires_a_domicile[i] and equipes[i] not in self.adversaires_a_l_ext[j]:
+                        if equipes[j] not in self.adversaires_a_domicile[i] \
+                                and equipes[i] not in self.adversaires_a_l_ext[j]:
                             self.domicile.append(equipes[i])
                             self.exterieur.append(equipes[j])
                             self.adversaires_a_domicile[i].append(equipes[j])
@@ -58,19 +61,19 @@ class Journee(Club):
         Output : None
         """
         self.rencontres_journee()
-        for i in range(11): # Il y a 10 matchs par jour puisqu'il y a 20 équipes différentes
-            equipeA = self.domicile[i]
-            equipeB = self.exterieur[i]
-            butsA, butsB = self.jouer_match(equipeA, equipeB)
-            self.buts_dom.append(butsA)
-            self.buts_ext.append(butsB)
+        for i in range(11):  # Il y a 10 matchs par jour puisqu'il y a 20 équipes différentes
+            equipe_a = self.domicile[i]
+            equipe_b = self.exterieur[i]
+            buts_a, buts_b = self.jouer_match(equipe_a, equipe_b)
+            self.buts_dom.append(buts_a)
+            self.buts_ext.append(buts_b)
 
         domicile = np.array(self.domicile).reshape(10,)
         exterieur = np.array(self.exterieur).reshape(10,)
         score_dom = np.array(self.buts_dom).reshape(10,)
         score_ext = np.array(self.buts_ext).reshape(10,)
 
-        return np.array(domicile, score_dom), np.array(exterieur,score_ext)
+        return np.array(domicile, score_dom), np.array(exterieur, score_ext)
 
 
 class Saison(Journee):
@@ -86,10 +89,15 @@ class Saison(Journee):
         self.matchs = []
         self.nb_journees = 0
 
-    def tri(self,tab):
+    def tri(self, tab):
+        """ On définit la méthode tri permet de trier un tableau en fonction du nombre de points des équipes
+
+        Input : tab (array)
+        Output : None
+        """
         tab1 = tab.copy()
         tab_trie = []
-        while tab1 != []:
+        while tab1:
             arg_min = np.argmin(tab[:, 1])
             tab_trie.append(tab1[arg_min])
             tab1.pop(arg_min)
@@ -106,24 +114,24 @@ class Saison(Journee):
         classement_journee = self.tri(scores_totaux)
         return classement_journee
 
-
     def jouer_saison(self):
         """ On définit la méthode jouer_saison le récapitulatif des matchs joués sur la saison
 
             Input : None
             Output : None
             """
-        classement_saison = np.zeros((20, 3)) # Tableau récapitulatif de la saison
-        classement_saison[:, 0] = self.noms_clubs  # La 1ère colonne correspond au nom des clubs
-        classement_saison[:, 1] = self.points # La 2ème colonne correspond à leur nombre de points
+        classement_saison = np.zeros((20, 3))  # Tableau récapitulatif de la saison
+        classement_saison[:, 0] = self.noms_clubs  # La 1ʳᵉ colonne correspond au nom des clubs
+        classement_saison[:, 1] = self.points  # La 2ᵉ colonne correspond à leur nombre de points
         for i in range(self.nb_journees + 1):
             classement_journee = self.jouer_journee()
             j = 0
             for club in self.noms_clubs:
                 indice = classement_journee[:, 0].index(club)
-                classement_saison[j, 2] += [indice, 2]  # La 3ème colonne correspond à leur nombre de buts
+                classement_saison[j, 2] += [indice, 2]  # La 3ᵉ colonne correspond à leur nombre de buts
                 j += 1
         return classement_saison
+
 
 if __name__ == "__main__":
 
@@ -135,8 +143,8 @@ if __name__ == "__main__":
               3.75, 1, 2.25, 0.75]
     clubs = []
     lieux = ["Ajaccio", "Angers", "Auxerre", "Brest", "Clermont", "Lens", "Lille", "Lorient",
-                  "Lyon", "Marseilles", "Monaco", "Montpellier", "Nantes", "Nice", "Paris", "Reims",
-                  "Rennes", "Strasbourg", "Toulouse", "Troyes"]
+                "Lyon", "Marseilles", "Monaco", "Montpellier", "Nantes", "Nice", "Paris", "Reims",
+                "Rennes", "Strasbourg", "Toulouse", "Troyes"]
     equipes = []
 
     try:
@@ -162,9 +170,11 @@ if __name__ == "__main__":
         # Fermeture du fichier après lecture
         f.close()
 
-    for i in range (len(noms_clubs)):
-        noms_joueurs = equipes[i]
-        print(noms_joueurs)
-        Club.creer_club(noms_clubs[i],  scores[i], lieux[i],noms_joueurs)
+    joueurs = Joueur()
+    clubs = Club()
+    for i in range(len(noms_clubs)):
+        for j in range(11):
+            joueurs.creer_joueur(equipes[i][j])
+        clubs.creer_club(noms_clubs[i], scores[i], lieux[i], equipes[i])
     saison = Saison()
     print(saison.jouer_saison())

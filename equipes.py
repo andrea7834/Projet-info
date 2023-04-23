@@ -26,8 +26,8 @@ class Joueur(list):
         return self.noms_joueurs
 
     @noms_joueurs.setter
-    def noms_joueurs(self, value):
-        self.noms_joueurs.append(value)
+    def noms_joueurs(self, nom):
+        self.noms_joueurs.append(nom)
 
     def creer_joueur(self, nom_joueur):
         """On crée un nouveau joueur dans la liste.
