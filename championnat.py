@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from equipes import  Club, Joueur
+from equipes import Club, Joueur
 import random
 import numpy as np
 
@@ -8,20 +8,61 @@ import numpy as np
 Ce module contient la définition de la classe principale servant à créer le championnat
 """
 
-class Match:
-    def __init__(self, equipe_dom, equipe_ext):
+class Match(Club):
+    def __init__(self):
         """On définit la classe Match récapitulant le match joué par deux équipes
 
         Input : équipe jouant à domicile (str)
                   équipe jouant à l'extérieur (str)
         Output : None
         """
-        self.equipe_dom = equipe_dom
-        self.equipe_ext = equipe_ext
+        super().__init__()
+        self.equipe_dom = ""
+        self.equipe_ext = ""
         self.buts_dom = 0
         self.buts_ext = 0
         self.proba_dom = 1.0
         self.proba_ext = 1.0
+
+    def jouer_match(self, equipeA, equipeB):
+        """On définit la méthode jouer_match ajoutant un match dans le tableau des matchs
+
+        Inputs : equipeA (str)
+                    equipeB (str)
+        Output : None
+        """
+
+        # On définit le nombre de buts marqués et encaissés en fonction du niveau de l'équipe
+        buts_marquesA = int(self.niveau * np.random.randint(0, 5))
+        buts_marquesB = int(self.niveau * np.random.randint(0, 5))
+
+        # On actualise le nombre de points et de buts marqués de chaque équipe
+        if buts_marquesA > buts_marquesB:
+            self.gagner_match(equipeA)
+            self.perdre_match(equipeB)
+        elif buts_marquesA < buts_marquesB:
+            self.gagner_match(equipeB)
+            self.perdre_match(equipeA)
+        elif buts_marquesA < buts_marquesB:
+            self.match_nul(equipeA, equipeB)
+        i = self.noms_clubs.index(equipeA)
+        j = self.noms_clubs.index(equipeB)
+        self.buts_marques[i] += buts_marquesA
+        self.buts_marques[j] += buts_marquesB
+
+        for nb_butsA in range(buts_marquesA + 1):
+            indice_buteur = np.random.randint(1,
+                                              12)  # On prend un buteur au hasard dans l'équipe (sauf le gardien d'indice 0)
+            buteur = self.noms_joueurs()[i + indice_buteur]
+            self.marquer_but(buteur)
+            self.actualiser_note(buteur)
+
+        for nb_butsB in range(buts_marquesB + 1):
+            indice_buteur = np.random.randint(1,
+                                              12)  # On prend un buteur au hasard dans l'équipe (sauf le gardien d'indice 0)
+            buteur = self.noms_joueurs()[j + indice_buteur]
+            self.marquer_but(buteur)
+            self.actualiser_note(buteur)
 
     def jouer(self):
         """On définit la méthode jouer permettant de simuler un match joué
