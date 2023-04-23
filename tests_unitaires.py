@@ -40,6 +40,21 @@ class TestJournee(unittest.TestCase):
         self.journee.nb_jours_restants = 37
         self.assertEqual(self.journee.numero_journee(), 2)
 
+class TestObligatoires(unittest.TestCase):
+    '''def test_victoire_implique_plus_de_buts(self):
+        self.club = Club()
+        equipeA = self.club.creer_club('PSG', 5, 'Paris', ['j1', 'j2'])
+        equipeB = self.club.creer_club('OM', 4.75, 'Marseille', ['j4', 'j5'])
+        equipeA.buts_marques = 2
+        equipeB.buts_marques = 1
+        assert equipeA.buts_marques > equipeB.buts_encaisses
+    def test_nombre_de_points(self):
+        journee = Journee()
+        assert 2 * len(journee.noms_clubs)<= journee.nb_rencontres
+        assert journee.nb_rencontres <= 3 * len(journee.noms_clubs)
+    def test_nombre_de_matchs(self):
+        journee = Journee()
+        assert journee.nb_rencontres == len(journee.noms_clubs) // 2'''
 
 if __name__ == '__main__':
     unittest.main()
