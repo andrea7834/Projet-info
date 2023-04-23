@@ -2,12 +2,11 @@
 
 import random
 import numpy as np
-from math import exp
-from math import factorial
 
 """
 Ce module contient la définition des classe Joueurs et Clubs permettant la création des équipes
 """
+
 
 class Joueur(list):
     def __init__(self):
@@ -62,7 +61,6 @@ class Joueur(list):
         self.notes[i] = np.max(20.0, self.notes[i] + 20 * random.random())
         # Lorsque le joueur a atteint la note de 20, il ne peut pas avoir plus
 
-
     def __str__(self):
         """On définit __str__ la méthode retournant une chaine de caractères avec les noms des joueurs
             Input : None
@@ -90,7 +88,7 @@ class Club(Joueur):
         self.adversaires_a_l_ext = []
 
     def creer_club(self, nom_club, niveau, lieu, noms_joueurs):
-        """On définit la méthode gagner_match augmentant le nombre de points de 3 de l'équipe gagnante
+        """On définit la méthode creer_club permettant d'ajouter un club
 
             Input : nom_club (str), le nom du club
                       niveau (float)
@@ -121,18 +119,59 @@ class Club(Joueur):
         i = self.noms_clubs.index(nom_club)
         self.points[i] += 0  # Lorsque le club perd le match, son nombre de points n'augmente pas
 
-    def match_nul(self, nom_clubA, nom_clubB):
+    def match_nul(self, nom_club_a, nom_club_b):
         """On définit la méthode match_nul augmentant le nombre de points de 1 des deux équipes
 
-            Input : nom_clubA (str)
-                      nom_clubB (str)
+            Input : nom_club_a (str)
+                      nom_club_b (str)
             Output : None
         """
-        i = self.noms_clubs.index(nom_clubA)
-        j = self.noms_clubs.index(nom_clubB)
+        i = self.noms_clubs.index(nom_club_a)
+        j = self.noms_clubs.index(nom_club_b)
         self.points[i] += 1  # Lorsque le match est nul, le nombre de points de chacun des clubs augmente de 1
         self.points[j] += 1
 
+    def jouer_match(self, equipeA, equipeB):
+        """On définit la méthode jouer_match ajoutant un match dans le tableau des matchs
+
+        Inputs : equipeA (str)
+                    equipeB (str)
+        Output : None
+        """
+
+        # On définit le nombre de buts marqués et encaissés en fonction du niveau de l'équipe
+        buts_marquesA = int(self.niveau * np.random.randint(0, 5))
+        buts_marquesB = int(self.niveau * np.random.randint(0, 5))
+
+        # On actualise le nombre de points et de buts marqués de chaque équipe
+        if buts_marquesA > buts_marquesB:
+            self.gagner_match(equipeA)
+            self.perdre_match(equipeB)
+        elif buts_marquesA < buts_marquesB:
+            self.gagner_match(equipeB)
+            self.perdre_match(equipeA)
+        elif buts_marquesA < buts_marquesB:
+            self.match_nul(equipeA, equipeB)
+        i = self.noms_clubs.index(equipeA)
+        j = self.noms_clubs.index(equipeB)
+        self.buts_marques[i] += buts_marquesA
+        self.buts_marques[j] += buts_marquesB
+
+        for nb_butsA in range(buts_marquesA + 1):
+            indice_buteur = np.random.randint(1,12)
+            # On prend un buteur au hasard dans l'équipe (sauf le gardien d'indice 0)
+            buteur = self.noms_joueurs()[i + indice_buteur]
+            self.marquer_but(buteur)
+            self.actualiser_note(buteur)
+
+        for nb_butsB in range(buts_marquesB + 1):
+            indice_buteur = np.random.randint(1, 12)
+            # On prend un buteur au hasard dans l'équipe (sauf le gardien d'indice 0)
+            buteur = self.noms_joueurs()[j + indice_buteur]
+            self.marquer_but(buteur)
+            self.actualiser_note(buteur)
+
+        return buts_marquesA, buts_marquesB
 
     def __str__(self):
         """On définit __str__ la méthode retournant une chaine de caractères avec le nom des clubs
