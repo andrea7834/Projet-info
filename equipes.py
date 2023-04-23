@@ -21,13 +21,11 @@ class Joueur(list):
         self.notes = []
         self.buts_marques = []
 
-    @property
+    def ajouter_joueur(self, joueur):
+        self.noms_joueurs.append(joueur)
+
     def noms_joueurs(self):
         return self.noms_joueurs
-
-    @noms_joueurs.setter
-    def noms_joueurs(self, value):
-        self.noms_joueurs.append(value)
 
     def creer_joueur(self, nom_joueur):
         """On crée un nouveau joueur dans la liste.
@@ -47,7 +45,7 @@ class Joueur(list):
         Input : None
         Output : None
         """
-        i = self.noms_joueurs().index(nom_joueur)
+        i = self.noms_joueurs.index(nom_joueur)
         self.buts_marques[i] += 1      # On augmente de 1 but le nombre de buts marqués par le joueur
 
     def actualiser_note(self, nom_joueur):
@@ -57,7 +55,7 @@ class Joueur(list):
             Input : None
             Output : None
             """
-        i = self.noms_joueurs().index(nom_joueur)
+        i = self.noms_joueurs.index(nom_joueur)
         self.notes[i] = np.max(20.0, self.notes[i] + 20 * random.random())
         # Lorsque le joueur a atteint la note de 20, il ne peut pas avoir plus
 
