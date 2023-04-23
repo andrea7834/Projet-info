@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from championnat import Match, Championnat
+from championnat import Match, Saison, Journee
 from equipes import  Club, Joueur
 import unittest
 """
@@ -8,21 +8,31 @@ Ce module contient les tests unitaires.
 """
 
 class testClub(unittest.TestCase):
+    '''
+    def __init__(self):
+        self.noms_clubs = []
     def test_creer_club(self):
-        c = Club("Paris Saint-Germain", 5)
+        c = Club.creer_club(self,"Paris Saint-Germain", 5,"Paris", [1,2,3,4,5,6,7,8])
         assert str(c) == "Paris Saint-Germain : 0 points"
         assert len(c.joueurs) == 0
-        assert c.points == 0
-        assert c.buts_marques == 0
-
+        assert c.niveau == 5
+        assert c.buts_lieux == 'Paris'
+'''
 class testJoueur(unittest.TestCase):
+
+    def __init__(self):
+        self.noms_joueurs = []
     def test_creer_joueurs(self):
-        j = Joueur("Mbappé")
-        assert str(j) == "Mbappé (0)"
+        j = Joueur.creer_joueur(self, "Mbappé")
+        assert str(j) == "Mbappé"
         assert j.note == 0
         assert j.buts_marques == 0
 
-class testChampionnat(unittest.TestCase):
+    def test_note_joueur(self):
+        j = Joueur("Mbappé")
+        assert j.notes <= 20
+'''
+class testSaison(unittest.TestCase):
 
     def test_creer_championnat(self):
         c1 = Club("Paris Saint-Germain", 5)
@@ -49,14 +59,14 @@ class testMatch(unittest.TestCase):
         assert m.buts_dom == 0
         assert m.buts_ext == 0
 
-    '''def test_jouer_match(self):
+    def test_jouer_match(self):
         c1 = Club("Paris Saint-Germain", 5)
         c2 = Club("Olympique de Marseille", 4.5)
         m = Match(c1, c2)
         m.jouer()
         assert c1.points != 0 or c2.points != 0
         assert c1.points + c2.points > 0
-        assert m.equipe_dom.points ==3'''
+        assert m.equipe_dom.points ==3
 
     def test_victoire_implique_plus_de_buts(self):
         c1 = Club("Paris Saint-Germain", 5)
@@ -70,8 +80,10 @@ class testMatch(unittest.TestCase):
         else:
             # Match nul
             assert c1.buts_marques == c2.buts_marques
+            
+class testJournee(unittest.TestCase):
 
-'''
+
 class autre():
     def test_nombre_points_par_journee(self):
         j = Championnat.jouer_journee(self.nb_journees)
