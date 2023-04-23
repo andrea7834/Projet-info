@@ -39,9 +39,9 @@ class TestJournee(unittest.TestCase):
         self.assertEqual(self.journee.numero_journee(), 1)
         self.journee.nb_jours_restants = 37
         self.assertEqual(self.journee.numero_journee(), 2)
-
+'''
 class TestObligatoires(unittest.TestCase):
-    '''def test_victoire_implique_plus_de_buts(self):
+    def test_victoire_implique_plus_de_buts(self):
         self.club = Club()
         equipeA = self.club.creer_club('PSG', 5, 'Paris', ['j1', 'j2'])
         equipeB = self.club.creer_club('OM', 4.75, 'Marseille', ['j4', 'j5'])
