@@ -2,6 +2,7 @@
 
 import random
 import numpy as np
+import pandas
 
 """
 Ce module contient la définition des classe Joueurs et Clubs permettant la création des équipes
@@ -20,12 +21,6 @@ class Joueur(list):
         self.noms_joueurs = []
         self.notes = []
         self.buts_marques = []
-
-    def ajouter_joueur(self, joueur):
-        self.noms_joueurs.append(joueur)
-
-    def noms_joueurs(self):
-        return self.noms_joueurs
 
     def creer_joueur(self, nom_joueur):
         """On crée un nouveau joueur dans la liste.

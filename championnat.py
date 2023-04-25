@@ -134,41 +134,15 @@ class Saison(Journee):
 
 
 if __name__ == "__main__":
-
-    noms_clubs = ["Ajaccio", "Angers", "Auxerre", "Brest", "Clermont", "Lens", "Lille", "Lorient",
-                  "OL", "OM", "AS Monaco", "Montpellier", "Nantes", "Nice", "PSG", "Reims",
-                  "Rennes", "Strasbourg", "Toulouse", "Troyes"]
     scores = [0.5, 0.25, 1.5, 1.25, 2.5, 4.75, 4, 2.75,
               3.5, 4.5, 4.25, 2, 1.75, 3, 5, 3.25,
               3.75, 1, 2.25, 0.75]
+
     clubs = []
     lieux = ["Ajaccio", "Angers", "Auxerre", "Brest", "Clermont", "Lens", "Lille", "Lorient",
                 "Lyon", "Marseilles", "Monaco", "Montpellier", "Nantes", "Nice", "Paris", "Reims",
                 "Rennes", "Strasbourg", "Toulouse", "Troyes"]
     equipes = []
-
-    try:
-        f = open("noms_joueurs.txt", 'r')
-    except IOError as e:
-        print("Ouverture du fichier impossible \n", e)
-        sys.exit(1)
-    else:
-        # Mettre le curseur au début du fichier
-        f.seek(0)
-        # Lecture du fichier ligne par ligne avec une boucle for
-        for ligne in f:
-            equipe_club = []
-            noms = ligne.strip()
-            noms = noms.strip(",")
-            noms = noms.strip(" \n")
-            noms = noms.strip(" ")
-            noms = noms.split('"')
-            for nom in noms:
-                equipe_club.append(nom)
-            equipes.append(equipe_club)
-        print(equipes)
-        # Fermeture du fichier après lecture
-        f.close()
 
     joueurs = Joueur()
     clubs = Club()

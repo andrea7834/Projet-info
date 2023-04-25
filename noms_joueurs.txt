@@ -1,20 +1,20 @@
-"Leroy", "Michelin", "Alphonse", "Lebas", "Diallo", "Vidal", "Gonzalez", "N'Diaye", "Silla", "Roure", "Hamouma"
-"Borne", "Doumbia", "Camara", "Mendy", "Masson", "Capelle", "Guillaume", "Alioui", "Sima", "Corduan", "Bamba"
-"De Percin", "Lipinski", "Pellenard", "Jeanvier", "Bain", "Dembélé", "Da Costa", "Danois", "Autret", "Dugimont", "Merdji"
-"Blasquez", "Duverne", "Brassier", "Chardonnet", "Magnetti", "Del Castillo", "Le Douaron", "Lemaréchal", "Tavarès", "Mounié", "Elis"
-"Margueron", "Boyer", "Borges", "Wieteska", "Cissé", "Versini", "Maurer", "Massolin", "Rajot", "Bayo", "Gastien"
-"Vincensini", "Ganiou", "Sylla", "Medina", "Fortès", "Boura", "Gradit", "Le Cardinal", "Pereira", "Varane", "Valencia"
-"Chevalier", "Burlet", "Ribeiro", "Fonte", "Yoro", "Gudmundsson", "Martin", "Cabella", "Gomes", "André",  "David"
-"Pattier", "Silva", "Talbi", "Matsima", "Laporte", "Le Goff", "Kroupi", "Pelon", "Innocent", "Ponceau", "Le Fée"
-"Lopès", "Gusto", "Tagliafico", "Sanchez", "Caqueret", "Lepenant", "Tolisso", "Lega", "Bercola", "Aouar", "Cherki"
-"Blanco", "Bailly", "Gigot", "Balerdi", "Clauss", "Lopez", "Payet", "Harit", "Kaboré", "Rongier", "Ounahi"
-"Lienard", "Serrano", "Maripan", "Sibidé", "Jakobs", "Embolo", "Pelé", "Henrique", "Aguilar", "Ben Yedder", "Ben Seguir"
-"Lecomte", "Sainte-Luce", "Tchato", "Sakho", "Mavididi", "Savanier", "Maouassa", "Nordin", "Germain", "Wahi", "Khazri"
-"Descamps", "Girotto", "Guessand", "Blas", "Coco", "Ganago", "Mollet", "Simon", "Delort", "Castelletto", "Pallois"
-"Guarrido", "Dante", "Bryan", "Attal", "Beka Beka", "Laborde", "Pépé", "Moffi", "Diop", "Brahimi", "Thuram"
-"Letellier", "Kipembé", "Ramos", "Mbappé", "Messi", "Verrati", "Neymar", "Mendès", "Sanchès", "Soler", "Ruiz"
-"Lemaître", "Abdelhamid", "Lopy", "Cajuste", "Ito", "Zeneli", "Balogin", "Flips", "Serhuis", "Munetsi", "Moalida"
-"Salin", "Rodon", "Theate", "Wooh", "Assignon", "Traoré", "Terrier", "Santamaria", "Kalimuendo", "Gouiri", "Majer"
-"Sels", "Perrin", "Le Marchand", "H.Diallo", "Mothiba", "Gameiro", "Djiku", "Bellegarde", "Liénard", "Sanson", "Delaine"
-"Himeur", "Dallinga", "Chaïbi", "Ratao", "Onaiwu", "Healey", "Spierings", "Aboukhlal", "Van den Boomen", "Dejaegere", "Desler"
-"Moulin", "Baldé", "Ugbo", "Ripart", "Lopez", "Odobert", "Chavalerin", "Conté", "Palaversa", "Porozo", "Salmier"
+Leroy Michelin Alphonse Lebas Diallo Vidal Gonzalez N'Diaye Silla Roure Hamouma
+Borne Doumbia Camara Mendy Masson Capelle Guillaume Alioui Sima Corduan Bamba
+De_Percin Lipinski Pellenard Jeanvier Bain Dembele Da_Costa Danois Autret Dugimont Merdji
+Blasquez Duverne Brassier Chardonnet Magnetti Del_Castillo Le_Douaron Lemarechal Tavares Mounie Elis
+Margueron Boyer Borges Wieteska Cisse Versini Maurer Massolin Rajot Bayo Gastien
+Vincensini Ganiou Sylla Medina Fortes Boura Gradit Le_Cardinal Pereira Varane Valencia
+Chevalier Burlet Ribeiro Fonte Yoro Gudmundsson Martin Cabella Gomes Andre David
+Pattier Silva Talbi Matsima Laporte Le_Goff Kroupi Pelon Innocent Ponceau Le_Fee
+Lopes Gusto Tagliafico Sanchez Caqueret Lepenant Tolisso Lega Bercola Aouar Cherki
+Blanco Bailly Gigot Balerdi Clauss Lopez Payet Harit Kabore Rongier Ounahi
+Lienard Serrano Maripan Sibide Jakobs Embolo Pele Henrique Aguilar Ben_Yedder Ben_Seguir
+Lecomte Sainte-Luce Tchato Sakho Mavididi Savanier Maouassa Nordin Germain Wahi Khazri
+Descamps Girotto Guessand Blas Coco Ganago Mollet Simon Delort Castelletto Pallois
+Guarrido Dante Bryan Attal Beka Beka Laborde Pepe Moffi Diop Brahimi Thuram
+Letellier Kipembe Ramos Mbappe Messi Verrati Neymar Mendes Sanches Soler Ruiz
+Lemaitre Abdelhamid Lopy Cajuste Ito Zeneli Balogin Flips Serhuis Munetsi Moalida
+Salin Rodon Theate Wooh Assignon Traore Terrier Santamaria Kalimuendo Gouiri Majer
+Sels Perrin Le_Marchand H.Diallo Mothiba Gameiro Djiku Bellegarde Lienard Sanson Delaine
+Himeur Dallinga Chaïbi Ratao Onaiwu Healey Spierings Aboukhlal Van_den_Boomen Dejaegere Desler
+Moulin Balde Ugbo Ripart Lopez Odobert Chavalerin Conte Palaversa Porozo Salmier
