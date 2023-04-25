@@ -1,0 +1,20 @@
+Ajaccio
+Angers
+Auxerre
+Brest
+Clermont
+Lens
+Lille
+Lorient
+OL
+OM
+AS Monaco
+Montpellier
+Nantes
+Nice
+PSG
+Reims
+Rennes
+Strasbourg
+Toulouse
+Troyes
