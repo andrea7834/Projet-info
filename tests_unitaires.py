@@ -1,8 +1,8 @@
 import unittest
 import random
 import numpy as np
-from equipes import Club, Joueur
-from championnat import Journee, Saison
+from Joueur import Club, Joueur
+from Journee import Journee, Saison
 
 class TestJoueur(unittest.TestCase):
 
@@ -58,4 +58,3 @@ class TestObligatoires(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-
