@@ -3,7 +3,7 @@ import numpy as np
 
 """ Ce module contient la définition de la classe principale Saison servant à créer le championnat """
 
-class Saison(Journee, Club):
+class Saison(Journee):
     def __init__(self):
         """On définit la classe Saison regroupant les matchs d'une journée et le récapitulatif de la saison
         Input et Output : None

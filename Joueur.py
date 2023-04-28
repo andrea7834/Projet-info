@@ -38,11 +38,11 @@ class Joueur(list):
         Input et Output : None
         """
         i = self.noms_joueurs.index(nom_joueur)
-        self.notes[i] = np.max(20.0, self.notes[i] + 20 * random.random())
+        self.notes[i] = np.maximum(20.0, self.notes[i] + 20 * random.random())
         # Lorsque le joueur a atteint la note de 20, il ne peut pas avoir plus
 
     def __str__(self):
         """On définit __str__ la méthode retournant une chaine de caractères avec les noms des joueurs
             Input et Output : None
         """
-        return pd.DataFrame({"Noms des joueurs" : self.noms_joueurs, 'Notes' : self.notes, "Buts marqués" : self.buts_marques})
+        return pd.DataFrame({"Noms des joueurs" : self.noms_joueurs, 'Notes' : self.notes, "Buts marqués" : self.buts_marques}).to_string()

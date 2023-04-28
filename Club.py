@@ -20,7 +20,7 @@ class Club(Joueur):
         self.points = np.zeros(20)
         self.buts_marques = np.zeros(20)
         self.dom_ext = np.eye(20)  # On définit une matrice pour les matchs joués à domicile ou à l'extérieur
-        # Les lignes correspondent aux équipes jouant à domcile et les colonnes à celles jouant à l'extérieur
+        # Les lignes correspondent aux équipes jouant à domicile et les colonnes à celles jouant à l'extérieur
 
     def creer_club(self, nom_club, niveau, noms_joueurs):
         """On définit la méthode creer_club permettant d'ajouter un club
