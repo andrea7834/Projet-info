@@ -12,50 +12,42 @@ class Saison(Journee):
         """
         super().__init__()
         self.nom = "Ligue 1"
-        self.classement_saison = np.array(self.noms_clubs, self.points, self.buts_marques)
+        self.classement_final = np.array(self.noms_clubs, self.points, self.buts_marques)
+        self.nb_jours_total = 38
         self.nb_journees = 0
 
-    def tri(self, tab):
-        """ On définit la méthode tri permet de trier un tableau en fonction du nombre de points des équipes
-        Input : tab (array)
-        Output : None
-        """
-        tab1 = tab.copy()
-        tab_trie = []
-        while tab1:
-            arg_min = np.argmin(tab[:, 1])
-            tab_trie.append(tab1[arg_min])
-            tab1.pop(arg_min)
-        return tab_trie
+    def calendrier(self):
+        nb_jours = self.nb_jours_restants
+        nb_col = 7 # Du lundi au dimanche
+        nb_lignes = int(nb_jours / nb_col) + 1
+        calend = np.empty((nb_lignes, nb_col))
+        for i in range(0, nb_lignes):
+            for j in range(0, nb_col):
+                calend[i][j] = int(i * nb_col + j + 1)
+        calend[-1][4:] = 0
+        return calend
 
-    def jouer_journee(self):
-        """ On définit la méthode jouer_journee qui donne le récapitulatif des matchs joués en une journée
-        Input et Output : None
-        """
+
+
+    def matchs_saison(self):
+        """ On définit la méthode jouer_saison le récapitulatif des matchs joués sur la saison"""
+        matchs = []
+        for i in range(self.nb_jours_total + 1):
+            matchs_journee = self.jouer_journee()
+            matchs.append(matchs_journee)
+        return matchs
+
+    def classement_journee(self, date):
+        """ On définit la méthode classement_journee qui donne le récapitulatif des matchs joués en une journée"""
         tab_dom, tab_ext = self.simuler_journee()
-        scores_totaux = np.array(tab_dom, tab_ext).reshape((20, 2))
+        scores_totaux = np.array(tab_dom, tab_ext).reshape((20, 2))  # On ajoute les résultats de la journée dans le récap final
         classement_journee = self.tri(scores_totaux)
         return classement_journee
-
-    def jouer_saison(self):
-        """ On définit la méthode jouer_saison le récapitulatif des matchs joués sur la saison
-        Input et Output : None
-        """
-        classement_saison = np.zeros((20, 3))  # Tableau récapitulatif de la saison
-        classement_saison[:][0] = self.noms_clubs  # La 1ʳᵉ colonne correspond au nom des clubs
-        classement_saison[:, 1] = self.points  # La 2ᵉ colonne correspond à leur nombre de points
-        for i in range(self.nb_journees + 1):
-            classement_journee = self.jouer_journee()
-            j = 0
-            for club in self.noms_clubs:
-                indice = classement_journee[:, 0].index(club)
-                classement_saison[j, 2] += [indice, 2]  # La 3ᵉ colonne correspond à leur nombre de buts
-                j += 1
-        return classement_saison
 
 
 if __name__ == "__main__":
 
+    # Extraction de la liste des clubs
     fichier = open("noms_clubs.txt", 'r')
     noms_clubs = []
     fichier.seek(0)  # Mettre le curseur au début du fichier
@@ -64,6 +56,7 @@ if __name__ == "__main__":
         noms_clubs.append(club)
     fichier.close()  # Fermeture du fichier après lecture
 
+    # Extraction de la liste des joueurs
     fichier = open("noms_joueurs.txt", 'r')
     noms_joueurs = []
     fichier.seek(0)
@@ -76,15 +69,12 @@ if __name__ == "__main__":
         noms_joueurs.append(equipe)
     fichier.close()  # Fermeture du fichier après lecture
 
+    # On attribue un niveau à chaque club (en fonction des résultats de cette année)
     niveau_clubs = [0.5, 0.25, 1.5, 1.25, 2.5, 4.75, 4, 2.75,
               3.5, 4.5, 4.25, 2, 1.75, 3, 5, 3.25,
               3.75, 1, 2.25, 0.75]
 
-    joueurs = Joueur.Joueur()
-    clubs = Club.Club()
-    for i in range(len(noms_clubs)):
-        for j in range(11):
-            joueurs.creer_joueur(str(noms_joueurs[i][j]))
-        clubs.creer_club(noms_clubs[i*11 : (i+1)*11], niveau_clubs[i*11 : (i+1)*11], noms_joueurs[i*11 : (i+1)*11])
+    clubs = Club.Club(noms_clubs, niveau_clubs, noms_joueurs)
+
     saison = Saison()
     print(saison.jouer_saison())

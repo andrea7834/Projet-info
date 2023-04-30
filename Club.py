@@ -20,20 +20,6 @@ class Club(Joueur):
         self.dom_ext = np.eye(20)  # On définit une matrice pour les matchs joués à domicile ou à l'extérieur
         # Les lignes correspondent aux équipes jouant à domicile et les colonnes à celles jouant à l'extérieur
 
-    def rencontre_possible(self, equipe_a, equipe_b):
-        """On définit la méthode rencontre_possible vérifiant dans la matrice des rencontres
-        si le match a déjà eu lieu ou non
-        Inputs : equipe_a (str) jouant à domicile
-                    equipe_b (str) jouant à l'extérieur
-        Output : None
-        """
-        i = self.noms_clubs.index(equipe_a)
-        j = self.noms_clubs.index(equipe_b)
-        if self.dom_ext[i][j] == 1:
-            return False
-        else:
-            return True
-
     def jouer_un_match(self, equipe_a, equipe_b):
         """On définit la méthode jouer_match ajoutant un match dans le tableau des matchs
         Inputs : equipe_a (str) jouant à domicile
@@ -45,7 +31,7 @@ class Club(Joueur):
         i = self.noms_clubs.index(equipe_a)
         j = self.noms_clubs.index(equipe_b)
 
-        if not self.rencontre_possible(equipe_a, equipe_b):
+        if self.dom_ext[i][j] == 1:
             return "Cette rencontre a déjà eu lieu"
         else:
             self.dom_ext[i][j] = 1
@@ -57,15 +43,15 @@ class Club(Joueur):
             # On actualise le nombre de points et de buts marqués de chaque équipe
             # Lorsqu'un club gagne, il remporte 3 points, le perdant ne gagne aucun point.
             # S'il y a égalité, chaque équipe remporte 1 point
+            points_a, points_b = 0, 0
             if buts_marques_a > buts_marques_b: # Le club A gagne et le club B perd
-                self.points[i] += 3
-                self.points[j] += 0
+                points_a = 3
             elif buts_marques_a < buts_marques_b: # Le club B gagne et le club A perd
-                self.points[i] += 0
-                self.points[j] += 3
+                points_b = 3
             elif buts_marques_a == buts_marques_b: # Il y a égalité
-                self.points[i] += 1
-                self.points[j] += 1
+                points_a, points_b = 1, 1
+            self.points[i] += points_a
+            self.points[j] += points_b
             self.buts_marques[i] += buts_marques_a
             self.buts_marques[j] += buts_marques_b
 
@@ -80,7 +66,7 @@ class Club(Joueur):
                 buteur = self.noms_joueurs[j][indice_buteur]
                 buteur.marquer_but()
 
-            return buts_marques_a, buts_marques_b
+            return [buts_marques_a, buts_marques_b], [points_a,points_b]
 
     def __str__(self):
         """On définit __str__ la méthode retournant le nom de clubs, leur nombre de poinst et le nombre de buts marqués sous forme de dataframe
