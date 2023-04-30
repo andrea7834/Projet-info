@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import Joueur, Club, Journee
 import numpy as np
 

@@ -6,11 +6,9 @@ import numpy as np
 """ Ce module contient la définition de la classe Joueur permettant la création d'un joueur """
 
 class Joueur():
-    nb_joueurs = 0
     def __init__(self, nom_joueur, note=0, buts_marques=0):
         """On définit la classe Joueur définissant les caractéristiques du joueur"""
         self.nom_joueur, self.note, self.buts_marques = nom_joueur, note, buts_marques
-        Joueur.nb_joueurs += 1
 
     def marquer_but(self):
         """On définit la méthode marquer_but mettant à jour la note et le nombre de buts marqués

@@ -21,6 +21,17 @@ class Journee(Club):
         Journee.nb_journee += 1
         self.nb_jours_restants = 38  # il y a 19 rencontres aller et 19 rencontres retour
 
+    def calendrier(self):
+        nb_jours = self.nb_jours_restants
+        nb_col = 7 # Du lundi au dimanche
+        nb_lignes = int(nb_jours / nb_col) + 1
+        calend = np.empty((nb_lignes, nb_col))
+        for i in range(0, nb_lignes):
+            for j in range(0, nb_col):
+                calend[i][j] = int(i * nb_col + j + 1)
+        calend[-1][4:] = 0
+        return calend
+
     def rencontres_journee(self):
         """On définit la méthode rencontres_journee décidant des rencontres de la journée
         Inputs : None
