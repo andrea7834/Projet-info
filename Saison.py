@@ -83,6 +83,6 @@ if __name__ == "__main__":
     for i in range(len(noms_clubs)):
         for j in range(11):
             joueurs.creer_joueur(str(noms_joueurs[i][j]))
-        clubs.creer_club(noms_clubs[i], niveau_clubs[i], noms_joueurs[i])
+        clubs.creer_club(noms_clubs[i*11 : (i+1)*11], niveau_clubs[i*11 : (i+1)*11], noms_joueurs[i*11 : (i+1)*11])
     saison = Saison()
     print(saison.jouer_saison())
