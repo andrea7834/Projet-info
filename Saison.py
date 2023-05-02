@@ -27,7 +27,7 @@ class Saison(Journee):
 
 
 if __name__ == "__main__":
-
     clubs = Club.Club()
+    print(clubs)
     saison = Saison()
     print(saison.classement_final())
