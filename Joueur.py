@@ -10,6 +10,21 @@ class Joueur():
         """On définit la classe Joueur définissant les caractéristiques du joueur"""
         self.nom_joueur, self.note, self.buts_marques = nom_joueur, note, buts_marques
 
+    def noms_des_joueurs(self):
+        # Extraction de la liste des joueurs
+        fichier = open("noms_joueurs.txt", 'r')
+        noms_joueurs = []
+        fichier.seek(0)
+        for ligne in fichier:  # Il y a une équipe de 11 joueurs par ligne
+            equipe = []
+            noms = ligne.strip(" \n")
+            noms = noms.split()  # Le nom de chaque joueur est séparé par un espace
+            for nom in noms:
+                equipe.append(nom)
+            noms_joueurs.append(equipe)
+        fichier.close()  # Fermeture du fichier après lecture
+        return  noms_joueurs
+
     def marquer_but(self):
         """On définit la méthode marquer_but mettant à jour la note et le nombre de buts marqués
         par le joueur lorsqu'il marque un but."""

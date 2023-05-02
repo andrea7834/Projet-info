@@ -11,16 +11,14 @@ class Journee(Club):
     def __init__(self):
         """On définit la classe Journee comprenant les rencontres de la journée """
         super().__init__()
-        self.nb_rencontres_par_jour = 10
-        # Comme il y a 20 équipes alors il y a 10 matchs par jour puisque toutes les équipes jouent une fois
-        Journee.nb_journee += 1
+        self.nb_rencontres_par_jour = 10 # Comme il y a 20 équipes alors il y a 10 matchs par jour puisque toutes les équipes jouent une fois
         self.nb_jours_total = 38  # il y a 19 rencontres aller et 19 rencontres retour
 
     def jouer_journee(self):
-        """On définit la méthode rencontres_journee décidant des rencontres de la journée """
+        """On définit la méthode jouer_journee récapitulant les résultats des rencontres de la journée """
         self.nb_jours_total -= 1
         nb_rencontres = self.nb_rencontres_par_jour
-        equipes_dom, equipes_ext, buts_dom, buts_ext, pts_dom, pts_ext = [], [], [], [], [], []
+        equipes_dom, equipes_ext, buts_dom, buts_ext, pts_dom, pts_ext, buteurs_dom, buteurs_ext = [], [], [], [], [], [], [], []
 
         if self.nb_jours_restants > 0:  # On vérifie bien que ce n'est pas la fin de la saison
             equipes = self.noms_clubs
@@ -37,6 +35,8 @@ class Journee(Club):
                             buts_ext.append(self.jouer_un_match(equipes[i], equipes[j])[0][1])
                             pts_dom.append(self.jouer_un_match(equipes[i], equipes[j])[1][0])
                             pts_ext.append(self.jouer_un_match(equipes[i], equipes[j])[1][1])
+                            buteurs_dom.append(self.jouer_un_match(equipes[i], equipes[j])[2])
+                            buteurs_ext.append(self.jouer_un_match(equipes[i], equipes[j])[3])
                             nb_rencontres -= 1
             equipes_dom = np.array(equipes_dom).reshape(10, 1)
             equipes_ext = np.array(equipes_ext).reshape(10, 1)
@@ -44,19 +44,30 @@ class Journee(Club):
             buts_ext = np.array(buts_ext).reshape(10, 1)
             pts_dom = np.array(buts_dom).reshape(10, 1)
             pts_ext = np.array(buts_ext).reshape(10, 1)
+            buteurs_dom = np.array(buteurs_dom).reshape(10, 1)
+            buteurs_ext = np.array(buteurs_ext).reshape(10, 1)
 
-            return np.array(equipes_dom, buts_dom, pts_dom), np.array(equipes_ext, buts_ext, pts_ext)
+            return np.array(equipes_dom, buts_dom, pts_dom, buteurs_dom), np.array(equipes_ext, buts_ext, pts_ext, buteurs_ext)
 
-    def tri(self, tab):
-        """ On définit la méthode tri permet de trier un tableau en fonction du nombre de points des équipes
-        Input : tab (array)
-        Output : tab_triee
-        """
-        tab1 = tab.copy()
-        tab_trie = []
+    def classement_journee(self):
+        """ On définit la méthode classement_journee qui donne le classement d'une journée"""
+        tab_dom, tab_ext = self.simuler_journee()
+        tab = np.concatenate((tab_dom, tab_ext), axis=0)
+        classement_journee = tab[np.argsort(tab[:, 2]), :] # On trie selon le nombre de points gagnés
+        return classement_journee
 
-        while tab1:
-            arg_min = np.argmin(tab[:, 1])  # On cherche l'indice du plus petit élément du tableau des scores
-            tab_trie.append(tab1[arg_min])
-            tab1.pop(arg_min)
-        return tab_trie
+    def classement_date(self, no_jour):
+        classement_date = [self.noms_clubs, [0 for i in range(20)], [0 for i in range(20)]]
+        for i in range(no_jour):    # Classement au jour n° no_jour
+            classement_jour = self.classement_journee()
+            for nom in self.noms_clubs:
+                j = classement_jour[0].index(nom)  # Indice du club dans le classement du jour
+                k = classement_date[0].index(nom)  # Indice du club dans le classement à la date t
+                classement_date[1][k] += classement_jour[1][j]  # On actualise le nb_buts
+                classement_date[2][k] += classement_jour[2][j]  # On actualise le nb_points
+        tab = np.array(classement_date)
+        classement_date = tab[np.argsort(tab[:, 2]), :] # On trie selon le nombre de points gagnés
+        return classement_date
+
+    def __str__(self, date):
+        return str(self.classement_date(date))

@@ -6,19 +6,32 @@ import Joueur
 """ Ce module contient la définition de la classe Club permettant la création des équipes """
 
 class Club(Joueur):
-    def __init__(self, noms_clubs, niveau, noms_joueurs):
+    def __init__(self):
         """ On définit la classe Club qui regroupe le nom de chaque club, ses joueurs,
         son nombre de points et le nombre de buts marqués lors de la saison (initialisés à 0)
-        Inputs : noms_clubs (liste de str)
-                    niveau (liste de float)
-                    noms_joueurs (liste de listes de str)
         """
         super().__init__()
-        self.noms_clubs, self.niveau, self.joueurs = noms_clubs, niveau, noms_joueurs
-        self.points = np.zeros(20)
-        self.buts_marques = np.zeros(20)
+        self.noms_clubs = self.noms_des_clubs()
+        # On attribue un niveau à chaque club (en fonction des résultats de cette année)
+        self.niveau = [0.5, 0.25, 1.5, 1.25, 2.5, 4.75, 4, 2.75,
+              3.5, 4.5, 4.25, 2, 1.75, 3, 5, 3.25,
+              3.75, 1, 2.25, 0.75]
+        self.joueurs = self.noms_des_joueurs()
+        self.points = [0 for i in range(20)]
+        self.buts_marques = [0 for i in range(20)]
         self.dom_ext = np.eye(20)  # On définit une matrice pour les matchs joués à domicile ou à l'extérieur
         # Les lignes correspondent aux équipes jouant à domicile et les colonnes à celles jouant à l'extérieur
+
+    def noms_des_clubs(self):
+        # Extraction de la liste des clubs
+        fichier = open("noms_clubs.txt", 'r')
+        noms_clubs = []
+        fichier.seek(0)  # Mettre le curseur au début du fichier
+        for club in fichier:  # Il y a un club par ligne
+            club = club.strip(" \n")
+            noms_clubs.append(club)
+        fichier.close()  # Fermeture du fichier après lecture
+        return noms_clubs
 
     def jouer_un_match(self, equipe_a, equipe_b):
         """On définit la méthode jouer_match ajoutant un match dans le tableau des matchs
@@ -26,6 +39,8 @@ class Club(Joueur):
                     equipe_b (str) jouant à l'extérieur
         Output : None
         """
+
+        buteurs_a, buteurs_b = [], []
 
         # On cherche l'indice de chaque club dans la liste des clubs pour accéder à ses caractéristiques
         i = self.noms_clubs.index(equipe_a)
@@ -55,18 +70,21 @@ class Club(Joueur):
             self.buts_marques[i] += buts_marques_a
             self.buts_marques[j] += buts_marques_b
 
-            for nb_butsA in range(buts_marques_a + 1):
-                indice_buteur = np.random.randint(1, 12)
-                # On prend un buteur au hasard dans l'équipe (sauf le gardien d'indice 0)
-                buteur = self.noms_joueurs[i][indice_buteur]
-                buteur.marquer_but()
+            if buts_marques_a > 0:
+                for nb_butsA in range(1, buts_marques_a + 1):
+                    indice_buteur = np.random.randint(1, 12)
+                    # On prend un buteur au hasard dans l'équipe (sauf le gardien d'indice 0)
+                    buteur = self.noms_joueurs[i][indice_buteur]
+                    buteurs_a.append(buteur)
+                    buteur.marquer_but()
+            if buts_marques_b > 0:
+                for nb_butsB in range(1, buts_marques_b + 1):
+                    indice_buteur = np.random.randint(1, 12)
+                    buteur = self.noms_joueurs[j][indice_buteur]
+                    buteurs_b.append(buteur)
+                    buteur.marquer_but()
 
-            for nb_butsB in range(buts_marques_b + 1):
-                indice_buteur = np.random.randint(1, 12)
-                buteur = self.noms_joueurs[j][indice_buteur]
-                buteur.marquer_but()
-
-            return [buts_marques_a, buts_marques_b], [points_a,points_b]
+            return [buts_marques_a, buts_marques_b], [points_a,points_b], buteurs_a, buteurs_b
 
     def __str__(self):
         """On définit __str__ la méthode retournant le nom de clubs, leur nombre de poinst et le nombre de buts marqués sous forme de dataframe
