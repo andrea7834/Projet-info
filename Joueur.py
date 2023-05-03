@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import random
+from abc import ABCMeta
 import numpy as np
 
 """ Ce module contient la définition de la classe Joueur permettant la création d'un joueur """
 
-class Joueur():
+class Joueur(metaclass=ABCMeta):
     def __init__(self, nom_joueur, note=0, buts_marques=0):
         """On définit la classe Joueur définissant les caractéristiques du joueur"""
         self.nom_joueur, self.note, self.buts_marques = nom_joueur, note, buts_marques

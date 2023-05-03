@@ -12,11 +12,11 @@ class Journee(Club):
         """On définit la classe Journee comprenant les rencontres de la journée """
         super().__init__()
         self.nb_rencontres_par_jour = 10 # Comme il y a 20 équipes alors il y a 10 matchs par jour puisque toutes les équipes jouent une fois
-        self.nb_jours_total = 38  # il y a 19 rencontres aller et 19 rencontres retour
+        self.nb_jours_restants = 38  # il y a 19 rencontres aller et 19 rencontres retour
 
     def jouer_journee(self):
         """On définit la méthode jouer_journee récapitulant les résultats des rencontres de la journée """
-        self.nb_jours_total -= 1
+        self.nb_jours_restants -= 1
         nb_rencontres = self.nb_rencontres_par_jour
         equipes_dom, equipes_ext, buts_dom, buts_ext, pts_dom, pts_ext, buteurs_dom, buteurs_ext = [], [], [], [], [], [], [], []
 
@@ -51,7 +51,7 @@ class Journee(Club):
 
     def classement_journee(self):
         """ On définit la méthode classement_journee qui donne le classement d'une journée"""
-        tab_dom, tab_ext = self.simuler_journee()
+        tab_dom, tab_ext = self.jouer_journee()
         tab = np.concatenate((tab_dom, tab_ext), axis=0)
         classement_journee = tab[np.argsort(tab[:, 2]), :] # On trie selon le nombre de points gagnés
         return classement_journee
