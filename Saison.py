@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import Club, Journee
+import Club, Journee, Joueur
 import numpy as np
 
 """ Ce module contient la définition de la classe principale Saison servant à créer le championnat """
@@ -27,7 +27,9 @@ class Saison(Journee):
 
 
 if __name__ == "__main__":
-    clubs = Club.Club()
-    print(clubs)
-    saison = Saison()
-    print(saison.classement_final())
+    joueurs = Joueur.Joueur
+    print(joueurs)
+    # clubs = Club.Club()
+    # print(clubs)
+    # saison = Saison()
+    # print(saison.classement_final())

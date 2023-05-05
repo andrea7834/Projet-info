@@ -10,13 +10,14 @@ class Club(Joueur):
         """ On définit la classe Club qui regroupe le nom de chaque club, ses joueurs,
         son nombre de points et le nombre de buts marqués lors de la saison (initialisés à 0)
         """
-        super().__init__()
+        self.joueurs = self.noms_des_joueurs()
+        for joueur in self.joueurs:
+            super().__init__(joueur)
         self.noms_clubs = self.noms_des_clubs()
         # On attribue un niveau à chaque club (en fonction des résultats de cette année)
         self.niveau = [0.5, 0.25, 1.5, 1.25, 2.5, 4.75, 4, 2.75,
               3.5, 4.5, 4.25, 2, 1.75, 3, 5, 3.25,
               3.75, 1, 2.25, 0.75]
-        self.joueurs = self.noms_des_joueurs()
         self.points = [0 for i in range(20)]
         self.buts_marques = [0 for i in range(20)]
         self.dom_ext = np.eye(20)  # On définit une matrice pour les matchs joués à domicile ou à l'extérieur

@@ -7,9 +7,12 @@ import numpy as np
 """ Ce module contient la définition de la classe Joueur permettant la création d'un joueur """
 
 class Joueur(metaclass=ABCMeta):
-    def __init__(self, nom_joueur, note=0, buts_marques=0):
+    def __init__(self):
         """On définit la classe Joueur définissant les caractéristiques du joueur"""
-        self.nom_joueur, self.note, self.buts_marques = nom_joueur, note, buts_marques
+        self.noms_joueurs = self.noms_des_joueurs()
+        self.note = np.zeros((220, 1))
+        self.buts_marques = np.zeros((220, 1))
+        self.tab = np.array(self.noms_joueurs, self.note, self.buts_marques)
 
     def noms_des_joueurs(self):
         # Extraction de la liste des joueurs
@@ -34,6 +37,9 @@ class Joueur(metaclass=ABCMeta):
         self.buts_marques += 1
 
     def __str__(self):
-        """On définit __str__ la méthode retournant une chaine de caractères avec le nom du joueur,
-        sa note et le nombre de buts qu'il a marqué"""
-        return f"Nom du joueur : {self.nom_joueur}, Note : {self.note}, Buts marqués :{self.buts_marques}"
+        """On définit __str__ la méthode retournant une chaine de caractères avec les noms des joueurs,
+        ses notes et leur nombre de buts qu'ils ont marqué"""
+        for i in range(len(self.noms_joueurs[:][0]) + 1):
+            return f"Nom du joueur : {self.noms_joueurs[i]}, Note : {self.note[i]}, Buts marqués :{self.buts_marques[i]}"
+
+if __name__ == "__main__":
