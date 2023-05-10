@@ -37,9 +37,6 @@ class Joueur(metaclass=ABCMeta):
         self.buts_marques += 1
 
     def __str__(self):
-        """On définit __str__ la méthode retournant une chaine de caractères avec les noms des joueurs,
-        ses notes et leur nombre de buts qu'ils ont marqué"""
-        for i in range(len(self.noms_joueurs[:][0]) + 1):
-            return f"Nom du joueur : {self.noms_joueurs[i]}, Note : {self.note[i]}, Buts marqués :{self.buts_marques[i]}"
-
-if __name__ == "__main__":
+        """On définit __str__ la méthode retournant une chaine de caractères avec le nom du joueur,
+        sa note et son nombre de buts qu'il a marqué"""
+        return f"Nom du joueur : {self.noms_joueurs}, Note : {self.note}, Buts marqués :{self.buts_marques}"
