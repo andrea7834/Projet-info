@@ -8,13 +8,73 @@ import numpy as np
 
 class Journee(Club):
 
-    def __init__(self, noms_clubs, noms_joueurs):
+    def __init__(self, noms_clubs, noms_joueurs, niveaux):
         """On définit la classe Journee comprenant les rencontres de la journée """
         for club in noms_clubs:
             super().__init__(club)
         super().__init__(noms_clubs, noms_joueurs)
+        self.noms_clubs = noms_clubs
+        self.noms_joueurs = noms_joueurs
+        self.niveaux = niveaux
+        self.points = np.zeros((20, 1))
+        self.buts_marques = np.zeros((20, 1))
+        self.dom_ext = np.eye(20)  # On définit une matrice pour les matchs joués à domicile ou à l'extérieur
+        # Les lignes correspondent aux équipes jouant à domicile et les colonnes à celles jouant à l'extérieur
         self.nb_rencontres_par_jour = 10 # Comme il y a 20 équipes alors il y a 10 matchs par jour puisque toutes les équipes jouent une fois
         self.nb_jours_restants = 38  # il y a 19 rencontres aller et 19 rencontres retour
+
+    def jouer_un_match(self, equipe_a, equipe_b):
+        """On définit la méthode jouer_match ajoutant un match dans le tableau des matchs
+        Inputs : equipe_a (str) jouant à domicile
+                    equipe_b (str) jouant à l'extérieur
+        Output : None
+        """
+
+        buteurs_a, buteurs_b = [], []
+
+        # On cherche l'indice de chaque club dans la liste des clubs pour accéder à ses caractéristiques
+        i = self.noms_clubs.index(equipe_a)
+        j = self.noms_clubs.index(equipe_b)
+
+        if self.dom_ext[i][j] == 1:
+            return "Cette rencontre a déjà eu lieu"
+        else:
+            self.dom_ext[i][j] = 1
+
+            # On définit le nombre de buts marqués et encaissés en fonction du niveau de l'équipe
+            buts_marques_a = int(self.niveau * np.random.randint(0, 5))
+            buts_marques_b = int(self.niveau * np.random.randint(0, 5))
+
+            # On actualise le nombre de points et de buts marqués de chaque équipe
+            # Lorsqu'un club gagne, il remporte 3 points, le perdant ne gagne aucun point.
+            # S'il y a égalité, chaque équipe remporte 1 point
+            points_a, points_b = 0, 0
+            if buts_marques_a > buts_marques_b: # Le club A gagne et le club B perd
+                points_a = 3
+            elif buts_marques_a < buts_marques_b: # Le club B gagne et le club A perd
+                points_b = 3
+            elif buts_marques_a == buts_marques_b: # Il y a égalité
+                points_a, points_b = 1, 1
+            self.points[i] += points_a
+            self.points[j] += points_b
+            self.buts_marques[i] += buts_marques_a
+            self.buts_marques[j] += buts_marques_b
+
+            if buts_marques_a > 0:
+                for nb_butsA in range(1, buts_marques_a + 1):
+                    indice_buteur = np.random.randint(1, 12)
+                    # On prend un buteur au hasard dans l'équipe (sauf le gardien d'indice 0)
+                    buteur = self.noms_joueurs[i][indice_buteur]
+                    buteurs_a.append(buteur)
+                    buteur.marquer_but()
+            if buts_marques_b > 0:
+                for nb_butsB in range(1, buts_marques_b + 1):
+                    indice_buteur = np.random.randint(1, 12)
+                    buteur = self.noms_joueurs[j][indice_buteur]
+                    buteurs_b.append(buteur)
+                    buteur.marquer_but()
+
+            return [buts_marques_a, buts_marques_b, points_a,points_b, buteurs_a, buteurs_b]
 
     def jouer_journee(self):
         """On définit la méthode jouer_journee récapitulant les résultats des rencontres de la journée """
@@ -30,15 +90,15 @@ class Journee(Club):
                 for i in range((len(equipes) + 1) // 2): # Equipes à domiciles (lignes)
                     for j in range((len(equipes) + 1) // 2, len(equipes) +1): # Equipes à l'extérieur (colonnes)
                         # On vérifie que ces deux équipes ne se sont pas affrontées au domicile de l'équipe i
-                        if self.dom_ext[i][j] == 1:
+                        if self.dom_ext[i][j] != 1:
                             equipes_dom.append(equipes[i])
                             equipes_ext.append(equipes[j])
-                            buts_dom.append(self.jouer_un_match(equipes[i], equipes[j])[0][0])
-                            buts_ext.append(self.jouer_un_match(equipes[i], equipes[j])[0][1])
-                            pts_dom.append(self.jouer_un_match(equipes[i], equipes[j])[1][0])
-                            pts_ext.append(self.jouer_un_match(equipes[i], equipes[j])[1][1])
-                            buteurs_dom.append(self.jouer_un_match(equipes[i], equipes[j])[2])
-                            buteurs_ext.append(self.jouer_un_match(equipes[i], equipes[j])[3])
+                            buts_dom.append(self.jouer_un_match(equipes[i], equipes[j])[0])
+                            buts_ext.append(self.jouer_un_match(equipes[i], equipes[j])[1])
+                            pts_dom.append(self.jouer_un_match(equipes[i], equipes[j])[2])
+                            pts_ext.append(self.jouer_un_match(equipes[i], equipes[j])[3])
+                            buteurs_dom.append(self.jouer_un_match(equipes[i], equipes[j])[4])
+                            buteurs_ext.append(self.jouer_un_match(equipes[i], equipes[j])[5])
                             nb_rencontres -= 1
             equipes_dom = np.array(equipes_dom).reshape(10, 1)
             equipes_ext = np.array(equipes_ext).reshape(10, 1)

@@ -8,7 +8,7 @@ import numpy as np
 class Joueur:
     def __init__(self, nom_joueur):
         """On définit la classe Joueur définissant les caractéristiques du joueur"""
-        self.noms_joueur = nom_joueur
+        self.nom_joueur = nom_joueur
         self.note = 0
         self.buts_marques = 0
 
@@ -22,4 +22,4 @@ class Joueur:
     def __str__(self):
         """On définit __str__ la méthode retournant une chaine de caractères avec le nom du joueur,
         sa note et son nombre de buts qu'il a marqué"""
-        return f"Nom du joueur : {self.noms_joueur}, Note : {self.note}, Buts marqués :{self.buts_marques}"
+        return f"Nom du joueur : {self.nom_joueur}, Note : {self.note}, Buts marqués :{self.buts_marques}"

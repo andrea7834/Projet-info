@@ -5,10 +5,11 @@ import numpy as np
 
 """ Ce module contient la définition de la classe principale Saison servant à créer le championnat """
 
+
 class Saison(Journee):
     def __init__(self, noms_clubs, noms_joueurs):
         """On définit la classe Saison regroupant les matchs d'une journée et le récapitulatif de la saison """
-        super().__init__(noms_clubs, noms_clubs)
+        super().__init__(noms_clubs, noms_joueurs)
         self.nom = "Ligue 1"
         self.nb_jours_total = 38
 
@@ -48,9 +49,8 @@ if __name__ == "__main__":
         noms_clubs.append(club)
     fichier.close()  # Fermeture du fichier après lecture
 
-    # joueurs = Joueur.Joueur
-    # print(joueurs)
-    # clubs = Club.Club()
-    # print(clubs)
-    # saison = Saison()
-    # print(saison.classement_final())
+    niveau = np.array([0.5, 0.25, 1.5, 1.25, 2.5, 4.75, 4, 2.75,
+                       3.5, 4.5, 4.25, 2, 1.75, 3, 5, 3.25,
+                       3.75, 1, 2.25, 0.75]).reshape((20, 1))
+
+    print(Joueur.Joueur("Pablo"))
