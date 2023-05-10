@@ -138,6 +138,3 @@ class Journee(Joueur.Joueur):
         tab = np.array(classement_date)
         classement_date = tab[np.argsort(tab[:, 2]), :] # On trie selon le nombre de points gagnés
         return classement_date
-
-    def __str__(self, date):
-        return str(self.classement_date(date))
