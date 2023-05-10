@@ -18,8 +18,8 @@ class Club(Joueur):
         self.niveau = [0.5, 0.25, 1.5, 1.25, 2.5, 4.75, 4, 2.75,
               3.5, 4.5, 4.25, 2, 1.75, 3, 5, 3.25,
               3.75, 1, 2.25, 0.75]
-        self.points = 0
-        self.buts_marques = 0
+        self.points = [0 for i in range(20)]
+        self.buts_marques = [0 for i in range(20)]
         self.dom_ext = np.eye(20)  # On définit une matrice pour les matchs joués à domicile ou à l'extérieur
         # Les lignes correspondent aux équipes jouant à domicile et les colonnes à celles jouant à l'extérieur
 
