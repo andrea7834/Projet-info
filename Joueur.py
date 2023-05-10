@@ -23,3 +23,20 @@ class Joueur:
         """On définit __str__ la méthode retournant une chaine de caractères avec le nom du joueur,
         sa note et son nombre de buts qu'il a marqué"""
         return f"Nom du joueur : {self.nom_joueur}, Note : {self.note}, Buts marqués :{self.buts_marques}"
+
+if __name__ == "__main__":
+
+    # Extraction de la liste des joueurs
+    fichier = open("noms_joueurs.txt", 'r')
+    noms_joueurs = []
+    fichier.seek(0)
+    for ligne in fichier:  # Il y a une équipe de 11 joueurs par ligne
+        equipe = []
+        noms = ligne.strip(" \n")
+        noms = noms.split()  # Le nom de chaque joueur est séparé par un espace
+        for nom in noms:
+            equipe.append(nom)
+            joueur = Joueur(nom)
+            print(joueur)
+        noms_joueurs.append(equipe)
+    fichier.close()  # Fermeture du fichier après lecture
