@@ -9,10 +9,10 @@ import numpy as np
 class Joueur(metaclass=ABCMeta):
     def __init__(self):
         """On définit la classe Joueur définissant les caractéristiques du joueur"""
-        self.noms_joueurs = self.noms_des_joueurs()
-        self.note = np.zeros((220, 1))
-        self.buts_marques = np.zeros((220, 1))
-        self.tab = np.array(self.noms_joueurs, self.note, self.buts_marques)
+        self.noms_joueurs = ""
+        self.note = 0
+        self.buts_marques = 0
+        self.tab = np.array([self.noms_joueurs, self.note, self.buts_marques])
 
     def noms_des_joueurs(self):
         # Extraction de la liste des joueurs
