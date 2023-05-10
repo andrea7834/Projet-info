@@ -1,18 +1,20 @@
 # -*- coding: utf-8 -*-
 
-import Club
+import Club, Joueur
 import numpy as np
 
 """ Ce module contient la définition de la classe Journée simulant une journée de championnat """
 
 
-class Journee(Club):
+class Journee(Joueur.Joueur):
 
     def __init__(self, noms_clubs, noms_joueurs, niveaux):
         """On définit la classe Journee comprenant les rencontres de la journée """
-        for club in noms_clubs:
-            super().__init__(club)
-        super().__init__(noms_clubs, noms_joueurs)
+        # for club in noms_clubs:
+        #     super().__init__(club)
+        # super().__init__(noms_clubs, noms_joueurs)
+        for nom in noms_joueurs:
+            super().__init__(nom)
         self.noms_clubs = noms_clubs
         self.noms_joueurs = noms_joueurs
         self.niveaux = niveaux
@@ -42,8 +44,8 @@ class Journee(Club):
             self.dom_ext[i][j] = 1
 
             # On définit le nombre de buts marqués et encaissés en fonction du niveau de l'équipe
-            buts_marques_a = int(self.niveau * np.random.randint(0, 5))
-            buts_marques_b = int(self.niveau * np.random.randint(0, 5))
+            buts_marques_a = int(self.niveaux[i] * np.random.randint(0, 2))
+            buts_marques_b = int(self.niveaux[j] * np.random.randint(0, 2))
 
             # On actualise le nombre de points et de buts marqués de chaque équipe
             # Lorsqu'un club gagne, il remporte 3 points, le perdant ne gagne aucun point.
@@ -62,19 +64,21 @@ class Journee(Club):
 
             if buts_marques_a > 0:
                 for nb_butsA in range(1, buts_marques_a + 1):
-                    indice_buteur = np.random.randint(1, 12)
+                    indice_buteur = np.random.randint(1, 11)
                     # On prend un buteur au hasard dans l'équipe (sauf le gardien d'indice 0)
                     buteur = self.noms_joueurs[i][indice_buteur]
                     buteurs_a.append(buteur)
-                    buteur.marquer_but()
+                    joueur = Joueur.Joueur(buteur)
+                    joueur.marquer_but()
             if buts_marques_b > 0:
                 for nb_butsB in range(1, buts_marques_b + 1):
-                    indice_buteur = np.random.randint(1, 12)
+                    indice_buteur = np.random.randint(1, 11)
                     buteur = self.noms_joueurs[j][indice_buteur]
                     buteurs_b.append(buteur)
-                    buteur.marquer_but()
+                    joueur = Joueur.Joueur(buteur)
+                    joueur.marquer_but()
 
-            return [buts_marques_a, buts_marques_b, points_a,points_b, buteurs_a, buteurs_b]
+            return [buts_marques_a, buts_marques_b, points_a, points_b, buteurs_a, buteurs_b]
 
     def jouer_journee(self):
         """On définit la méthode jouer_journee récapitulant les résultats des rencontres de la journée """
