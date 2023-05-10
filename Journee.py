@@ -44,8 +44,12 @@ class Journee(Joueur.Joueur):
             self.dom_ext[i][j] = 1
 
             # On définit le nombre de buts marqués et encaissés en fonction du niveau de l'équipe
-            buts_marques_a = int(self.niveaux[i] * np.random.randint(0, 2))
-            buts_marques_b = int(self.niveaux[j] * np.random.randint(0, 2))
+            buts_marques_a = int(np.random.normal(self.niveaux, 1, 1) + 2)
+            buts_marques_b = int(np.random.normal(self.niveaux, 1, 1) + 2)
+            if buts_marques_a < 0:
+                buts_marques_a = 0
+            if buts_marques_b < 0:
+                buts_marques_b = 0
 
             # On actualise le nombre de points et de buts marqués de chaque équipe
             # Lorsqu'un club gagne, il remporte 3 points, le perdant ne gagne aucun point.
@@ -92,7 +96,7 @@ class Journee(Joueur.Joueur):
         # On choisit les rencontres de la journée
             while nb_rencontres > 0:
                 for i in range((len(equipes) + 1) // 2): # Equipes à domiciles (lignes)
-                    for j in range((len(equipes) + 1) // 2, len(equipes) +1): # Equipes à l'extérieur (colonnes)
+                    for j in range((len(equipes) + 1) // 2, len(equipes)): # Equipes à l'extérieur (colonnes)
                         # On vérifie que ces deux équipes ne se sont pas affrontées au domicile de l'équipe i
                         if self.dom_ext[i][j] != 1:
                             equipes_dom.append(equipes[i])

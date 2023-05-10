@@ -61,4 +61,9 @@ if __name__ == "__main__":
     fichier.close()  # Fermeture du fichier après lecture
 
     journee = Journee.Journee(noms_clubs, noms_joueurs, niveaux)
-    print(journee. jouer_un_match("PSG", "OM"))
+    test = journee.jouer_un_match("PSG", "OM")
+    print(test)
+
+
+
+    #saison = Saison.matchs_saison(self)
