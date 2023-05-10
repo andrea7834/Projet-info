@@ -8,9 +8,11 @@ import numpy as np
 
 class Journee(Club):
 
-    def __init__(self):
+    def __init__(self, noms_clubs, noms_joueurs):
         """On définit la classe Journee comprenant les rencontres de la journée """
-        super().__init__()
+        for club in noms_clubs:
+            super().__init__(club)
+        super().__init__(noms_clubs, noms_joueurs)
         self.nb_rencontres_par_jour = 10 # Comme il y a 20 équipes alors il y a 10 matchs par jour puisque toutes les équipes jouent une fois
         self.nb_jours_restants = 38  # il y a 19 rencontres aller et 19 rencontres retour
 

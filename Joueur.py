@@ -7,27 +7,12 @@ import numpy as np
 """ Ce module contient la définition de la classe Joueur permettant la création d'un joueur """
 
 class Joueur(metaclass=ABCMeta):
-    def __init__(self):
+    def __init__(self, nom_joueur):
         """On définit la classe Joueur définissant les caractéristiques du joueur"""
-        self.noms_joueurs = []
+        self.noms_joueur = nom_joueur
         self.note = 0
         self.buts_marques = 0
-        self.tab = np.array([self.noms_joueurs, self.note, self.buts_marques])
-
-    def noms_des_joueurs(self):
-        # Extraction de la liste des joueurs
-        fichier = open("noms_joueurs.txt", 'r')
-        noms_joueurs = []
-        fichier.seek(0)
-        for ligne in fichier:  # Il y a une équipe de 11 joueurs par ligne
-            equipe = []
-            noms = ligne.strip(" \n")
-            noms = noms.split()  # Le nom de chaque joueur est séparé par un espace
-            for nom in noms:
-                equipe.append(nom)
-            noms_joueurs.append(equipe)
-        fichier.close()  # Fermeture du fichier après lecture
-        return  noms_joueurs
+        self.tab = np.array([self.noms_joueur, self.note, self.buts_marques])
 
     def marquer_but(self):
         """On définit la méthode marquer_but mettant à jour la note et le nombre de buts marqués
@@ -39,4 +24,4 @@ class Joueur(metaclass=ABCMeta):
     def __str__(self):
         """On définit __str__ la méthode retournant une chaine de caractères avec le nom du joueur,
         sa note et son nombre de buts qu'il a marqué"""
-        return f"Nom du joueur : {self.noms_joueurs}, Note : {self.note}, Buts marqués :{self.buts_marques}"
+        return f"Nom du joueur : {self.noms_joueur}, Note : {self.note}, Buts marqués :{self.buts_marques}"

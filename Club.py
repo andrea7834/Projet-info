@@ -6,14 +6,13 @@ import Joueur
 """ Ce module contient la définition de la classe Club permettant la création des équipes """
 
 class Club(Joueur):
-    def __init__(self):
+    def __init__(self, nom_club, noms_joueurs):
         """ On définit la classe Club qui regroupe le nom de chaque club, ses joueurs,
         son nombre de points et le nombre de buts marqués lors de la saison (initialisés à 0)
         """
-        self.joueurs = self.noms_des_joueurs()
-        for joueur in self.joueurs:
+        for joueur in noms_joueurs:
             super().__init__(joueur)
-        self.noms_clubs = []
+        self.noms_clubs = [nom_club]
         # On attribue un niveau à chaque club (en fonction des résultats de cette année)
         self.niveau = [0.5, 0.25, 1.5, 1.25, 2.5, 4.75, 4, 2.75,
               3.5, 4.5, 4.25, 2, 1.75, 3, 5, 3.25,
@@ -22,17 +21,6 @@ class Club(Joueur):
         self.buts_marques = [0 for i in range(20)]
         self.dom_ext = np.eye(20)  # On définit une matrice pour les matchs joués à domicile ou à l'extérieur
         # Les lignes correspondent aux équipes jouant à domicile et les colonnes à celles jouant à l'extérieur
-
-    def noms_des_clubs(self):
-        # Extraction de la liste des clubs
-        fichier = open("noms_clubs.txt", 'r')
-        noms_clubs = []
-        fichier.seek(0)  # Mettre le curseur au début du fichier
-        for club in fichier:  # Il y a un club par ligne
-            club = club.strip(" \n")
-            noms_clubs.append(club)
-        fichier.close()  # Fermeture du fichier après lecture
-        return noms_clubs
 
     def jouer_un_match(self, equipe_a, equipe_b):
         """On définit la méthode jouer_match ajoutant un match dans le tableau des matchs
