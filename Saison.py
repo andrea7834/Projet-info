@@ -12,6 +12,7 @@ class Saison(Journee.Journee):
         super().__init__(noms_clubs, noms_joueurs, niveaux)
         self.nom = "Ligue 1"
         self.nb_jours_total = 38
+        self.recommencer_tournoi()
 
     def matchs_saison(self):
         """ On définit la méthode matchs_saison le récapitulatif des matchs joués sur la saison"""
@@ -64,7 +65,7 @@ if __name__ == "__main__":
     # test = journee.jouer_un_match("PSG", "OM")
     # print(test)
 
-    journee = Journee.Journee(noms_clubs, noms_joueurs, niveaux)
-    print(journee.jouer_journee())
+    journee = Journee.Journee(noms_clubs, noms_joueurs, niveaux).jouer_journee()
+    print(journee)
 
     #saison = Saison.matchs_saison(self)
