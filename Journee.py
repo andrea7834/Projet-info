@@ -7,7 +7,7 @@ import pandas as pd
 """ Ce module contient la définition de la classe Journée simulant une journée de championnat """
 
 
-class Journee(Joueur.Joueur):
+class Journee(list, Joueur.Joueur):
 
     def __init__(self, noms_clubs, noms_joueurs, niveaux):
         """On définit la classe Journee comprenant les rencontres de la journée """
@@ -78,7 +78,7 @@ class Journee(Joueur.Joueur):
 
             return [buts_marques_a, buts_marques_b, points_a, points_b, buteurs_a, buteurs_b]
 
-    def jouer_journee(self):
+    def classement_journee(self):
         """On définit la méthode jouer_journee récapitulant les résultats des rencontres de la journée """
         self.nb_jours_restants -= 1
         nb_rencontres = self.nb_rencontres_par_jour
@@ -123,21 +123,8 @@ class Journee(Joueur.Joueur):
 
             return res
 
-
-    def classement_journee(self):
-        """ On définit la méthode classement_journee qui donne le classement d'une journée"""
-        return self.jouer_journee().sort_values(by=["Points dom", "Points exté"])
-
     def classement_date(self, no_jour):
         for i in range(no_jour-1):    # Classement au jour n° no_jour
             self.classement_journee()
         classement_date = self.classement_journee()
         return classement_date
-
-    def recommencer_tournoi(self):
-        self.points = np.zeros((20,))
-        self.buts_marques = np.zeros((20,))
-        self.dom_ext = np.eye(20)  # On définit une matrice pour les matchs joués à domicile ou à l'extérieur
-        # Les lignes correspondent aux équipes jouant à domicile et les colonnes à celles jouant à l'extérieur
-        self.nb_rencontres_par_jour = 10  # Comme il y a 20 équipes alors il y a 10 matchs par jour puisque toutes les équipes jouent une fois
-        self.nb_jours_restants = 38  # il y a 19 rencontres aller et 19 rencontres retour

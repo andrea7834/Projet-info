@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
-import Club, Journee, Joueur
+import Journee
 import numpy as np
+import pandas as pd
 
 """ Ce module contient la définition de la classe principale Saison servant à créer le championnat """
 
@@ -12,14 +13,19 @@ class Saison(Journee.Journee):
         super().__init__(noms_clubs, noms_joueurs, niveaux)
         self.nom = "Ligue 1"
         self.nb_jours_total = 38
-        self.recommencer_tournoi()
 
     def matchs_saison(self):
         """ On définit la méthode matchs_saison le récapitulatif des matchs joués sur la saison"""
+        dico = {"Points dom": [], "Buteurs dom": [], "Clubs à domicile": [],
+                "Buts dom": [],
+                "Buts exté": [], "Clubs à l'extérieur": [], "Buteurs exté": [],
+                "Points exté": []}
         matchs = []
+
         for i in range(self.nb_jours_total + 1):
-            matchs_journee = self.jouer_journee()
-            matchs.append(matchs_journee)
+            matchs_journee = self.classement_journee()
+            matchs = [matchs, matchs_journee]
+            pd.concat(matchs, ignore_index=True, axis=1, sort="outer")
         return matchs
 
     def classement_final(self):
@@ -61,11 +67,11 @@ if __name__ == "__main__":
         i += 1
     fichier.close()  # Fermeture du fichier après lecture
 
-    # journee = Journee.Journee(noms_clubs, noms_joueurs, niveaux)
-    # test = journee.jouer_un_match("PSG", "OM")
-    # print(test)
+    saison = Saison(noms_clubs, noms_joueurs, niveaux)
+    print(saison.matchs_saison())
 
-    journee = Journee.Journee(noms_clubs, noms_joueurs, niveaux).jouer_journee()
-    print(journee)
+    # journee = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee()
+    # print(journee)
 
-    #saison = Saison.matchs_saison(self)
+    # saison = Saison(noms_clubs, noms_joueurs, niveaux).matchs_saison()
+    # print(saison)
