@@ -48,11 +48,8 @@ if __name__ == "__main__":
         noms = noms.split()  # Le nom de chaque joueur est séparé par un espace
         for nom in noms:
             equipe.append(nom)
-            # joueur = Joueur.Joueur(nom)
-            # print(joueur)
         noms_joueurs.append(equipe)
     fichier.close()  # Fermeture du fichier après lecture
-    # noms_joueurs = np.array(noms_joueurs).reshape((20,))
 
     # Extraction de la liste des clubs
     fichier = open("noms_clubs.txt", 'r')
@@ -62,16 +59,11 @@ if __name__ == "__main__":
     for nom_club in fichier:  # Il y a un club par ligne
         nom_club = nom_club.strip(" \n")
         noms_clubs.append(nom_club)
-        # club = Club.Club(nom_club, niveau[i], noms_joueurs[i])
-        # print(club)
         i += 1
     fichier.close()  # Fermeture du fichier après lecture
 
-    saison = Saison(noms_clubs, noms_joueurs, niveaux)
-    print(saison.matchs_saison())
+    # saison = Saison(noms_clubs, noms_joueurs, niveaux)
+    # print(saison.matchs_saison())
 
-    # journee = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee()
-    # print(journee)
-
-    # saison = Saison(noms_clubs, noms_joueurs, niveaux).matchs_saison()
-    # print(saison)
+    journee = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee()
+    print(journee)

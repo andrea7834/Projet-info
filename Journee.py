@@ -119,7 +119,7 @@ class Journee(list, Joueur.Joueur):
                    "Buts exté": buts_ext, "Clubs à l'extérieur": equipes_ext, "Buteurs exté": buteurs_ext, "Points exté": pts_ext}
 
             res = pd.DataFrame(data=dico)
-            res.sort_values(by=["Points dom"])
+            res.sort_values(by=["Points dom", "Buts dom"])
 
             return res
 
