@@ -14,20 +14,6 @@ class Saison(Journee.Journee):
         self.nom = "Ligue 1"
         self.nb_jours_total = 38
 
-    def matchs_saison(self):
-        """ On définit la méthode matchs_saison le récapitulatif des matchs joués sur la saison"""
-        dico = {"Points dom": [], "Buteurs dom": [], "Clubs à domicile": [],
-                "Buts dom": [],
-                "Buts exté": [], "Clubs à l'extérieur": [], "Buteurs exté": [],
-                "Points exté": []}
-        matchs = []
-
-        for i in range(self.nb_jours_total + 1):
-            matchs_journee = self.classement_journee()
-            matchs = [matchs, matchs_journee]
-            pd.concat(matchs, ignore_index=True, axis=1, sort="outer")
-        return matchs
-
     def classement_final(self):
         return self.classement_date(self.nb_jours_total)
 
