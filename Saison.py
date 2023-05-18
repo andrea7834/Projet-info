@@ -51,5 +51,4 @@ if __name__ == "__main__":
     # saison = Saison(noms_clubs, noms_joueurs, niveaux)
     # print(saison.matchs_saison())
 
-    journee = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee()
-    print(journee)
+    # journee = Journee.Journee(noms_clubs, noms_joueurs, niveaux)

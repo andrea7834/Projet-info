@@ -1,0 +1,11 @@
+,Points dom,Buteurs dom,Clubs à domicile,Buts dom,Buts exté,Clubs à l'extérieur,Buteurs exté,Points exté
+0,3,"['Caqueret', 'Lega', 'Sanchez']",OL,3,2,Ajaccio,"['Gonzalez', 'Michelin']",2
+1,2,"['Gudmundsson', 'Ribeiro']",Lille,2,4,Auxerre,"['Jeanvier', 'Dugimont', 'Bain', 'Danois']",4
+2,3,"['Djiku', 'Mothiba', 'Le_Marchand']",Strasbourg,3,3,Lens,"['Sylla', 'Varane', 'Gradit']",3
+3,3,"['Mbappe', 'Kipembe', 'Sanches']",PSG,3,2,AS Monaco,"['Maripan', 'Embolo']",2
+4,3,"['Harit', 'Bailly', 'Balerdi']",OM,3,1,Troyes,['Salmier'],1
+5,3,"['Ito', 'Serhuis', 'Serhuis']",Reims,3,2,Nantes,"['Ganago', 'Coco']",2
+6,2,"['Beka', 'Beka']",Nice,2,1,Rennes,['Majer'],1
+7,2,"['Maouassa', 'Savanier']",Montpellier,2,4,Lorient,"['Talbi', 'Laporte', 'Laporte', 'Laporte']",4
+8,2,"['Del_Castillo', 'Lemarechal']",Brest,2,2,Clermont,"['Maurer', 'Versini']",2
+9,2,"['Alioui', 'Doumbia']",Angers,2,3,Toulouse,"['Spierings', 'Spierings', 'Dallinga']",3

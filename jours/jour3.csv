@@ -1,0 +1,11 @@
+,Points dom,Buteurs dom,Clubs à domicile,Buts dom,Buts exté,Clubs à l'extérieur,Buteurs exté,Points exté
+0,2,"['Varane', 'Valencia']",Lens,2,3,Brest,"['Lemarechal', 'Le_Douaron', 'Chardonnet']",3
+1,0,[],Clermont,0,4,Strasbourg,"['Le_Marchand', 'H.Diallo', 'Lienard', 'Gameiro']",4
+2,3,"['Moffi', 'Dante', 'Dante']",Nice,3,3,Montpellier,"['Savanier', 'Khazri', 'Tchato']",3
+3,0,[],Lorient,0,1,Angers,['Alioui'],1
+4,2,"['Pallois', 'Coco']",Nantes,2,2,PSG,"['Verrati', 'Mendes']",2
+5,2,"['Serhuis', 'Munetsi']",Reims,2,3,AS Monaco,"['Sibide', 'Jakobs', 'Jakobs']",3
+6,3,"['Diallo', 'Alphonse', 'Roure']",Ajaccio,3,2,Lille,"['Andre', 'David']",2
+7,1,['Chavalerin'],Troyes,1,3,OL,"['Sanchez', 'Tolisso', 'Tagliafico']",3
+8,3,"['Gigot', 'Kabore', 'Rongier']",OM,3,1,Toulouse,['Dejaegere'],1
+9,4,"['Majer', 'Santamaria', 'Gouiri', 'Theate']",Rennes,4,2,Auxerre,"['Da_Costa', 'Da_Costa']",2
