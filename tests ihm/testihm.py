@@ -21,7 +21,7 @@ class Widget(QtWidgets.QWidget):
         self.pandasTv.setSortingEnabled(True)
 
     def loadFile(self):
-        fileName, _ = QtWidgets.QFileDialog.getOpenFileName(self, "Open File", "", "journee.csv")
+        fileName, _ = QtWidgets.QFileDialog.getOpenFileName(self, "Open File")
         self.pathLE.setText("journee.csv")
         df = pd.read_csv(fileName)
         model = PandasModel(df)
