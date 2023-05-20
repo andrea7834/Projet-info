@@ -17,12 +17,12 @@ import sys
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1600, 800)
+        MainWindow.resize(1250, 800)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
 
         self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
-        self.tableWidget.setGeometry(QtCore.QRect(100, 250, 1400, 500))
+        self.tableWidget.setGeometry(QtCore.QRect(25, 25, 1250, 500))
         self.tableWidget.setObjectName("tableWidget")
         self.tableWidget.setColumnCount(0)
         self.tableWidget.setRowCount(0)
@@ -81,8 +81,14 @@ if __name__=="__main__":
             self.ui.tableWidget.setHorizontalHeaderLabels(("Points dom", 'Buteurs dom', "Clubs à domicile", 'Buts dom', 'Buts exté',
                                                            "Clubs à l'extérieur", 'Buteurs exté',  'Points exté'))
 
-            for i in range(8):
-                self.ui.tableWidget.setColumnWidth(i, 175)
+            self.ui.tableWidget.setColumnWidth(0, 75)
+            self.ui.tableWidget.setColumnWidth(1, 175)
+            self.ui.tableWidget.setColumnWidth(2, 175)
+            self.ui.tableWidget.setColumnWidth(3, 75)
+            self.ui.tableWidget.setColumnWidth(4, 75)
+            self.ui.tableWidget.setColumnWidth(5, 175)
+            self.ui.tableWidget.setColumnWidth(6, 175)
+            self.ui.tableWidget.setColumnWidth(7, 75)
 
             row_index = 0
             for colonnes in classement_jour1:
