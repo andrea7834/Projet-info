@@ -1,0 +1,632 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>La_Ligue_1_Uber_Eats</class>
+ <widget class="QMainWindow" name="La_Ligue_1_Uber_Eats">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1040</width>
+    <height>857</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>La_Ligue_1_Uber_Eats</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>mini-soccer-petit-ballon-de-foot.jpg</normaloff>mini-soccer-petit-ballon-de-foot.jpg</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(134, 230, 96);
+font: 75 12pt &quot;Times New Roman&quot;;
+color: rgb(0, 125, 92);
+border-color: rgb(0, 0, 0);</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QTextEdit" name="resultats">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>320</y>
+      <width>961</width>
+      <height>471</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="tabStopWidth">
+     <number>45</number>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="instructions">
+    <property name="geometry">
+     <rect>
+      <x>740</x>
+      <y>240</y>
+      <width>261</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="html">
+     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Times New Roman'; font-size:12pt; font-weight:72; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Cliquez sur une journée pour avoir les scores de celle-ci !&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="quitter">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>810</y>
+      <width>93</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Quitter</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>21</x>
+      <y>11</y>
+      <width>595</width>
+      <height>261</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="calendrier">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetMinimumSize</enum>
+     </property>
+     <item row="0" column="0">
+      <widget class="QPushButton" name="jour1">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(216, 216, 216);
+font: 75 12pt &quot;Times New Roman&quot;;
+color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>1</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QPushButton" name="jour2">
+       <property name="styleSheet">
+        <string notr="true">font: 75 12pt &quot;Times New Roman&quot;;
+background-color: rgb(4, 4, 4);
+color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>2</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QPushButton" name="jour3">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(216, 216, 216);
+font: 75 12pt &quot;Times New Roman&quot;;
+color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>3</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="3">
+      <widget class="QPushButton" name="jour4">
+       <property name="styleSheet">
+        <string notr="true">font: 75 12pt &quot;Times New Roman&quot;;
+background-color: rgb(4, 4, 4);
+color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>4</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="4">
+      <widget class="QPushButton" name="jour5">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(216, 216, 216);
+font: 75 12pt &quot;Times New Roman&quot;;
+color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>5</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="5">
+      <widget class="QPushButton" name="jour6">
+       <property name="styleSheet">
+        <string notr="true">font: 75 12pt &quot;Times New Roman&quot;;
+background-color: rgb(4, 4, 4);
+color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>6</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QPushButton" name="jour7">
+       <property name="styleSheet">
+        <string notr="true">font: 75 12pt &quot;Times New Roman&quot;;
+background-color: rgb(4, 4, 4);
+color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>7</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QPushButton" name="jour8">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(216, 216, 216);
+font: 75 12pt &quot;Times New Roman&quot;;
+color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>8</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QPushButton" name="jour9">
+       <property name="styleSheet">
+        <string notr="true">font: 75 12pt &quot;Times New Roman&quot;;
+background-color: rgb(4, 4, 4);
+color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>9</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="3">
+      <widget class="QPushButton" name="jour10">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(216, 216, 216);
+font: 75 12pt &quot;Times New Roman&quot;;
+color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>10</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="4">
+      <widget class="QPushButton" name="jour11">
+       <property name="styleSheet">
+        <string notr="true">font: 75 12pt &quot;Times New Roman&quot;;
+background-color: rgb(4, 4, 4);
+color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>11</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="5">
+      <widget class="QPushButton" name="jour12">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(216, 216, 216);
+font: 75 12pt &quot;Times New Roman&quot;;
+color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>12</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QPushButton" name="jour13">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(216, 216, 216);
+font: 75 12pt &quot;Times New Roman&quot;;
+color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>13</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QPushButton" name="jour14">
+       <property name="styleSheet">
+        <string notr="true">font: 75 12pt &quot;Times New Roman&quot;;
+background-color: rgb(4, 4, 4);
+color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>14</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="2">
+      <widget class="QPushButton" name="jour15">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(216, 216, 216);
+font: 75 12pt &quot;Times New Roman&quot;;
+color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>15</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="3">
+      <widget class="QPushButton" name="jour16">
+       <property name="styleSheet">
+        <string notr="true">font: 75 12pt &quot;Times New Roman&quot;;
+background-color: rgb(4, 4, 4);
+color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>16</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="4">
+      <widget class="QPushButton" name="jour17">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(216, 216, 216);
+font: 75 12pt &quot;Times New Roman&quot;;
+color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>17</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="5">
+      <widget class="QPushButton" name="jour18">
+       <property name="styleSheet">
+        <string notr="true">font: 75 12pt &quot;Times New Roman&quot;;
+background-color: rgb(4, 4, 4);
+color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>18</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QPushButton" name="jour19">
+       <property name="styleSheet">
+        <string notr="true">font: 75 12pt &quot;Times New Roman&quot;;
+background-color: rgb(4, 4, 4);
+color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>19</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QPushButton" name="jour20">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(216, 216, 216);
+font: 75 12pt &quot;Times New Roman&quot;;
+color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>20</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="2">
+      <widget class="QPushButton" name="jour21">
+       <property name="styleSheet">
+        <string notr="true">font: 75 12pt &quot;Times New Roman&quot;;
+background-color: rgb(4, 4, 4);
+color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>21</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="3">
+      <widget class="QPushButton" name="jour22">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(216, 216, 216);
+font: 75 12pt &quot;Times New Roman&quot;;
+color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>22</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="4">
+      <widget class="QPushButton" name="jour23">
+       <property name="styleSheet">
+        <string notr="true">font: 75 12pt &quot;Times New Roman&quot;;
+background-color: rgb(4, 4, 4);
+color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>23</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="5">
+      <widget class="QPushButton" name="jour24">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(216, 216, 216);
+font: 75 12pt &quot;Times New Roman&quot;;
+color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>24</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QPushButton" name="jour25">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(216, 216, 216);
+font: 75 12pt &quot;Times New Roman&quot;;
+color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>25</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QPushButton" name="jour26">
+       <property name="styleSheet">
+        <string notr="true">font: 75 12pt &quot;Times New Roman&quot;;
+background-color: rgb(4, 4, 4);
+color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>26</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="2">
+      <widget class="QPushButton" name="jour27">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(216, 216, 216);
+font: 75 12pt &quot;Times New Roman&quot;;
+color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>27</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="3">
+      <widget class="QPushButton" name="jour28">
+       <property name="styleSheet">
+        <string notr="true">font: 75 12pt &quot;Times New Roman&quot;;
+background-color: rgb(4, 4, 4);
+color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>28</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="4">
+      <widget class="QPushButton" name="jour29">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(216, 216, 216);
+font: 75 12pt &quot;Times New Roman&quot;;
+color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>29</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="5">
+      <widget class="QPushButton" name="jour30">
+       <property name="styleSheet">
+        <string notr="true">font: 75 12pt &quot;Times New Roman&quot;;
+background-color: rgb(4, 4, 4);
+color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>30</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <widget class="QPushButton" name="jour31">
+       <property name="styleSheet">
+        <string notr="true">font: 75 12pt &quot;Times New Roman&quot;;
+background-color: rgb(4, 4, 4);
+color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>31</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QPushButton" name="jour32">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(216, 216, 216);
+font: 75 12pt &quot;Times New Roman&quot;;
+color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>32</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="2">
+      <widget class="QPushButton" name="jour33">
+       <property name="styleSheet">
+        <string notr="true">font: 75 12pt &quot;Times New Roman&quot;;
+background-color: rgb(4, 4, 4);
+color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>33</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="3">
+      <widget class="QPushButton" name="jour34">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(216, 216, 216);
+font: 75 12pt &quot;Times New Roman&quot;;
+color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>34</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="4">
+      <widget class="QPushButton" name="jour35">
+       <property name="styleSheet">
+        <string notr="true">font: 75 12pt &quot;Times New Roman&quot;;
+background-color: rgb(4, 4, 4);
+color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>35</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="5">
+      <widget class="QPushButton" name="jour36">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(216, 216, 216);
+font: 75 12pt &quot;Times New Roman&quot;;
+color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>36</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0">
+      <widget class="QPushButton" name="jour37">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(216, 216, 216);
+font: 75 12pt &quot;Times New Roman&quot;;
+color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>37</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="1">
+      <widget class="QPushButton" name="jour38">
+       <property name="styleSheet">
+        <string notr="true">font: 75 12pt &quot;Times New Roman&quot;;
+background-color: rgb(4, 4, 4);
+color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>38</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1040</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="quitter_2">
+    <property name="title">
+     <string>Quitter</string>
+    </property>
+   </widget>
+   <addaction name="quitter_2"/>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>jour1</sender>
+   <signal>clicked()</signal>
+   <receiver>resultats</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>47</x>
+     <y>55</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>520</x>
+     <y>583</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>quitter</sender>
+   <signal>clicked()</signal>
+   <receiver>La_Ligue_1_Uber_Eats</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>516</x>
+     <y>823</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>519</x>
+     <y>428</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>jour10</sender>
+   <signal>clicked()</signal>
+   <receiver>La_Ligue_1_Uber_Eats</receiver>
+   <slot>update()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>368</x>
+     <y>65</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>519</x>
+     <y>428</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
