@@ -124,7 +124,6 @@ class Journee(list, Joueur.Joueur):
             return res
 
     def classement_date(self, no_jour):
-        for i in range(no_jour-1):    # Classement au jour n° no_jour
+        for i in range(no_jour-1):
             self.classement_journee()
-        classement_date = self.classement_journee()
-        return classement_date
+        return self.classement_journee()
