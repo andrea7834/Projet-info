@@ -22,13 +22,13 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName("centralwidget")
 
         self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
-        self.tableWidget.setGeometry(QtCore.QRect(25, 25, 1250, 500))
+        self.tableWidget.setGeometry(QtCore.QRect(25, 25, 1100, 360))
         self.tableWidget.setObjectName("tableWidget")
         self.tableWidget.setColumnCount(0)
         self.tableWidget.setRowCount(0)
 
         self.formLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.formLayoutWidget.setGeometry(QtCore.QRect(600, 400, 1000, 500))
+        self.formLayoutWidget.setGeometry(QtCore.QRect(600, 400, 800, 400))
         self.formLayoutWidget.setObjectName("formLayoutWidget")
         self.formLayout = QtWidgets.QFormLayout(self.formLayoutWidget)
         self.formLayout.setContentsMargins(0, 0, 0, 0)
@@ -57,57 +57,25 @@ class Ui_MainWindow(object):
         # self.label.setText(_translate("MainWindow", "Name"))
         # self.label_2.setText(_translate("MainWindow", "Price"))
 
-if __name__=="__main__":
-    class window(QtWidgets.QMainWindow):
-        def __init__(self):
-            super(window, self).__init__()
-            self.ui = Ui_MainWindow()
-            self.ui.setupUi(self)
+class window(QtWidgets.QMainWindow):
+    def __init__(self):
+        super(window, self).__init__()
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self)
 
-            self.load_data()
-            self.ui.tableWidget.doubleClicked.connect(self.doubleClick)
+        # self.load_data()
+        self.ui.tableWidget.doubleClicked.connect(self.doubleClick)
 
-        def doubleClick(self):
-            for item in self.ui.tableWidget.selectedItems():
-                print(item.row(), item.column(), item.text())
-
-        def load_data(self):
-            saison = Saison()
-            classement_jour1 = saison.classement_journee()
-
-            self.ui.tableWidget.setRowCount(len(classement_jour1))
-            self.ui.tableWidget.setColumnCount(7)
-
-            self.ui.tableWidget.setHorizontalHeaderLabels(("Points dom", 'Buteurs dom', "Clubs à domicile", 'Buts dom', 'Buts exté',
-                                                           "Clubs à l'extérieur", 'Buteurs exté',  'Points exté'))
-
-            self.ui.tableWidget.setColumnWidth(0, 75)
-            self.ui.tableWidget.setColumnWidth(1, 175)
-            self.ui.tableWidget.setColumnWidth(2, 175)
-            self.ui.tableWidget.setColumnWidth(3, 75)
-            self.ui.tableWidget.setColumnWidth(4, 75)
-            self.ui.tableWidget.setColumnWidth(5, 175)
-            self.ui.tableWidget.setColumnWidth(6, 175)
-            self.ui.tableWidget.setColumnWidth(7, 75)
-
-            row_index = 0
-            for colonnes in classement_jour1:
-                self.ui.tableWidget.setItem(row_index, 0, Qt.QTableWidgetItem(str(classement_jour1['Points dom'][row_index])))
-                self.ui.tableWidget.setItem(row_index, 1, Qt.QTableWidgetItem(str(classement_jour1['Buteurs dom'][row_index])))
-                self.ui.tableWidget.setItem(row_index, 2, Qt.QTableWidgetItem(str(classement_jour1['Clubs à domicile'][row_index])))
-                self.ui.tableWidget.setItem(row_index, 3, Qt.QTableWidgetItem(str(classement_jour1['Buts dom'][row_index])))
-                self.ui.tableWidget.setItem(row_index, 4, Qt.QTableWidgetItem(str(classement_jour1['Buts exté'][row_index])))
-                self.ui.tableWidget.setItem(row_index, 5, Qt.QTableWidgetItem(str(classement_jour1["Clubs à l'extérieur"][row_index])))
-                self.ui.tableWidget.setItem(row_index, 6, Qt.QTableWidgetItem(str(classement_jour1['Buteurs exté'][row_index])))
-                self.ui.tableWidget.setItem(row_index, 7, Qt.QTableWidgetItem(str(classement_jour1['Points exté'][row_index])))
-                row_index += 1
+    def doubleClick(self):
+        for item in self.ui.tableWidget.selectedItems():
+            print(item.row(), item.column(), item.text())
 
 
-    def create_app():
-        app = QtWidgets.QApplication(sys.argv)
-        win = window()
-        win.show()
-        sys.exit(app.exec_())
+def create_app():
+    app = QtWidgets.QApplication(sys.argv)
+    win = window()
+    win.show()
+    sys.exit(app.exec_())
 
 
-    create_app()
+create_app()
