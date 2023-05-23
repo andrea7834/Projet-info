@@ -1,11 +1,11 @@
 ,Points dom,Buteurs dom,Clubs à domicile,Buts dom,Buts exté,Clubs à l'extérieur,Buteurs exté,Points exté
-0,2,"['Brassier', 'Magnetti']",Brest,2,3,Strasbourg,"['Le_Marchand', 'Djiku', 'Lienard']",3
-1,2,"['Rodon', 'Traore']",Rennes,2,3,Lille,"['Ribeiro', 'Gomes', 'David']",3
-2,2,"['Capelle', 'Camara']",Angers,2,1,OM,['Rongier'],1
-3,3,"['Balde', 'Porozo', 'Chavalerin']",Troyes,3,3,Lens,"['Valencia', 'Ganiou', 'Sylla']",3
-4,3,"['Balogin', 'Lopy', 'Moalida']",Reims,3,1,Ajaccio,['Vidal'],1
-5,3,"['Autret', 'Danois', 'Merdji']",Auxerre,3,1,PSG,['Mendes'],1
-6,3,"['Germain', 'Mavididi', 'Sainte-Luce']",Montpellier,3,4,AS Monaco,"['Maripan', 'Aguilar', 'Ben_Yedder', 'Aguilar']",4
-7,3,"['Laporte', 'Laporte', 'Matsima']",Lorient,3,2,OL,"['Tagliafico', 'Caqueret']",2
-8,3,"['Brahimi', 'Moffi', 'Attal']",Nice,3,4,Clermont,"['Borges', 'Borges', 'Gastien', 'Rajot']",4
-9,2,"['Guessand', 'Delort']",Nantes,2,5,Toulouse,"['Van_den_Boomen', 'Aboukhlal', 'Dallinga', 'Dallinga', 'Aboukhlal']",5
+0,3,"['Flips', 'Cajuste', 'Lopy']",Reims,3,2,AS Monaco,"['Jakobs', 'Embolo']",2
+1,2,"['Hamouma', 'Silla']",Ajaccio,2,3,Rennes,"['Theate', 'Terrier', 'Santamaria']",3
+2,2,"['Healey', 'ChaÃ¯bi']",Toulouse,2,3,Angers,"['Bamba', 'Doumbia', 'Corduan']",3
+3,2,"['Sanches', 'Ramos']",PSG,2,2,Brest,"['Brassier', 'Duverne']",2
+4,1,['Boura'],Lens,1,1,Montpellier,['Khazri'],1
+5,2,"['Lega', 'Aouar']",OL,2,0,Nantes,[],0
+6,4,"['Kroupi', 'Kroupi', 'Talbi', 'Matsima']",Lorient,4,2,Strasbourg,"['Le_Marchand', 'Le_Marchand']",2
+7,2,"['Bain', 'Merdji']",Auxerre,2,1,Lille,['Martin'],1
+8,2,"['Attal', 'Moffi']",Nice,2,2,OM,"['Kabore', 'Ounahi']",2
+9,1,['Versini'],Clermont,1,2,Troyes,"['Chavalerin', 'Salmier']",2

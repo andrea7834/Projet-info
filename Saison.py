@@ -16,9 +16,50 @@ class Saison(Journee.Journee):
         super().__init__(noms_clubs, noms_joueurs, niveaux)
         self.nom = "Ligue 1"
         self.nb_jours_total = 38
+        self.journee1 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_csv("jour{0}.csv".format(1))
+        self.journee2 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_csv("jour{0}.csv".format(2))
+        self.journee3 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_csv("jour{0}.csv".format(3))
+        self.journee4 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_csv("jour{0}.csv".format(4))
+        self.journee5 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_csv("jour{0}.csv".format(5))
+        self.journee6 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_csv("jour{0}.csv".format(6))
+        self.journee7 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_csv("jour{0}.csv".format(7))
+        self.journee8 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_csv("jour{0}.csv".format(8))
+        self.journee9 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_csv("jour{0}.csv".format(9))
+        self.journee10 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_csv("jour{0}.csv".format(10))
+        self.journee11 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_csv("jour{0}.csv".format(11))
+        self.journee12 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_csv("jour{0}.csv".format(12))
+        self.journee13 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_csv("jour{0}.csv".format(13))
+        self.journee14 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_csv("jour{0}.csv".format(14))
+        self.journee15 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_csv("jour{0}.csv".format(15))
+        self.journee16 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_csv("jour{0}.csv".format(16))
+        self.journee17 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_csv("jour{0}.csv".format(17))
+        self.journee18 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_csv("jour{0}.csv".format(18))
+        self.journee19 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_csv("jour{0}.csv".format(19))
+        self.journee20 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_csv("jour{0}.csv".format(20))
+        self.journee21 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_csv("jour{0}.csv".format(21))
+        self.journee22 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_csv("jour{0}.csv".format(22))
+        self.journee23 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_csv("jour{0}.csv".format(23))
+        self.journee24 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_csv("jour{0}.csv".format(24))
+        self.journee25 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_csv("jour{0}.csv".format(25))
+        self.journee26 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_csv("jour{0}.csv".format(26))
+        self.journee27 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_csv("jour{0}.csv".format(27))
+        self.journee28 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_csv("jour{0}.csv".format(28))
+        self.journee29 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_csv("jour{0}.csv".format(29))
+        self.journee30 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_csv("jour{0}.csv".format(30))
+        self.journee31 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_csv("jour{0}.csv".format(31))
+        self.journee32 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_csv("jour{0}.csv".format(32))
+        self.journee33 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_csv("jour{0}.csv".format(33))
+        self.journee34 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_csv("jour{0}.csv".format(34))
+        self.journee35 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_csv("jour{0}.csv".format(35))
+        self.journee36 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_csv("jour{0}.csv".format(36))
+        self.journee37 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_csv("jour{0}.csv".format(37))
+        self.journee38 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_csv("jour{0}.csv".format(38))
 
     def classement_final(self):
-        return self.classement_date(self.nb_jours_total)
+        dico = {"Clubs": self.noms_clubs, "Points": self.points}
+        res = pd.DataFrame(data=dico)
+        res.sort_values(by="Points", ascending=False)
+        return res
 
     def extraire_joueurs(self):
         """Extraction de la liste des joueurs"""
@@ -57,8 +98,12 @@ class Saison(Journee.Journee):
 
 if __name__ == "__main__":
     saison = Saison()
-    noms_clubs = saison.extraire_clubs()
-    noms_joueurs = saison.extraire_joueurs()
-    niveaux = saison.niveaux
-    journee = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee()
-    print(journee)
+    # for i in range(38):
+    #     res = saison.classement_journee()
+    #     res.to_csv("jour{0}.csv".format(i+1))
+    print(saison.classement_final())
+
+
+## Nombre de points = nombre de buts (on veut pas)
+## Stockage / appel à la fonction classement_journee
+## Le nombre de points final de chaque club ne s'actualise pas correctement

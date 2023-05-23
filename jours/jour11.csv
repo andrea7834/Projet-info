@@ -1,11 +1,11 @@
 ,Points dom,Buteurs dom,Clubs à domicile,Buts dom,Buts exté,Clubs à l'extérieur,Buteurs exté,Points exté
-0,2,"['Pepe', 'Brahimi']",Nice,2,2,Lille,"['Gomes', 'Yoro']",2
-1,4,"['Medina', 'Valencia', 'Gradit', 'Pereira']",Lens,4,3,Strasbourg,"['Gameiro', 'Gameiro', 'Sanson']",3
-2,3,"['Ratao', 'Onaiwu', 'Dallinga']",Toulouse,3,3,Reims,"['Flips', 'Lopy', 'Munetsi']",3
-3,2,"['Le_Goff', 'Ponceau']",Lorient,2,1,Rennes,['Wooh'],1
-4,3,"['Sakho', 'Mavididi', 'Germain']",Montpellier,3,0,Angers,[],0
-5,3,"['Wieteska', 'Bayo', 'Massolin']",Clermont,3,3,OL,"['Caqueret', 'Lega', 'Tagliafico']",3
-6,2,"['Dugimont', 'Lipinski']",Auxerre,2,3,Troyes,"['Salmier', 'Conte', 'Odobert']",3
-7,1,['Ruiz'],PSG,1,3,Brest,"['Del_Castillo', 'Del_Castillo', 'Le_Douaron']",3
-8,3,"['Rongier', 'Ounahi', 'Clauss']",OM,3,1,Nantes,['Delort'],1
-9,3,"['Michelin', 'Alphonse', 'Gonzalez']",Ajaccio,3,2,AS Monaco,"['Ben_Seguir', 'Serrano']",2
+0,2,"['Balerdi', 'Bailly']",OM,2,0,AS Monaco,[],0
+1,4,"['Delaine', 'Bellegarde', 'Le_Marchand', 'Gameiro']",Strasbourg,4,3,Nantes,"['Coco', 'Pallois', 'Castelletto']",3
+2,1,['Doumbia'],Angers,1,1,Lille,['Andre'],1
+3,3,"['Ito', 'Cajuste', 'Abdelhamid']",Reims,3,1,Troyes,['Ugbo'],1
+4,2,"['Germain', 'Savanier']",Montpellier,2,2,Rennes,"['Traore', 'Wooh']",2
+5,1,['Chardonnet'],Brest,1,2,Auxerre,"['Pellenard', 'Dugimont']",2
+6,1,['Aouar'],OL,1,2,PSG,"['Sanches', 'Ruiz']",2
+7,3,"['Le_Fee', 'Silva', 'Laporte']",Lorient,3,2,Lens,"['Valencia', 'Fortes']",2
+8,3,"['Diop', 'Diop', 'Laborde']",Nice,3,1,Ajaccio,['Michelin'],1
+9,4,"['Healey', 'Aboukhlal', 'Aboukhlal', 'Dejaegere']",Toulouse,4,3,Clermont,"['Borges', 'Massolin', 'Cisse']",3

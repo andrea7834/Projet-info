@@ -1,11 +1,11 @@
 ,Points dom,Buteurs dom,Clubs à domicile,Buts dom,Buts exté,Clubs à l'extérieur,Buteurs exté,Points exté
-0,2,"['Majer', 'Traore']",Rennes,2,3,Lens,"['Fortes', 'Gradit', 'Sylla']",3
-1,1,['Healey'],Toulouse,1,2,Angers,"['Mendy', 'Capelle']",2
-2,0,[],Ajaccio,0,1,Nice,['Moffi'],1
-3,2,"['Sibide', 'Ben_Yedder']",AS Monaco,2,0,Montpellier,[],0
-4,4,"['H.Diallo', 'Delaine', 'Le_Marchand', 'H.Diallo']",Strasbourg,4,2,PSG,"['Neymar', 'Ruiz']",2
-5,1,['Gomes'],Lille,1,0,Brest,[],0
-6,2,"['Le_Goff', 'Matsima']",Lorient,2,2,OM,"['Kabore', 'Bailly']",2
-7,4,"['Pellenard', 'Da_Costa', 'Bain', 'Danois']",Auxerre,4,3,OL,"['Tagliafico', 'Tagliafico', 'Lega']",3
-8,3,"['Conte', 'Lopez', 'Palaversa']",Troyes,3,1,Reims,['Balogin'],1
-9,1,['Delort'],Nantes,1,2,Clermont,"['Rajot', 'Borges']",2
+0,1,['Harit'],OM,1,1,Lille,['Andre'],1
+1,2,"['Talbi', 'Matsima']",Lorient,2,0,Angers,[],0
+2,1,['Gonzalez'],Ajaccio,1,0,PSG,[],0
+3,2,"['Da_Costa', 'Da_Costa']",Auxerre,2,0,OL,[],0
+4,3,"['ChaÃ¯bi', 'Onaiwu', 'Dallinga']",Toulouse,3,2,Strasbourg,"['Mothiba', 'Perrin']",2
+5,2,"['Munetsi', 'Cajuste']",Reims,2,1,Rennes,['Wooh'],1
+6,4,"['Sainte-Luce', 'Sainte-Luce', 'Wahi', 'Maouassa']",Montpellier,4,2,Nantes,"['Mollet', 'Simon']",2
+7,2,"['Pereira', 'Gradit']",Lens,2,3,Troyes,"['Salmier', 'Palaversa', 'Chavalerin']",3
+8,3,"['Moffi', 'Dante', 'Moffi']",Nice,3,2,Brest,"['Brassier', 'Tavares']",2
+9,2,"['Wieteska', 'Boyer']",Clermont,2,1,AS Monaco,['Embolo'],1
