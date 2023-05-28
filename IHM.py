@@ -4,10 +4,12 @@ from PyQt5 import QtCore, QtGui, QtWidgets, Qt
 import sys
 from Saison import Saison
 import numpy as np
+from openpyxl import load_workbook
 
 
 class Ui_La_Ligue_1_Uber_Eats(QtWidgets.QMainWindow):
     def setupUi(self, La_Ligue_1_Uber_Eats):
+        self.name = La_Ligue_1_Uber_Eats
         saison = Saison()
         La_Ligue_1_Uber_Eats.setObjectName("La_Ligue_1_Uber_Eats")
         La_Ligue_1_Uber_Eats.resize(1183, 857)
@@ -15,21 +17,56 @@ class Ui_La_Ligue_1_Uber_Eats(QtWidgets.QMainWindow):
         icon.addPixmap(QtGui.QPixmap("C:\\Projet-info\\mini-soccer-petit-ballon-de-foot.jpg"), QtGui.QIcon.Normal,
                        QtGui.QIcon.Off)
         La_Ligue_1_Uber_Eats.setWindowIcon(icon)
+
         La_Ligue_1_Uber_Eats.setStyleSheet("background-color: rgb(134, 230, 96);\n" 
                                            "font: 75 12pt \"Times New Roman\";\n" "color: rgb(0, 125, 92);\n" 
                                            "border-color: rgb(0, 0, 0);")
         self.centralwidget = QtWidgets.QWidget(La_Ligue_1_Uber_Eats)
         self.centralwidget.setObjectName("centralwidget")
+        self.main_layout = QtWidgets.QVBoxLayout(self.centralwidget)
 
+        self.titre = QtWidgets.QLabel("La Ligue 1 UberEats", self)
+        self.titre.move(450, 300)
+        self.titre.resize(100, 50)
+        self.titre.setAlignment(QtCore.Qt.AlignBottom)
+        self.titre.setStyleSheet("border: 1px solid black;\n" "border-color: rgb(0, 125, 92);")
+
+        self.top_layout = QtWidgets.QHBoxLayout()
+        self.logo = QtGui.QPixmap("mini-soccer-petit-ballon-de-foot1.jpg")
+        self.max_width = 200
+        self.scaled_logo = self.logo.scaledToWidth(self.max_width)
+        self.logo_label = QtWidgets.QLabel()
+        self.logo_label.setPixmap(self.scaled_logo)
+        self.logo_label.setAlignment(QtCore.Qt.AlignLeft)  # Alignement à droite de l'image
+        self.top_layout.addWidget(self.logo_label)
+        self.main_layout.addLayout(self.top_layout)
+
+        self.pixmap = QtGui.QPixmap("Logo_Ligue_1_Uber_Eats_2022.svg.png")
+        self.max_width = 200
+        self.scaled_pixmap = self.pixmap.scaledToWidth(self.max_width)
+        self.image_label = QtWidgets.QLabel()
+        self.image_label.setPixmap(self.scaled_pixmap)
+        self.image_label.setAlignment(QtCore.Qt.AlignRight)  # Alignement à droite de l'image
+        self.top_layout.addWidget(self.image_label)
+        self.main_layout.addLayout(self.top_layout)
+
+        saison = Saison()
+        classement_final = saison.classement_final()
         self.resultats = QtWidgets.QTableWidget(self.centralwidget)
         self.resultats.setGeometry(QtCore.QRect(25, 400, 1133, 337))
         self.resultats.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.resultats.setObjectName("resultats")
-        self.resultats.setColumnCount(0)
-        self.resultats.setRowCount(0)
+        self.resultats.setHorizontalHeaderLabels(("Clubs", 'Points'))
+        self.resultats.setColumnCount(2)
+        self.resultats.setRowCount(20)
+        self.resultats.setColumnWidth(0, 540)
+        self.resultats.setColumnWidth(1, 540)
+        for ligne in range(20):
+            self.resultats.setItem(ligne, 0, Qt.QTableWidgetItem(str(classement_final['Clubs'][ligne])))
+            self.resultats.setItem(ligne, 1, Qt.QTableWidgetItem(str(classement_final['Points'][ligne])))
 
         self.instructions = QtWidgets.QTextEdit(self.centralwidget)
-        self.instructions.setGeometry(QtCore.QRect(21, 290, 580, 50))
+        self.instructions.setGeometry(QtCore.QRect(25, 225, 200, 90))
         self.instructions.setObjectName("instructions")
 
         self.quitter = QtWidgets.QPushButton(self.centralwidget)
@@ -41,7 +78,7 @@ class Ui_La_Ligue_1_Uber_Eats(QtWidgets.QMainWindow):
         self.menu_file_quit.setShortcut(QtGui.QKeySequence("Ctrl+Q"))
 
         self.widget = QtWidgets.QWidget(self.centralwidget)
-        self.widget.setGeometry(QtCore.QRect(21, 11, 250, 250))
+        self.widget.setGeometry(QtCore.QRect(300, 40, 250, 250))
         self.widget.setObjectName("widget")
         self.calendrier = QtWidgets.QGridLayout(self.widget)
         self.calendrier.setSizeConstraint(QtWidgets.QLayout.SetMinimumSize)
@@ -326,7 +363,6 @@ class Ui_La_Ligue_1_Uber_Eats(QtWidgets.QMainWindow):
                    self.jour17, self.jour18, self.jour19, self.jour20, self.jour21, self.jour22, self.jour23, self.jour24,
                    self.jour25, self.jour26, self.jour27, self.jour28, self.jour29, self.jour30, self.jour31, self.jour32,
                    self.jour33, self.jour34, self.jour35, self.jour36, self.jour37, self.jour38]
-        I = np.linspace(0, 38, 1)
         for i in range(len(boutons)):
             boutons[i].clicked.connect(self.handle_button_clicked)
             boutons[i].setProperty('index', i + 1)
@@ -343,41 +379,38 @@ class Ui_La_Ligue_1_Uber_Eats(QtWidgets.QMainWindow):
 
 
     def load_data(self, no_jour):
-            saison = Saison()
-            dataframe = saison.classement_date(no_jour)
-            self.resultats.setRowCount(10)
-            self.resultats.setColumnCount(8)
+        # self.main_layout = QtWidgets.QVBoxLayout(self.centralwidget)
 
-            self.resultats.setHorizontalHeaderLabels(
-                    ("Points dom", 'Buteurs dom', "Clubs à domicile", 'Buts dom', 'Buts exté',
+        self.workbook = load_workbook("jour{}.xlsx".format(no_jour))
+        self.feuille = self.workbook.active
+
+        self.resultats = QtWidgets.QTableWidget(self.centralwidget)
+        self.resultats.setRowCount(10)
+        self.resultats.setColumnCount(8)
+        self.resultats.setGeometry(QtCore.QRect(25, 400, 1133, 337))
+        self.resultats.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.resultats.setObjectName("resultats")
+        self.resultats.setHorizontalHeaderLabels(
+                    ("Points dom", '"Buteurs dom"', "Clubs à domicile", "Buts dom", "Buts exté",
                      "Clubs à l'extérieur", 'Buteurs exté', 'Points exté'))
 
-            self.resultats.setColumnWidth(0, 100)
-            self.resultats.setColumnWidth(1, 175)
-            self.resultats.setColumnWidth(2, 175)
-            self.resultats.setColumnWidth(3, 100)
-            self.resultats.setColumnWidth(4, 100)
-            self.resultats.setColumnWidth(5, 175)
-            self.resultats.setColumnWidth(6, 175)
-            self.resultats.setColumnWidth(7, 100)
+        self.resultats.setColumnWidth(0, 100)
+        self.resultats.setColumnWidth(1, 175)
+        self.resultats.setColumnWidth(2, 175)
+        self.resultats.setColumnWidth(3, 100)
+        self.resultats.setColumnWidth(4, 100)
+        self.resultats.setColumnWidth(5, 175)
+        self.resultats.setColumnWidth(6, 175)
+        self.resultats.setColumnWidth(7, 100)
 
-            for row_index in range(10):
-                    self.resultats.setItem(row_index, 0,
-                                                Qt.QTableWidgetItem(str(dataframe['Points dom'][row_index])))
-                    self.resultats.setItem(row_index, 1,
-                                                Qt.QTableWidgetItem(str(dataframe['Buteurs dom'][row_index])))
-                    self.resultats.setItem(row_index, 2, Qt.QTableWidgetItem(
-                            str(dataframe['Clubs à domicile'][row_index])))
-                    self.resultats.setItem(row_index, 3,
-                                                Qt.QTableWidgetItem(str(dataframe['Buts dom'][row_index])))
-                    self.resultats.setItem(row_index, 4,
-                                                Qt.QTableWidgetItem(str(dataframe['Buts exté'][row_index])))
-                    self.resultats.setItem(row_index, 5, Qt.QTableWidgetItem(
-                            str(dataframe["Clubs à l'extérieur"][row_index])))
-                    self.resultats.setItem(row_index, 6,
-                                                Qt.QTableWidgetItem(str(dataframe['Buteurs exté'][row_index])))
-                    self.resultats.setItem(row_index, 7,
-                                                Qt.QTableWidgetItem(str(dataframe['Points exté'][row_index])))
+        for i in range(2, self.feuille.max_row+1):
+            for j in range(2, self.feuille.max_column+1):
+                cell_value = self.feuille.cell(row=i, column=j).value
+                item = QtWidgets.QTableWidgetItem(str(cell_value))
+                self.resultats.setItem(i-2 , j-2, item)
+        # self.resultats.removeColumn(0)
+        self.resultats.show()
+
 
     def quit(self):
         sys.exit()
