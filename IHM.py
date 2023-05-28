@@ -37,7 +37,7 @@ class Ui_La_Ligue_1_Uber_Eats(QtWidgets.QMainWindow):
         self.scaled_logo = self.logo.scaledToWidth(self.max_width)
         self.logo_label = QtWidgets.QLabel()
         self.logo_label.setPixmap(self.scaled_logo)
-        self.logo_label.setAlignment(QtCore.Qt.AlignLeft)  # Alignement à droite de l'image
+        self.logo_label.setAlignment(QtCore.Qt.AlignLeft)
         self.top_layout.addWidget(self.logo_label)
         self.main_layout.addLayout(self.top_layout)
 
@@ -46,7 +46,8 @@ class Ui_La_Ligue_1_Uber_Eats(QtWidgets.QMainWindow):
         self.scaled_pixmap = self.pixmap.scaledToWidth(self.max_width)
         self.image_label = QtWidgets.QLabel()
         self.image_label.setPixmap(self.scaled_pixmap)
-        self.image_label.setAlignment(QtCore.Qt.AlignRight)  # Alignement à droite de l'image
+        self.image_label.setAlignment(QtCore.Qt.AlignRight)
+        # self.image_label.setGeometry(1200, 10, 300, 200)
         self.top_layout.addWidget(self.image_label)
         self.main_layout.addLayout(self.top_layout)
 
@@ -68,6 +69,11 @@ class Ui_La_Ligue_1_Uber_Eats(QtWidgets.QMainWindow):
         self.instructions = QtWidgets.QTextEdit(self.centralwidget)
         self.instructions.setGeometry(QtCore.QRect(25, 225, 200, 90))
         self.instructions.setObjectName("instructions")
+
+        self.titre1 = QtWidgets.QTextEdit(self.centralwidget)
+        self.titre1.setGeometry(QtCore.QRect(365, 320, 450, 70))
+        self.titre1.setStyleSheet("border: 1px solid black;\n" "border-color: rgb(134, 230, 96);")
+        self.titre1.setObjectName("titre1")
 
         self.quitter = QtWidgets.QPushButton(self.centralwidget)
         self.quitter.setGeometry(QtCore.QRect(530, 775, 93, 28))
@@ -423,6 +429,12 @@ class Ui_La_Ligue_1_Uber_Eats(QtWidgets.QMainWindow):
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'Times New Roman\'; font-size:12pt; font-weight:72; font-style:normal;\">\n"
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Cliquez sur une journée pour avoir les scores de celle-ci !</p></body></html>"))
+        self.titre1.setHtml(_translate("La_Ligue_1_Uber_Eats",
+                                             "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+                                             "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+                                             "p, li { white-space: pre-wrap; }\n"
+                                             "</style></head><body style=\" font-family:\'Times New Roman\'; font-size:26pt; font-weight:72; font-style:normal;\">\n"
+                                             "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">La Ligue 1 UberEats</p></body></html>"))
         self.quitter.setText(_translate("La_Ligue_1_Uber_Eats", "Quitter"))
         self.jour1.setText(_translate("La_Ligue_1_Uber_Eats", "1"))
         self.jour2.setText(_translate("La_Ligue_1_Uber_Eats", "2"))
@@ -471,3 +483,7 @@ if __name__ == "__main__":
     ui.setupUi(principale_ihm)
     principale_ihm.show()
     sys.exit(app.exec_())
+
+## Nombre de points = nombre de buts (on veut pas)
+## Le nombre de points final de chaque club ne s'actualise pas correctement
+## Afficher photo Ligue 1 plus bas ?
