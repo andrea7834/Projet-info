@@ -94,16 +94,3 @@ class Saison(Journee.Journee):
                        3.5, 4.5, 4.25, 2, 1.75, 3, 5, 3.25,
                        3.75, 1, 2.25, 0.75]).reshape((20, 1))
         return niveaux
-
-
-if __name__ == "__main__":
-    saison = Saison()
-    # for i in range(38):
-    #     res = saison.classement_journee()
-    #     res.to_excel("jour{0}.xlsx".format(i+1))
-    print(saison.classement_final())
-
-
-## Nombre de points = nombre de buts (on veut pas)
-## Stockage / appel à la fonction classement_journee
-## Le nombre de points final de chaque club ne s'actualise pas correctement
