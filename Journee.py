@@ -122,8 +122,3 @@ class Journee(list, Joueur.Joueur):
             res.sort_values(by=["Points dom", "Buts dom"], ascending=False)
 
             return res
-
-    def classement_date(self, no_jour):
-        for i in range(no_jour-1):
-            self.classement_journee()
-        return self.classement_journee()

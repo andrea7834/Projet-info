@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import Journee
+from Club import Club
 import numpy as np
 import pandas as pd
 
@@ -13,7 +14,10 @@ class Saison(Journee.Journee):
         noms_clubs = self.extraire_clubs()
         noms_joueurs = self.extraire_joueurs()
         niveaux = self.niveaux()
+        self.Clubs = []
         super().__init__(noms_clubs, noms_joueurs, niveaux)
+        for i in range(20):
+            self.Clubs.append(Club(noms_clubs[i], niveaux[i], noms_joueurs[i]))
         self.nom = "Ligue 1"
         self.nb_jours_total = 38
         self.journee1 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_excel("jour{0}.xlsx".format(1))
@@ -54,12 +58,16 @@ class Saison(Journee.Journee):
         self.journee36 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_excel("jour{0}.xlsx".format(36))
         self.journee37 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_excel("jour{0}.xlsx".format(37))
         self.journee38 = Journee.Journee(noms_clubs, noms_joueurs, niveaux).classement_journee().to_excel("jour{0}.xlsx".format(38))
+        self.classement_final = {"Clubs": [], "Points": []}
+        for i in range(20):
+            self.classement_final["Clubs"].append(self.noms_clubs[i])
+            self.classement_final["Points"].append(self.Clubs[i].points)
+        self.fin = pd.DataFrame(data=self.classement_final)
+        self.fin.sort_values(by="Points", ascending=False)
+
 
     def classement_final(self):
-        dico = {"Clubs": self.noms_clubs, "Points": self.points}
-        res = pd.DataFrame(data=dico)
-        res.sort_values(by="Points", ascending=False)
-        return res
+        return self.fin
 
     def extraire_joueurs(self):
         """Extraction de la liste des joueurs"""

@@ -3,6 +3,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets, Qt
 import sys
 from Saison import Saison
+import pandas as pd
 import numpy as np
 from openpyxl import load_workbook
 
@@ -51,8 +52,9 @@ class Ui_La_Ligue_1_Uber_Eats(QtWidgets.QMainWindow):
         self.top_layout.addWidget(self.image_label)
         self.main_layout.addLayout(self.top_layout)
 
-        saison = Saison()
-        classement_final = saison.classement_final()
+        self.saison = Saison()
+        self.classement_final = saison.fin
+        # self.classement_final = pd.DataFrame(data=saison.classement_final)
         self.resultats = QtWidgets.QTableWidget(self.centralwidget)
         self.resultats.setGeometry(QtCore.QRect(25, 400, 1133, 337))
         self.resultats.setStyleSheet("background-color: rgb(255, 255, 255);")
@@ -63,8 +65,8 @@ class Ui_La_Ligue_1_Uber_Eats(QtWidgets.QMainWindow):
         self.resultats.setColumnWidth(0, 540)
         self.resultats.setColumnWidth(1, 540)
         for ligne in range(20):
-            self.resultats.setItem(ligne, 0, Qt.QTableWidgetItem(str(classement_final['Clubs'][ligne])))
-            self.resultats.setItem(ligne, 1, Qt.QTableWidgetItem(str(classement_final['Points'][ligne])))
+            self.resultats.setItem(ligne, 0, Qt.QTableWidgetItem(str(self.classement_final['Clubs'][ligne])))
+            self.resultats.setItem(ligne, 1, Qt.QTableWidgetItem(str(self.classement_final['Points'][ligne])))
 
         self.instructions = QtWidgets.QTextEdit(self.centralwidget)
         self.instructions.setGeometry(QtCore.QRect(25, 225, 200, 90))
