@@ -5,6 +5,7 @@ import numpy as np
 
 """ Ce module contient la définition de la classe Joueur permettant la création d'un joueur """
 
+
 class Joueur:
     def __init__(self, nom_joueur):
         """On définit la classe Joueur définissant les caractéristiques du joueur"""

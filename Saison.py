@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from Journee import Journee
-from Club import Club
-import numpy as np
 import pandas as pd
+
+from Journee import Journee
 
 """ Ce module contient la définition de la classe principale Saison servant à créer le championnat """
 
@@ -53,14 +52,20 @@ class Saison(Journee):
         self.journee36 = journee.classement_journee().to_excel("jour{0}.xlsx".format(36))
         self.journee37 = journee.classement_journee().to_excel("jour{0}.xlsx".format(37))
         self.journee38 = journee.classement_journee().to_excel("jour{0}.xlsx".format(38))
-        self.classement_final = {"Clubs": [], "Points": []}
+        Clubs = []
+        Points = []
         for i in range(20):
-            self.Clubs[i].points = journee.points(self)[i]
-            self.classement_final["Clubs"].append(self.noms_clubs[i])
-            self.classement_final["Points"].append(self.Clubs[i].points)
-        self.fin = pd.DataFrame(data=self.classement_final)
-        self.fin.sort_values(by="Points", ascending=False)
-
+            Clubs.append(self.noms_clubs[i])
+            Points.append(self.Clubs[i].points)
+        self.dico = {"Clubs": Clubs, "Points": Points}
+        self.fin = pd.DataFrame(data=self.dico)
+        self.fin = self.fin.sort_values(by="Points", ascending=False)
 
     def classement_final(self):
         return self.fin
+
+
+if __name__ == "__main__":
+    saison = Saison()
+    results = saison.classement_final()
+    print(results)

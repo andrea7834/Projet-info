@@ -2,8 +2,9 @@
 
 import numpy as np
 import pandas as pd
+
 from Club import Club
-from Joueur import Joueur
+
 
 class Journee:
 
@@ -157,16 +158,16 @@ class Journee:
 
             dico = {"Points dom" : pts_dom, "Buteurs dom" : buteurs_dom, "Clubs à domicile" : equipes_dom, "Buts dom" : buts_dom,
                    "Buts exté": buts_ext, "Clubs à l'extérieur": equipes_ext, "Buteurs exté": buteurs_ext, "Points exté": pts_ext}
-
             res = pd.DataFrame(data=dico)
             res = res.sort_values(by=["Points dom", "Buts dom"], ascending=False)
-
             return res
 
 if __name__ == "__main__":
     journee = Journee()
-    score = journee.jouer_un_match("PSG", "OM")
-    print(score)
+    score1 = journee.classement_journee()
+    print(score1)
+    score2 = journee.classement_journee()
+    print(score2)
     # joueurs = journee.extraire_joueurs()
     # clubs = journee.extraire_clubs()
     # niveaux = journee.niveaux()
