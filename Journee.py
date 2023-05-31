@@ -151,8 +151,8 @@ class Journee:
             equipes_ext = np.array([equipes_ext]).reshape(10, )
             buts_dom = np.array([buts_dom]).reshape(10, )
             buts_ext = np.array([buts_ext]).reshape(10, )
-            pts_dom = np.array([buts_dom]).reshape(10, )
-            pts_ext = np.array([buts_ext]).reshape(10, )
+            pts_dom = np.array([pts_dom]).reshape(10, )
+            pts_ext = np.array([pts_ext]).reshape(10, )
             buteurs_dom = np.array([buteurs_dom]).reshape(10, )
             buteurs_ext = np.array([buteurs_ext]).reshape(10, )
 
@@ -161,16 +161,16 @@ class Journee:
             res = pd.DataFrame(data=dico)
             res = res.sort_values(by=["Points dom", "Buts dom"], ascending=False)
             return res
-
-if __name__ == "__main__":
-    journee = Journee()
-    score1 = journee.classement_journee()
-    print(score1)
-    score2 = journee.classement_journee()
-    print(score2)
-    # joueurs = journee.extraire_joueurs()
-    # clubs = journee.extraire_clubs()
-    # niveaux = journee.niveaux()
-    # print(joueurs)
-    # print(clubs)
-    # print(niveaux)
+#
+# if __name__ == "__main__":
+#     journee = Journee()
+#     score1 = journee.classement_journee()
+#     print(score1)
+#     score2 = journee.classement_journee()
+#     print(score2)
+#     # joueurs = journee.extraire_joueurs()
+#     # clubs = journee.extraire_clubs()
+#     # niveaux = journee.niveaux()
+#     # print(joueurs)
+#     # print(clubs)
+#     # print(niveaux)
