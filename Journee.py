@@ -3,6 +3,7 @@
 import numpy as np
 import pandas as pd
 from Club import Club
+from Joueur import Joueur
 
 class Journee(list, Club):
 
@@ -103,16 +104,16 @@ class Journee(list, Club):
                 for nb_butsA in range(1, buts_marques_a + 1):
                     indice_buteur = np.random.randint(1, 11)
                     # On prend un buteur au hasard dans l'équipe (sauf le gardien d'indice 0)
-                    buteur = self.noms_joueurs[i][indice_buteur]
-                    buteurs_a.append(buteur)
-                    joueur = Joueur(buteur)
+                    # buteur = self.noms_joueurs[i][indice_buteur]
+                    # buteurs_a.append(buteur)
+                    joueur = self.Clubs[i].Joueurs[indice_buteur]
                     joueur.marquer_but()
             if buts_marques_b > 0:
                 for nb_butsB in range(1, buts_marques_b + 1):
                     indice_buteur = np.random.randint(1, 11)
-                    buteur = self.noms_joueurs[j][indice_buteur]
-                    buteurs_b.append(buteur)
-                    joueur = Joueur(buteur)
+                    # buteur = self.noms_joueurs[j][indice_buteur]
+                    # buteurs_b.append(buteur)
+                    joueur = self.Clubs[j].Joueurs[indice_buteur]
                     joueur.marquer_but()
 
             return [buts_marques_a, buts_marques_b, points_a, points_b, buteurs_a, buteurs_b]
