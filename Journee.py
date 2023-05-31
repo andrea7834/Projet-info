@@ -158,6 +158,8 @@ class Journee:
             res = res.sort_values(by=["Buts dom", "Score dom"], ascending=False)
             return res
 
+
+
 if __name__ == "__main__":
     journee = Journee()
     classement = journee.classement_journee()

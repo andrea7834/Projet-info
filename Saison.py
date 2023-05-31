@@ -2,6 +2,7 @@
 import time
 
 import pandas as pd
+import matplotlib.pyplot as plt
 
 from Journee import Journee
 
@@ -71,6 +72,34 @@ class Saison(Journee):
 
     # def classement_final(self):
     #     return self.fin
+
+class Analyse(Saison):
+
+    '''Cette classe va permettre l'analyse des résultats des clubs'''
+    def clubs_avantage_domicile(self):
+
+        """Retourne les clubs pour lesquels jouer à domicile profite le plus"""
+
+        club_avantages = []
+        for club in self.Clubs:
+            avantage_domicile = club.points_dom() - club.points_exte()
+            club_avantages.append((club.nom, avantage_domicile))
+        club_avantages = sorted(club_avantages, key=lambda x: x[1], reverse=True)
+
+        return (avantage_domicile,club_avantages)
+
+    def afficher(self):
+
+        valeurs, categories = Analyse().clubs_avantage_domicile()
+
+        plt.bar(categories, valeurs)
+
+        plt.xlabel('Equipes')
+        plt.ylabel('Avantages domiciles')
+        plt.title('Les équipes avantagées par les matchs à domicile')
+
+        plt.show()
+
 
 
 if __name__ == "__main__":
