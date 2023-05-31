@@ -14,6 +14,9 @@ class Saison(Journee):
         self.nb_jours_total = 38
         super().__init__()
         journee = Journee()
+        for i in range(self.nb_jours_total):
+            classement_journee = journee.classement_journee()
+            classement_journee.to_excel("jour{0}.xlsx".format(i+1))
         self.journee1 = journee.classement_journee().to_excel("jour{0}.xlsx".format(1))
         self.journee2 = journee.classement_journee().to_excel("jour{0}.xlsx".format(2))
         self.journee3 = journee.classement_journee().to_excel("jour{0}.xlsx".format(3))
@@ -52,20 +55,28 @@ class Saison(Journee):
         self.journee36 = journee.classement_journee().to_excel("jour{0}.xlsx".format(36))
         self.journee37 = journee.classement_journee().to_excel("jour{0}.xlsx".format(37))
         self.journee38 = journee.classement_journee().to_excel("jour{0}.xlsx".format(38))
-
-    def classement_final(self):
         equipes = []
         scores = []
+        scores_dom = []
+        scores_exte = []
         for club in self.Clubs:
             equipes.append(club.nom_club)
             scores.append(club.points)
-        equipes = np.array(equipes)
-        scores = np.array(scores)
-        fin = np.concatenate(equipes, scores, axis=1)
-        return fin
+            scores_dom.append(club.points_dom)
+            scores
+        dico = {"Clubs":equipes, "Points" : scores}
+        # equipes = np.array(equipes)
+        # scores = np.array(scores)
+        self.fin = pd.DataFrame(data=dico)
+        self.fin = self.fin.sort_values(by=['Points'], ascending=False)
+        self.fin.to_excel("classement_final")
+
+
+    def classement_final(self):
+        return self.fin
 
 
 if __name__ == "__main__":
     saison = Saison()
-    results = saison.classement_final()
-    print(results)
+    # results = saison.classement_final()
+    # print(results)

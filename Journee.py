@@ -93,7 +93,9 @@ class Journee:
                 points_b = 3
             else: # Il y a égalité
                 points_a, points_b = 1, 1
+            self.Clubs[i].points_dom += points_a
             self.Clubs[i].points += points_a
+            self.Clubs[j].points_exte += points_b
             self.Clubs[j].points += points_b
             self.Clubs[i].buts_marques += buts_marques_a
             self.Clubs[i].buts_marques += buts_marques_b
