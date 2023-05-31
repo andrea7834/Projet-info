@@ -17,7 +17,7 @@ class Joueur:
         par le joueur lorsqu'il marque un but."""
 
         # La note ne peut pas dépasser 20 et on l'augmente à chaque but
-        self.note = np.maximum(20.0, self.note + random.random())
+        self.note = np.maximum(self.note + random.random(), 20.0)
         self.buts_marques_j += 1
 
     def __str__(self):

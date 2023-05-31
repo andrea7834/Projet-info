@@ -5,17 +5,16 @@ import pandas as pd
 from Club import Club
 from Joueur import Joueur
 
-class Journee(list, Club):
+class Journee:
 
     def __init__(self):
         """On définit la classe Journee comprenant les rencontres de la journée """
         self.noms_clubs = self.extraire_clubs()
         self.noms_joueurs = self.extraire_joueurs()
         self.niveaux = self.niveaux()
-        super().__init__()
+        # super().__init__()
         self.Clubs = []
         for i in range(20):
-            Club.__init__(self, self.noms_clubs[i], self.niveaux[i], self.noms_joueurs[i])
             self.Clubs.append(Club(self.noms_clubs[i], self.niveaux[i], self.noms_joueurs[i]))
 
         # self.points = np.zeros((20, ))
@@ -41,7 +40,7 @@ class Journee(list, Club):
                 equipe.append(nom)
             noms_joueurs.append(equipe)
         fichier.close()  # Fermeture du fichier après lecture
-        noms_joueurs = np.array(noms_joueurs)
+        # noms_joueurs = np.array(noms_joueurs)
         return noms_joueurs
 
     def extraire_clubs(self):
@@ -55,12 +54,13 @@ class Journee(list, Club):
             noms_clubs.append(nom_club)
             i += 1
         fichier.close()  # Fermeture du fichier après lecture
+        # noms_clubs = np.array(noms_clubs)
         return noms_clubs
 
     def niveaux(self):
-        niveaux = [0.5, 0.25, 1.5, 1.25, 2.5, 4.75, 4, 2.75,
+        niveaux = np.array([0.5, 0.25, 1.5, 1.25, 2.5, 4.75, 4, 2.75,
                        3.5, 4.5, 4.25, 2, 1.75, 3, 5, 3.25,
-                       3.75, 1, 2.25, 0.75]
+                       3.75, 1, 2.25, 0.75])
         return niveaux
 
     def jouer_un_match(self, equipe_a, equipe_b):
@@ -104,15 +104,15 @@ class Journee(list, Club):
                 for nb_butsA in range(1, buts_marques_a + 1):
                     indice_buteur = np.random.randint(1, 11)
                     # On prend un buteur au hasard dans l'équipe (sauf le gardien d'indice 0)
-                    # buteur = self.noms_joueurs[i][indice_buteur]
-                    # buteurs_a.append(buteur)
+                    buteur = self.noms_joueurs[i][indice_buteur]
+                    buteurs_a.append(buteur)
                     joueur = self.Clubs[i].Joueurs[indice_buteur]
                     joueur.marquer_but()
             if buts_marques_b > 0:
                 for nb_butsB in range(1, buts_marques_b + 1):
                     indice_buteur = np.random.randint(1, 11)
-                    # buteur = self.noms_joueurs[j][indice_buteur]
-                    # buteurs_b.append(buteur)
+                    buteur = self.noms_joueurs[j][indice_buteur]
+                    buteurs_b.append(buteur)
                     joueur = self.Clubs[j].Joueurs[indice_buteur]
                     joueur.marquer_but()
 
@@ -165,9 +165,11 @@ class Journee(list, Club):
 
 if __name__ == "__main__":
     journee = Journee()
-    joueurs = journee.extraire_joueurs()
-    clubs = journee.extraire_clubs()
-    niveaux = journee.niveaux()
-    print(joueurs)
-    print(clubs)
-    print(niveaux)
+    score = journee.jouer_un_match("PSG", "OM")
+    print(score)
+    # joueurs = journee.extraire_joueurs()
+    # clubs = journee.extraire_clubs()
+    # niveaux = journee.niveaux()
+    # print(joueurs)
+    # print(clubs)
+    # print(niveaux)
