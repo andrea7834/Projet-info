@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import sys
-
 from PyQt5 import Qt, QtCore, QtGui, QtWidgets
 from openpyxl import load_workbook
 
@@ -488,6 +487,5 @@ if __name__ == "__main__":
     principale_ihm.show()
     sys.exit(app.exec_())
 
-## Nombre de points = nombre de buts (on ne veut pas)
 ## Le nombre de points final de chaque club ne s'actualise pas correctement
 ## Afficher photo Ligue 1 plus bas ?

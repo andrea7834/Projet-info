@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import numpy as np
 import pandas as pd
 
 from Journee import Journee
@@ -52,17 +52,17 @@ class Saison(Journee):
         self.journee36 = journee.classement_journee().to_excel("jour{0}.xlsx".format(36))
         self.journee37 = journee.classement_journee().to_excel("jour{0}.xlsx".format(37))
         self.journee38 = journee.classement_journee().to_excel("jour{0}.xlsx".format(38))
-        Clubs = []
-        Points = []
-        for i in range(20):
-            Clubs.append(self.noms_clubs[i])
-            Points.append(self.Clubs[i].points)
-        self.dico = {"Clubs": Clubs, "Points": Points}
-        self.fin = pd.DataFrame(data=self.dico)
-        self.fin = self.fin.sort_values(by="Points", ascending=False)
 
     def classement_final(self):
-        return self.fin
+        equipes = []
+        scores = []
+        for club in self.Clubs:
+            equipes.append(club.nom_club)
+            scores.append(club.points)
+        equipes = np.array(equipes)
+        scores = np.array(scores)
+        fin = np.concatenate(equipes, scores, axis=1)
+        return fin
 
 
 if __name__ == "__main__":

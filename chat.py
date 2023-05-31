@@ -1,10 +1,49 @@
 # -*- coding: utf-8 -*-
 
+import random
 import numpy as np
 import pandas as pd
 
-from Club import Club
 
+class Joueur:
+    def __init__(self, nom_joueur):
+        """On définit la classe Joueur définissant les caractéristiques du joueur"""
+        self.nom_joueur = nom_joueur
+        self.note = 0
+        self.buts_marques_j = 0
+
+    def marquer_but(self):
+        """On définit la méthode marquer_but mettant à jour la note et le nombre de buts marqués
+        par le joueur lorsqu'il marque un but."""
+        # La note ne peut pas dépasser 20 et on l'augmente à chaque but
+        self.note = np.maximum(self.note + random.random(), 20.0)
+        self.buts_marques_j += 1
+
+    def __str__(self):
+        """On définit __str__ la méthode retournant une chaine de caractères avec le nom du joueur,
+        sa note et son nombre de buts qu'il a marqué"""
+        return f"Nom du joueur : {self.nom_joueur}, Note : {self.note}, Buts marqués :{self.buts_marques_j}"
+
+class Club:
+    def __init__(self, nom_club, niveau, noms_joueurs):
+        """ On définit la classe Club qui regroupe le nom de chaque club, ses joueurs,
+        son nombre de points et le nombre de buts marqués lors de la saison (initialisés à 0)
+        """
+        self.noms_joueurs = noms_joueurs
+        self.nom_club = nom_club
+        self.Joueurs = []
+        for nom in noms_joueurs:
+            self.Joueurs.append(Joueur(nom))
+        # On attribue un niveau à chaque club (en fonction des résultats de cette année)
+        self.niveau = niveau
+        self.points = 0
+        self.buts_marques = 0
+
+    def __str__(self):
+        """On définit __str__ la méthode retournant le nom de clubs, leur nombre de points et le nombre de buts marqués
+        sous forme de dataframe
+        """
+        return f"Noms des clubs : {self.nom_club}, Nombre de points : {self.points}, Buts marqués : {self.buts_marques}"
 
 class Journee:
 
@@ -159,7 +198,59 @@ class Journee:
             res = res.sort_values(by=["Points dom", "Buts dom"], ascending=False)
             return res
 
-if __name__ == "__main__":
-    journee = Journee()
-    res = journee.jouer_un_match("PSG", "OM")
-    print(res)
+class Saison(Journee):
+    def __init__(self):
+        """On définit la classe Saison regroupant les matchs d'une journée et le récapitulatif de la saison """
+        self.nom = "Ligue 1"
+        self.nb_jours_total = 38
+        super().__init__()
+        journee = Journee()
+        self.journee1 = journee.classement_journee().to_excel("jour{0}.xlsx".format(1))
+        self.journee2 = journee.classement_journee().to_excel("jour{0}.xlsx".format(2))
+        self.journee3 = journee.classement_journee().to_excel("jour{0}.xlsx".format(3))
+        self.journee4 = journee.classement_journee().to_excel("jour{0}.xlsx".format(4))
+        self.journee5 = journee.classement_journee().to_excel("jour{0}.xlsx".format(5))
+        self.journee6 = journee.classement_journee().to_excel("jour{0}.xlsx".format(6))
+        self.journee7 = journee.classement_journee().to_excel("jour{0}.xlsx".format(7))
+        self.journee8 = journee.classement_journee().to_excel("jour{0}.xlsx".format(8))
+        self.journee9 = journee.classement_journee().to_excel("jour{0}.xlsx".format(9))
+        self.journee10 = journee.classement_journee().to_excel("jour{0}.xlsx".format(10))
+        self.journee11 = journee.classement_journee().to_excel("jour{0}.xlsx".format(11))
+        self.journee12 = journee.classement_journee().to_excel("jour{0}.xlsx".format(12))
+        self.journee13 = journee.classement_journee().to_excel("jour{0}.xlsx".format(13))
+        self.journee14 = journee.classement_journee().to_excel("jour{0}.xlsx".format(14))
+        self.journee15 = journee.classement_journee().to_excel("jour{0}.xlsx".format(15))
+        self.journee16 = journee.classement_journee().to_excel("jour{0}.xlsx".format(16))
+        self.journee17 = journee.classement_journee().to_excel("jour{0}.xlsx".format(17))
+        self.journee18 = journee.classement_journee().to_excel("jour{0}.xlsx".format(18))
+        self.journee19 = journee.classement_journee().to_excel("jour{0}.xlsx".format(19))
+        self.journee20 = journee.classement_journee().to_excel("jour{0}.xlsx".format(20))
+        self.journee21 = journee.classement_journee().to_excel("jour{0}.xlsx".format(21))
+        self.journee22 = journee.classement_journee().to_excel("jour{0}.xlsx".format(22))
+        self.journee23 = journee.classement_journee().to_excel("jour{0}.xlsx".format(23))
+        self.journee24 = journee.classement_journee().to_excel("jour{0}.xlsx".format(24))
+        self.journee25 = journee.classement_journee().to_excel("jour{0}.xlsx".format(25))
+        self.journee26 = journee.classement_journee().to_excel("jour{0}.xlsx".format(26))
+        self.journee27 = journee.classement_journee().to_excel("jour{0}.xlsx".format(27))
+        self.journee28 = journee.classement_journee().to_excel("jour{0}.xlsx".format(28))
+        self.journee29 = journee.classement_journee().to_excel("jour{0}.xlsx".format(29))
+        self.journee30 = journee.classement_journee().to_excel("jour{0}.xlsx".format(30))
+        self.journee31 = journee.classement_journee().to_excel("jour{0}.xlsx".format(31))
+        self.journee32 = journee.classement_journee().to_excel("jour{0}.xlsx".format(32))
+        self.journee33 = journee.classement_journee().to_excel("jour{0}.xlsx".format(33))
+        self.journee34 = journee.classement_journee().to_excel("jour{0}.xlsx".format(34))
+        self.journee35 = journee.classement_journee().to_excel("jour{0}.xlsx".format(35))
+        self.journee36 = journee.classement_journee().to_excel("jour{0}.xlsx".format(36))
+        self.journee37 = journee.classement_journee().to_excel("jour{0}.xlsx".format(37))
+        self.journee38 = journee.classement_journee().to_excel("jour{0}.xlsx".format(38))
+
+    def classement_final(self):
+        equipes = []
+        scores = []
+        for club in self.Clubs:
+            equipes.append(club.nom_club)
+            scores.append(club.points)
+        equipes = np.array(equipes)
+        scores = np.array(scores)
+        fin = np.concatenate(equipes, scores, axis=1)
+        return fin
