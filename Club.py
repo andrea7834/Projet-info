@@ -4,7 +4,7 @@ from Joueur import Joueur
 
 """ Ce module contient la définition de la classe Club permettant la création des équipes """
 
-class Club(Joueur):
+class Club:
     def __init__(self, nom_club, niveau, noms_joueurs):
 
         """ On définit la classe Club qui regroupe le nom de chaque club, ses joueurs,
@@ -15,7 +15,6 @@ class Club(Joueur):
         self.nom_club = nom_club
         self.Joueurs = []
         for nom in noms_joueurs:
-            super().__init__(nom)
             self.Joueurs.append(Joueur(nom))
 
         # On attribue un niveau à chaque club (en fonction des résultats de cette année)

@@ -1,9 +1,44 @@
 # -*- coding: utf-8 -*-
+class Joueur:
+    def __init__(self, nom_joueur):
+        """On définit la classe Joueur définissant les caractéristiques du joueur"""
+        self.nom_joueur = nom_joueur
+        self.note = 0
+        self.buts_marques_j = 0
 
-import numpy as np
-import pandas as pd
-from Club import Club
-from Joueur import Joueur
+    def marquer_but(self):
+        """On définit la méthode marquer_but mettant à jour la note et le nombre de buts marqués
+        par le joueur lorsqu'il marque un but."""
+        # La note ne peut pas dépasser 20 et on l'augmente à chaque but
+        self.note = np.maximum(20.0, self.note + random.random())
+        self.buts_marques_j += 1
+
+    def __str__(self):
+        """On définit __str__ la méthode retournant une chaine de caractères avec le nom du joueur,
+        sa note et son nombre de buts qu'il a marqué"""
+        return f"Nom du joueur : {self.nom_joueur}, Note : {self.note}, Buts marqués :{self.buts_marques_j}"
+
+class Club(Joueur):
+    def __init__(self, nom_club, niveau, noms_joueurs):
+        """ On définit la classe Club qui regroupe le nom de chaque club, ses joueurs,
+        son nombre de points et le nombre de buts marqués lors de la saison (initialisés à 0)
+        """
+        self.noms_joueurs = noms_joueurs
+        self.nom_club = nom_club
+        self.Joueurs = []
+        for nom in noms_joueurs:
+            super().__init__(nom)
+            self.Joueurs.append(Joueur(nom))
+        # On attribue un niveau à chaque club (en fonction des résultats de cette année)
+        self.niveau = niveau
+        self.points = 0
+        self.buts_marques = 0
+
+    def __str__(self):
+        """On définit __str__ la méthode retournant le nom de clubs, leur nombre de poinst et le nombre de buts marqués sous forme de dataframe
+        """
+        return f"Noms des clubs : {self.nom_club}, Nombre de points : {self.points}, Buts marqués : {self.buts_marques}"
+
 
 class Journee(list, Club):
 
@@ -104,16 +139,16 @@ class Journee(list, Club):
                 for nb_butsA in range(1, buts_marques_a + 1):
                     indice_buteur = np.random.randint(1, 11)
                     # On prend un buteur au hasard dans l'équipe (sauf le gardien d'indice 0)
-                    # buteur = self.noms_joueurs[i][indice_buteur]
-                    # buteurs_a.append(buteur)
-                    joueur = self.Clubs[i].Joueurs[indice_buteur]
+                    buteur = self.noms_joueurs[i][indice_buteur]
+                    buteurs_a.append(buteur)
+                    joueur = Joueur(buteur)
                     joueur.marquer_but()
             if buts_marques_b > 0:
                 for nb_butsB in range(1, buts_marques_b + 1):
                     indice_buteur = np.random.randint(1, 11)
-                    # buteur = self.noms_joueurs[j][indice_buteur]
-                    # buteurs_b.append(buteur)
-                    joueur = self.Clubs[j].Joueurs[indice_buteur]
+                    buteur = self.noms_joueurs[j][indice_buteur]
+                    buteurs_b.append(buteur)
+                    joueur = Joueur(buteur)
                     joueur.marquer_but()
 
             return [buts_marques_a, buts_marques_b, points_a, points_b, buteurs_a, buteurs_b]
@@ -159,7 +194,7 @@ class Journee(list, Club):
                    "Buts exté": buts_ext, "Clubs à l'extérieur": equipes_ext, "Buteurs exté": buteurs_ext, "Points exté": pts_ext}
 
             res = pd.DataFrame(data=dico)
-            res = res.sort_values(by=["Points dom", "Buts dom"], ascending=False)
+            res.sort_values(by=["Points dom", "Buts dom"], ascending=False)
 
             return res
 
