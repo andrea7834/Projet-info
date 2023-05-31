@@ -63,12 +63,12 @@ class Saison(Journee):
             equipes.append(club.nom_club)
             scores.append(club.points)
             scores_dom.append(club.points_dom)
-            scores
-        dico = {"Clubs":equipes, "Points" : scores}
+            scores_exte.append(club.points_exte)
+        dico = {"Clubs":equipes, "Points" : scores, "Points à domicile":scores_dom, "Points à l'extérieur":scores_exte}
         # equipes = np.array(equipes)
         # scores = np.array(scores)
         self.fin = pd.DataFrame(data=dico)
-        self.fin = self.fin.sort_values(by=['Points'], ascending=False)
+        self.fin = self.fin.sort_values(by=['Points', "Points à domicile", "Points à l'extérieur"], ascending=False)
         self.fin.to_excel("classement_final")
 
 
