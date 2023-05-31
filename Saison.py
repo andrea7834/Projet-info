@@ -13,7 +13,7 @@ class Saison(Journee.Journee):
         """On définit la classe Saison regroupant les matchs d'une journée et le récapitulatif de la saison """
         self.nom = "Ligue 1"
         self.nb_jours_total = 38
-        journee = Journee.Journee(noms_clubs, noms_joueurs, niveaux)
+        journee = Journee.Journee()
         self.journee1 = journee.classement_journee().to_excel("jour{0}.xlsx".format(1))
         self.journee2 = journee.classement_journee().to_excel("jour{0}.xlsx".format(2))
         self.journee3 = journee.classement_journee().to_excel("jour{0}.xlsx".format(3))
@@ -53,6 +53,7 @@ class Saison(Journee.Journee):
         self.journee37 = journee.classement_journee().to_excel("jour{0}.xlsx".format(37))
         self.journee38 = journee.classement_journee().to_excel("jour{0}.xlsx".format(38))
         self.classement_final = {"Clubs": [], "Points": []}
+
         for i in range(20):
             self.Clubs[i].points = journee.points(self)[i]
             self.classement_final["Clubs"].append(self.noms_clubs[i])
@@ -60,6 +61,8 @@ class Saison(Journee.Journee):
         self.fin = pd.DataFrame(data=self.classement_final)
         self.fin.sort_values(by="Points", ascending=False)
 
+    '''j1 = Journee.classement_journee()
+        print(j1)'''
 
     def classement_final(self):
         return self.fin
