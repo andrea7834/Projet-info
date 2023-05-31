@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import pandas as pd
+import matplotlib.pyplot as plt
 
 from Journee import Journee
+from Club import Club
 
 """ Ce module contient la définition de la classe principale Saison servant à créer le championnat """
 
@@ -65,6 +67,7 @@ class Saison(Journee):
         return self.fin
 
 class Analyse(Saison):
+
     '''Cette classe va permettre l'analyse des résultats des clubs'''
     def clubs_avantage_domicile(self):
 
@@ -76,11 +79,23 @@ class Analyse(Saison):
             club_avantages.append((club.nom, avantage_domicile))
         club_avantages = sorted(club_avantages, key=lambda x: x[1], reverse=True)
 
-        return club_avantages
+        return (avantage_domicile,club_avantages)
 
+    def afficher(self):
 
+        valeurs, categories = Analyse().clubs_avantage_domicile()
+
+        plt.bar(categories, valeurs)
+
+        plt.xlabel('Equipes')
+        plt.ylabel('Avantages domiciles')
+        plt.title('Les équipes avantagées par les matchs à domicile')
+
+        plt.show()
 
 if __name__ == "__main__":
-    saison = Saison()
+    '''saison = Saison()
     results = saison.classement_final()
-    print(results)
+    print(results)'''
+
+    Analyse().afficher()
