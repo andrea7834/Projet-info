@@ -14,7 +14,7 @@ class Ui_La_Ligue_1_Uber_Eats(QtWidgets.QMainWindow):
         self.name = La_Ligue_1_Uber_Eats
         saison = Saison()
         La_Ligue_1_Uber_Eats.setObjectName("La_Ligue_1_Uber_Eats")
-        La_Ligue_1_Uber_Eats.resize(1183, 857)
+        La_Ligue_1_Uber_Eats.resize(1383, 857)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("C:\\Projet-info\\mini-soccer-petit-ballon-de-foot.jpg"), QtGui.QIcon.Normal,
                        QtGui.QIcon.Off)
@@ -28,7 +28,7 @@ class Ui_La_Ligue_1_Uber_Eats(QtWidgets.QMainWindow):
         self.main_layout = QtWidgets.QVBoxLayout(self.centralwidget)
 
         self.titre = QtWidgets.QLabel("La Ligue 1 UberEats", self)
-        self.titre.move(450, 300)
+        self.titre.move(641, 300)
         self.titre.resize(100, 50)
         self.titre.setAlignment(QtCore.Qt.AlignBottom)
         self.titre.setStyleSheet("border: 1px solid black;\n" "border-color: rgb(0, 125, 92);")
@@ -54,17 +54,16 @@ class Ui_La_Ligue_1_Uber_Eats(QtWidgets.QMainWindow):
         self.main_layout.addLayout(self.top_layout)
 
         self.saison = Saison()
-        self.classement_final = saison.fin
-        # self.classement_final = pd.DataFrame(data=saison.classement_final)
+        self.classement_final = saison.classement_final()
         self.resultats = QtWidgets.QTableWidget(self.centralwidget)
-        self.resultats.setGeometry(QtCore.QRect(25, 400, 1133, 337))
+        self.resultats.setGeometry(QtCore.QRect(400, 400, 560, 330))
         self.resultats.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.resultats.setObjectName("resultats")
         self.resultats.setHorizontalHeaderLabels(("Clubs", 'Points'))
         self.resultats.setColumnCount(2)
         self.resultats.setRowCount(20)
-        self.resultats.setColumnWidth(0, 540)
-        self.resultats.setColumnWidth(1, 540)
+        self.resultats.setColumnWidth(0, 400)
+        self.resultats.setColumnWidth(1, 100)
         for ligne in range(20):
             self.resultats.setItem(ligne, 0, Qt.QTableWidgetItem(str(self.classement_final['Clubs'][ligne])))
             self.resultats.setItem(ligne, 1, Qt.QTableWidgetItem(str(self.classement_final['Points'][ligne])))
@@ -74,12 +73,12 @@ class Ui_La_Ligue_1_Uber_Eats(QtWidgets.QMainWindow):
         self.instructions.setObjectName("instructions")
 
         self.titre1 = QtWidgets.QTextEdit(self.centralwidget)
-        self.titre1.setGeometry(QtCore.QRect(365, 320, 450, 70))
+        self.titre1.setGeometry(QtCore.QRect(450, 320, 450, 70))
         self.titre1.setStyleSheet("border: 1px solid black;\n" "border-color: rgb(134, 230, 96);")
         self.titre1.setObjectName("titre1")
 
         self.quitter = QtWidgets.QPushButton(self.centralwidget)
-        self.quitter.setGeometry(QtCore.QRect(530, 775, 93, 28))
+        self.quitter.setGeometry(QtCore.QRect(625, 775, 93, 28))
         self.quitter.setObjectName("quitter")
         self.menu_file_quit = QtWidgets.QAction('&Quit')
         self.menu_file_quit.setToolTip('Exit the application.')
@@ -87,7 +86,7 @@ class Ui_La_Ligue_1_Uber_Eats(QtWidgets.QMainWindow):
         self.menu_file_quit.setShortcut(QtGui.QKeySequence("Ctrl+Q"))
 
         self.widget = QtWidgets.QWidget(self.centralwidget)
-        self.widget.setGeometry(QtCore.QRect(300, 40, 250, 250))
+        self.widget.setGeometry(QtCore.QRect(400, 40, 250, 250))
         self.widget.setObjectName("widget")
         self.calendrier = QtWidgets.QGridLayout(self.widget)
         self.calendrier.setSizeConstraint(QtWidgets.QLayout.SetMinimumSize)
@@ -376,7 +375,7 @@ class Ui_La_Ligue_1_Uber_Eats(QtWidgets.QMainWindow):
         #            self.jour32,
         #            self.jour33, self.jour34, self.jour35, self.jour36, self.jour37, self.jour38]
         boutons = [self.jour1, self.jour2, self.jour3, self.jour4, self.jour5, self.jour6, self.jour7, self.jour8,
-                   self.jour9]
+                   self.jour9, self.jour10, self.jour11]
         for i in range(len(boutons)):
             boutons[i].clicked.connect(self.handle_button_clicked)
             boutons[i].setProperty('index', i + 1)
@@ -396,22 +395,24 @@ class Ui_La_Ligue_1_Uber_Eats(QtWidgets.QMainWindow):
 
         self.resultats = QtWidgets.QTableWidget(self.centralwidget)
         self.resultats.setRowCount(10)
-        self.resultats.setColumnCount(8)
-        self.resultats.setGeometry(QtCore.QRect(25, 400, 1133, 337))
+        self.resultats.setColumnCount(10)
+        self.resultats.setGeometry(QtCore.QRect(25, 400, 1333, 337))
         self.resultats.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.resultats.setObjectName("resultats")
         self.resultats.setHorizontalHeaderLabels(
-            ("Points dom", '"Buteurs dom"', "Clubs à domicile", "Buts dom", "Buts exté",
-             "Clubs à l'extérieur", 'Buteurs exté', 'Points exté'))
+            ("Scores", "Points dom", '"Buteurs dom"', "Clubs à domicile", "Buts dom", "Buts exté",
+             "Clubs à l'extérieur", 'Buteurs exté', 'Points exté', "Scores_"))
 
         self.resultats.setColumnWidth(0, 100)
-        self.resultats.setColumnWidth(1, 175)
+        self.resultats.setColumnWidth(1, 100)
         self.resultats.setColumnWidth(2, 175)
-        self.resultats.setColumnWidth(3, 100)
+        self.resultats.setColumnWidth(3, 175)
         self.resultats.setColumnWidth(4, 100)
-        self.resultats.setColumnWidth(5, 175)
+        self.resultats.setColumnWidth(5, 100)
         self.resultats.setColumnWidth(6, 175)
-        self.resultats.setColumnWidth(7, 100)
+        self.resultats.setColumnWidth(7, 175)
+        self.resultats.setColumnWidth(8, 100)
+        self.resultats.setColumnWidth(9, 100)
 
         for i in range(2, self.feuille.max_row + 1):
             for j in range(2, self.feuille.max_column + 1):
@@ -486,7 +487,3 @@ if __name__ == "__main__":
     ui.setupUi(principale_ihm)
     principale_ihm.show()
     sys.exit(app.exec_())
-
-## Nombre de points = nombre de buts (on ne veut pas)
-## Le nombre de points final de chaque club ne s'actualise pas correctement
-## Afficher photo Ligue 1 plus bas ?

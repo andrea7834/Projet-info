@@ -25,11 +25,11 @@ class Saison(Journee):
         self.journee7 = journee.classement_journee().to_excel("jour{0}.xlsx".format(7))
         self.journee8 = journee.classement_journee().to_excel("jour{0}.xlsx".format(8))
         self.journee9 = journee.classement_journee().to_excel("jour{0}.xlsx".format(9))
-        # self.journee10 = journee.classement_journee().to_excel("jour{0}.xlsx".format(10))
-        # self.journee11 = journee.classement_journee().to_excel("jour{0}.xlsx".format(11))
+        self.journee10 = journee.classement_journee().to_excel("jour{0}.xlsx".format(10))
+        self.journee11 = journee.classement_journee()
         # self.journee12 = journee.classement_journee().to_excel("jour{0}.xlsx".format(12))
         # self.journee13 = journee.classement_journee().to_excel("jour{0}.xlsx".format(13))
-        # self.journee14 = journee.classement_journee().to_excel("jour{0}.xlsx".format(14))
+        # self.journee14 = journee.classement_journee()
         # self.journee15 = journee.classement_journee().to_excel("jour{0}.xlsx".format(15))
         # self.journee16 = journee.classement_journee().to_excel("jour{0}.xlsx".format(16))
         # self.journee17 = journee.classement_journee().to_excel("jour{0}.xlsx".format(17))
@@ -55,30 +55,22 @@ class Saison(Journee):
         # self.journee37 = journee.classement_journee().to_excel("jour{0}.xlsx".format(37))
         # self.journee38 = journee.classement_journee()
         # self.journee38.to_excel("jour{0}.xlsx".format(38))
-        # print(self.journee38)
-        self.journees = [self.journee1, self.journee2, self.journee3, self.journee4, self.journee5, self.journee6,
-                         self.journee7, self.journee8, self.journee9]
         equipes = []
-        equipes.append(self.journees[-1]["Clubs à domicile"])
-        equipes.append(self.journees[-1]["Clubs à l'extérieur"])
         scores = []
-        scores.append(self.journees[-1]["Score dom"])
-        scores.append(self.journees[-1]["Score exte"])
-
-        # for club in self.Clubs:
-        #     equipes.append(club.nom_club)
-        #     scores.append(club.points)
-        #     scores_dom.append(club.points_dom)
-        #     scores_exte.append(club.points_exte)
-        # dico = {"Clubs":equipes, "Points" : scores, "Points à domicile":scores_dom, "Points à l'extérieur":scores_exte}
+        for i in range(10):
+            equipes.append(self.journee11.iloc[i, 3])
+            equipes.append(self.journee11.iloc[i, 6])
+            scores.append(self.journee11.iloc[i, 0])
+            scores.append(self.journee11.iloc[i, 0])
         dico = {"Clubs": equipes, "Points": scores}
         self.fin = pd.DataFrame(data=dico)
-        self.fin = self.fin.sort_values(by=['Points', "Points à domicile", "Points à l'extérieur"], ascending=False)
+        self.fin = self.fin.sort_values(by=['Points'], ascending=False)
         self.fin.to_excel("classement_final.xlsx")
+        self.journee11.to_excel("jour{0}.xlsx".format(11))
 
 
-    # def classement_final(self):
-    #     return self.fin
+    def classement_final(self):
+         return self.fin
 
 class Analyse(Saison):
     '''Cette classe va permettre l'analyse des résultats des clubs'''
@@ -103,16 +95,3 @@ class Analyse(Saison):
 
 if __name__ == "__main__":
     saison = Saison()
-    # equipes = []
-    # scores = []
-    # # scores_dom = []
-    # # scores_exte = []
-    # for club in saison.Clubs:
-    #     equipes.append(club.nom_club)
-    #     scores.append(club.points)
-    #     scores_dom.append(club.points_dom)
-    #     scores_exte.append(club.points_exte)
-    # dico = {"Clubs": equipes, "Points": scores, "Points à domicile": scores_dom, "Points à l'extérieur": scores_exte}
-    # fin = pd.DataFrame(data=dico)
-    # fin = fin.sort_values(by=['Points', "Points à domicile", "Points à l'extérieur"], ascending=False)
-    # fin.to_excel("classement_final.xlsx")
