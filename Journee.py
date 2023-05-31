@@ -1,27 +1,69 @@
 # -*- coding: utf-8 -*-
 
-import Club, Joueur
+from Club import Club
+from Joueur import Joueur
 import numpy as np
 import pandas as pd
 
 """ Ce module contient la définition de la classe Journée simulant une journée de championnat """
 
 
-class Journee(list, Joueur.Joueur):
+class Journee(list, Club):
 
-    def __init__(self, noms_clubs, noms_joueurs, niveaux):
+    def __init__(self):
         """On définit la classe Journee comprenant les rencontres de la journée """
-        for nom in noms_joueurs:
-            super().__init__(nom)
-        self.noms_clubs = noms_clubs
-        self.noms_joueurs = noms_joueurs
-        self.niveaux = niveaux
+        self.noms_clubs = self.extraire_clubs()
+        self.noms_joueurs = self.extraire_joueurs()
+        self.niveaux = self.niveaux()
+        super().__init__()
+        self.Clubs = []
+        for i in range(20):
+            Club.__init__(self.noms_clubs[i], self.niveaux[i], self.noms_joueurs[i])
+            self.Clubs.append(Club(self.noms_clubs[i], self.niveaux[i], self.noms_joueurs[i]))
+
         self.points = np.zeros((20, ))
         self.buts_marques = np.zeros((20, ))
         self.dom_ext = np.eye(20)  # On définit une matrice pour les matchs joués à domicile ou à l'extérieur
         # Les lignes correspondent aux équipes jouant à domicile et les colonnes à celles jouant à l'extérieur
         self.nb_rencontres_par_jour = 10 # Comme il y a 20 équipes alors il y a 10 matchs par jour puisque toutes les équipes jouent une fois
         self.nb_jours_restants = 38  # il y a 19 rencontres aller et 19 rencontres retour
+
+    def points(self):
+        return self.points
+
+    def extraire_joueurs(self):
+        """Extraction de la liste des joueurs"""
+        fichier = open("noms_joueurs.txt", 'r')
+        noms_joueurs = []
+        fichier.seek(0)
+        for ligne in fichier:  # Il y a une équipe de 11 joueurs par ligne
+            equipe = []
+            noms = ligne.strip(" \n")
+            noms = noms.split()  # Le nom de chaque joueur est séparé par un espace
+            for nom in noms:
+                equipe.append(nom)
+            noms_joueurs.append(equipe)
+        fichier.close()  # Fermeture du fichier après lecture
+        return noms_joueurs
+
+    def extraire_clubs(self):
+        """Extraction de la liste des clubs"""
+        fichier = open("noms_clubs.txt", 'r')
+        noms_clubs = []
+        fichier.seek(0)  # Mettre le curseur au début du fichier
+        i = 0
+        for nom_club in fichier:  # Il y a un club par ligne
+            nom_club = nom_club.strip(" \n")
+            noms_clubs.append(nom_club)
+            i += 1
+        fichier.close()  # Fermeture du fichier après lecture
+        return noms_clubs
+
+    def niveaux(self):
+        niveaux = np.array([0.5, 0.25, 1.5, 1.25, 2.5, 4.75, 4, 2.75,
+                       3.5, 4.5, 4.25, 2, 1.75, 3, 5, 3.25,
+                       3.75, 1, 2.25, 0.75]).reshape((20, 1))
+        return niveaux
 
     def jouer_un_match(self, equipe_a, equipe_b):
         """On définit la méthode jouer_match ajoutant un match dans le tableau des matchs
@@ -55,10 +97,10 @@ class Journee(list, Joueur.Joueur):
                 points_b = 3
             else: # Il y a égalité
                 points_a, points_b = 1, 1
-            self.points[i] += points_a
-            self.points[j] += points_b
-            self.buts_marques[i] += buts_marques_a
-            self.buts_marques[j] += buts_marques_b
+            self.Clubs[i].points += points_a
+            self.Clubs[j].points += points_b
+            self.Clubs[i].buts_marques += buts_marques_a
+            self.Clubs[i].buts_marques += buts_marques_b
 
             if buts_marques_a > 0:
                 for nb_butsA in range(1, buts_marques_a + 1):
@@ -66,14 +108,14 @@ class Journee(list, Joueur.Joueur):
                     # On prend un buteur au hasard dans l'équipe (sauf le gardien d'indice 0)
                     buteur = self.noms_joueurs[i][indice_buteur]
                     buteurs_a.append(buteur)
-                    joueur = Joueur.Joueur(buteur)
+                    joueur = Joueur(buteur)
                     joueur.marquer_but()
             if buts_marques_b > 0:
                 for nb_butsB in range(1, buts_marques_b + 1):
                     indice_buteur = np.random.randint(1, 11)
                     buteur = self.noms_joueurs[j][indice_buteur]
                     buteurs_b.append(buteur)
-                    joueur = Joueur.Joueur(buteur)
+                    joueur = Joueur(buteur)
                     joueur.marquer_but()
 
             return [buts_marques_a, buts_marques_b, points_a, points_b, buteurs_a, buteurs_b]

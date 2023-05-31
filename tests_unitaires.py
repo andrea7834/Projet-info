@@ -5,47 +5,25 @@ from Club import Club
 from Journee import Journee
 from Saison import Saison
 
-niveaux = np.array([0.5, 0.25, 1.5, 1.25, 2.5, 4.75, 4, 2.75,
-                            3.5, 4.5, 4.25, 2, 1.75, 3, 5, 3.25,
-                            3.75, 1, 2.25, 0.75]).reshape((20, 1))
+saison = Saison()
+niveaux = saison.niveaux()
+noms_joueurs = saison.extraire_joueurs()
+noms_clubs = saison.extraire_clubs()
 
-#Extraction de la liste des joueurs
-fichier = open("noms_joueurs.txt", 'r')
-noms_joueurs = []
-fichier.seek(0)
-for ligne in fichier:  # Il y a une équipe de 11 joueurs par ligne
-    equipe = []
-    noms = ligne.strip(" \n")
-    noms = noms.split()  # Le nom de chaque joueur est séparé par un espace
-    for nom in noms:
-        equipe.append(nom)
-    noms_joueurs.append(equipe)
-fichier.close()  # Fermeture du fichier après lecture
-
-# Extraction de la liste des clubs
-fichier = open("noms_clubs.txt", 'r')
-noms_clubs = []
-fichier.seek(0)  # Mettre le curseur au début du fichier
-i = 0
-for nom_club in fichier:  # Il y a un club par ligne
-    nom_club = nom_club.strip(" \n")
-    noms_clubs.append(nom_club)
-    i += 1
-fichier.close()  # Fermeture du fichier après lecture
 
 class TestJoueur(unittest.TestCase):
     def test_creer_joueur(self):
         joueur = Joueur('Mbappé')
         self.assertEqual('Mbappé', joueur.nom_joueur)
         self.assertEqual(0, joueur.note)
-        self.assertEqual(0, joueur.buts_marques)
+        self.assertEqual(0, joueur.buts_marques_j)
 
     def test_marquer_but(self):
         joueur = Joueur("MBappé")
         joueur.marquer_but()
-        self.assertEqual(joueur.buts_marques, 1)
+        self.assertEqual(joueur.buts_marques_j, 1)
         joueur.marquer_but()
-        self.assertEqual(joueur.buts_marques, 2)
+        self.assertEqual(joueur.buts_marques_j, 2)
 
 
 class TestClub(unittest.TestCase):
@@ -94,11 +72,11 @@ class TestJournee(unittest.TestCase):
 
 class TestSaison(unittest.TestCase):
     def test_nom_tournoi(self):
-        saison = Saison(noms_clubs, noms_joueurs, niveaux)
+        saison = Saison()
         self.assertEqual(saison.nom, "Ligue 1")
 
     def test_nb_jours_total(self):
-        saison = Saison(noms_clubs, noms_joueurs, niveaux)
+        saison = Saison()
         self.assertEqual(saison.nb_jours_total, 38)
 
 
