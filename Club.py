@@ -20,6 +20,6 @@ class Club:
         self.buts_marques = 0
 
     def __str__(self):
-        """On définit __str__ la méthode retournant le nom de clubs, leur nombre de poinst et le nombre de buts marqués sous forme de dataframe
+        """On définit __str__ la méthode retournant le nom de clubs, leur nombre de points et le nombre de buts marqués sous forme de dataframe
         """
         return f"Noms des clubs : {self.nom_club}, Nombre de points : {self.points}, Buts marqués : {self.buts_marques}"

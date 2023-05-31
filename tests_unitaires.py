@@ -36,35 +36,35 @@ class TestClub(unittest.TestCase):
 
 class TestJournee(unittest.TestCase):
     def test_noms_clubs(self):
-        journee = Journee(noms_clubs, noms_joueurs, niveaux)
+        journee = Journee()
         self.assertIs(journee.noms_clubs, noms_clubs)
 
     def test_noms_joueurs(self):
-        journee = Journee(noms_clubs, noms_joueurs, niveaux)
+        journee = Journee()
         self.assertIs(journee.noms_joueurs, noms_joueurs)
 
     def test_niveaux(self):
-        journee = Journee(noms_clubs, noms_joueurs, niveaux)
+        journee = Journee()
         self.assertIs(journee.niveaux, niveaux)
 
     def test_points(self):
-        journee = Journee(noms_clubs, noms_joueurs, niveaux)
+        journee = Journee()
         self.assertIs(journee.points.all(), np.zeros((20,)).all())
 
     def test_buts(self):
-        journee = Journee(noms_clubs, noms_joueurs, niveaux)
+        journee = Journee()
         self.assertEqual(journee.buts_marques.all(), np.zeros((20,)).all())
 
     def test_buts_dom(self):
-        journee = Journee(noms_clubs, noms_joueurs, niveaux)
+        journee = Journee()
         self.assertEqual(journee.dom_ext.all(), np.eye(20).all())
 
     def test_nb_rencontres_par_jour(self):
-        journee = Journee(noms_clubs, noms_joueurs, niveaux)
+        journee = Journee()
         self.assertEqual(journee.nb_rencontres_par_jour, 10)
 
     def test_numero_journee(self):
-        journee = Journee(noms_clubs, noms_joueurs, niveaux)
+        journee = Journee()
         self.assertEqual(journee.nb_jours_restants, 38)
         journee.classement_journee()
         self.assertEqual(journee.nb_jours_restants, 37)
