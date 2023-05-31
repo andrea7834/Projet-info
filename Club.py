@@ -21,6 +21,8 @@ class Club:
         # On attribue un niveau à chaque club (en fonction des résultats de cette année)
         self.niveau = niveau
         self.points = 0
+        self.points_dom = 0
+        self.points_exte = 0
         self.buts_marques = 0
 
     def __str__(self):

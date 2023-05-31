@@ -55,7 +55,7 @@ class Ui_La_Ligue_1_Uber_Eats(QtWidgets.QMainWindow):
 
         self.saison = Saison()
         self.classement_final = saison.fin
-        self.classement_final = pd.DataFrame(data=saison.classement_final)
+        # self.classement_final = pd.DataFrame(data=saison.classement_final)
         self.resultats = QtWidgets.QTableWidget(self.centralwidget)
         self.resultats.setGeometry(QtCore.QRect(25, 400, 1133, 337))
         self.resultats.setStyleSheet("background-color: rgb(255, 255, 255);")
@@ -367,20 +367,19 @@ class Ui_La_Ligue_1_Uber_Eats(QtWidgets.QMainWindow):
         self.quitter.clicked.connect(La_Ligue_1_Uber_Eats.close)
         QtCore.QMetaObject.connectSlotsByName(La_Ligue_1_Uber_Eats)
 
+        # boutons = [self.jour1, self.jour2, self.jour3, self.jour4, self.jour5, self.jour6, self.jour7, self.jour8,
+        #            self.jour9, self.jour10, self.jour11, self.jour12, self.jour13, self.jour14, self.jour15,
+        #            self.jour16,
+        #            self.jour17, self.jour18, self.jour19, self.jour20, self.jour21, self.jour22, self.jour23,
+        #            self.jour24,
+        #            self.jour25, self.jour26, self.jour27, self.jour28, self.jour29, self.jour30, self.jour31,
+        #            self.jour32,
+        #            self.jour33, self.jour34, self.jour35, self.jour36, self.jour37, self.jour38]
         boutons = [self.jour1, self.jour2, self.jour3, self.jour4, self.jour5, self.jour6, self.jour7, self.jour8,
-                   self.jour9, self.jour10, self.jour11, self.jour12, self.jour13, self.jour14, self.jour15,
-                   self.jour16,
-                   self.jour17, self.jour18, self.jour19, self.jour20, self.jour21, self.jour22, self.jour23,
-                   self.jour24,
-                   self.jour25, self.jour26, self.jour27, self.jour28, self.jour29, self.jour30, self.jour31,
-                   self.jour32,
-                   self.jour33, self.jour34, self.jour35, self.jour36, self.jour37, self.jour38]
+                   self.jour9]
         for i in range(len(boutons)):
             boutons[i].clicked.connect(self.handle_button_clicked)
             boutons[i].setProperty('index', i + 1)
-        # if boutons.any().clicked:
-        #     indice = list(boutons).index(boutons.any().clicked)
-        #     self.load_data(indice+1)
 
     def handle_button_clicked(self):
         sender = self.sender()  # Obtenir le bouton qui a émis le signal
@@ -419,7 +418,6 @@ class Ui_La_Ligue_1_Uber_Eats(QtWidgets.QMainWindow):
                 cell_value = self.feuille.cell(row=i, column=j).value
                 item = QtWidgets.QTableWidgetItem(str(cell_value))
                 self.resultats.setItem(i - 2, j - 2, item)
-        # self.resultats.removeColumn(0)
         self.resultats.show()
 
     def quit(self):

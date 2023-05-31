@@ -138,7 +138,6 @@ class Journee:
                 J = [k for k in indices2 if ((self.dom_ext[i][k] == 0) and (k != i))]
                 if J != []:
                     j = random.choice(J)
-                    # if (i != j):
                     self.dom_ext[i][j] = 1
                     n -= 1
                     indices.remove(i)
