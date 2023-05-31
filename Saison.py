@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from Journee import Journee
-from Club import Club
-import numpy as np
 import pandas as pd
+
+from Journee import Journee
 
 """ Ce module contient la définition de la classe principale Saison servant à créer le championnat """
 

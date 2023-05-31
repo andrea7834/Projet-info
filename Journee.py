@@ -2,8 +2,9 @@
 
 import numpy as np
 import pandas as pd
+
 from Club import Club
-from Joueur import Joueur
+
 
 class Journee:
 
