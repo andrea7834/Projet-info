@@ -161,7 +161,9 @@ class Journee:
             res = pd.DataFrame(data=dico)
             res = res.sort_values(by=["Points dom", "Buts dom"], ascending=False)
             return res
-#
+
+
+
 # if __name__ == "__main__":
 #     journee = Journee()
 #     score1 = journee.classement_journee()

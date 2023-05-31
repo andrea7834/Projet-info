@@ -64,6 +64,21 @@ class Saison(Journee):
     def classement_final(self):
         return self.fin
 
+class Analyse(Saison):
+    '''Cette classe va permettre l'analyse des résultats des clubs'''
+    def clubs_avantage_domicile(self):
+
+        """Retourne les clubs pour lesquels jouer à domicile profite le plus"""
+
+        club_avantages = []
+        for club in self.Clubs:
+            avantage_domicile = club.points_dom() - club.points_exte()
+            club_avantages.append((club.nom, avantage_domicile))
+        club_avantages = sorted(club_avantages, key=lambda x: x[1], reverse=True)
+
+        return club_avantages
+
+
 
 if __name__ == "__main__":
     saison = Saison()
