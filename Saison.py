@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import Journee
+from Journee import Journee
 from Club import Club
 import numpy as np
 import pandas as pd
@@ -8,12 +8,13 @@ import pandas as pd
 """ Ce module contient la définition de la classe principale Saison servant à créer le championnat """
 
 
-class Saison(Journee.Journee):
+class Saison(Journee):
     def __init__(self):
         """On définit la classe Saison regroupant les matchs d'une journée et le récapitulatif de la saison """
         self.nom = "Ligue 1"
         self.nb_jours_total = 38
-        journee = Journee.Journee(noms_clubs, noms_joueurs, niveaux)
+        super().__init__()
+        journee = Journee()
         self.journee1 = journee.classement_journee().to_excel("jour{0}.xlsx".format(1))
         self.journee2 = journee.classement_journee().to_excel("jour{0}.xlsx".format(2))
         self.journee3 = journee.classement_journee().to_excel("jour{0}.xlsx".format(3))

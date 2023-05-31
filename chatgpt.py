@@ -1,10 +1,22 @@
 # -*- coding: utf-8 -*-
+class Joueur:
+    def __init__(self, nom_joueur):
+        """On définit la classe Joueur définissant les caractéristiques du joueur"""
+        self.nom_joueur = nom_joueur
+        self.note = 0
+        self.buts_marques_j = 0
 
-import numpy as np
-import pandas as pd
+    def marquer_but(self):
+        """On définit la méthode marquer_but mettant à jour la note et le nombre de buts marqués
+        par le joueur lorsqu'il marque un but."""
+        # La note ne peut pas dépasser 20 et on l'augmente à chaque but
+        self.note = np.maximum(20.0, self.note + random.random())
+        self.buts_marques_j += 1
 
-
-
+    def __str__(self):
+        """On définit __str__ la méthode retournant une chaine de caractères avec le nom du joueur,
+        sa note et son nombre de buts qu'il a marqué"""
+        return f"Nom du joueur : {self.nom_joueur}, Note : {self.note}, Buts marqués :{self.buts_marques_j}"
 
 class Club(Joueur):
     def __init__(self, nom_club, niveau, noms_joueurs):
@@ -26,6 +38,7 @@ class Club(Joueur):
         """On définit __str__ la méthode retournant le nom de clubs, leur nombre de poinst et le nombre de buts marqués sous forme de dataframe
         """
         return f"Noms des clubs : {self.nom_club}, Nombre de points : {self.points}, Buts marqués : {self.buts_marques}"
+
 
 class Journee(list, Club):
 
