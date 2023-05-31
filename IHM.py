@@ -3,6 +3,7 @@
 import sys
 from PyQt5 import Qt, QtCore, QtGui, QtWidgets
 from openpyxl import load_workbook
+import pandas as pd
 
 from Saison import Saison
 
@@ -53,7 +54,7 @@ class Ui_La_Ligue_1_Uber_Eats(QtWidgets.QMainWindow):
 
         self.saison = Saison()
         self.classement_final = saison.fin
-        # self.classement_final = pd.DataFrame(data=saison.classement_final)
+        self.classement_final = pd.DataFrame(data=saison.classement_final)
         self.resultats = QtWidgets.QTableWidget(self.centralwidget)
         self.resultats.setGeometry(QtCore.QRect(25, 400, 1133, 337))
         self.resultats.setStyleSheet("background-color: rgb(255, 255, 255);")

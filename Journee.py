@@ -2,6 +2,8 @@
 
 import numpy as np
 import pandas as pd
+import random
+from itertools import combinations
 
 from Club import Club
 
@@ -10,9 +12,12 @@ class Journee:
 
     def __init__(self):
         """On définit la classe Journee comprenant les rencontres de la journée """
-        self.noms_clubs = self.extraire_clubs()
-        self.noms_joueurs = self.extraire_joueurs()
-        self.niveaux = self.niveaux()
+        noms_clubs = self.extraire_clubs()
+        niveaux = self.niveaux()
+        noms_joueurs = self.extraire_joueurs()
+        self.noms_clubs = noms_clubs
+        self.noms_joueurs = noms_joueurs
+        self.niveaux = niveaux
         # super().__init__()
         self.Clubs = []
         for i in range(20):
@@ -22,8 +27,6 @@ class Journee:
         self.nb_rencontres_par_jour = 10 # Comme il y a 20 équipes alors il y a 10 matchs par jour puisque toutes les équipes jouent une fois
         self.nb_jours_restants = 38  # il y a 19 rencontres aller et 19 rencontres retour
 
-    # def points(self):
-    #     return self.points
 
     def extraire_joueurs(self):
         """Extraction de la liste des joueurs"""
@@ -71,97 +74,91 @@ class Journee:
         # On cherche l'indice de chaque club dans la liste des clubs pour accéder à ses caractéristiques
         i = self.noms_clubs.index(equipe_a)
         j = self.noms_clubs.index(equipe_b)
+        # On définit le nombre de buts marqués et encaissés en fonction du niveau de l'équipe
+        buts_marques_a = int(np.random.normal(self.niveaux, 1, 1) + 2)
+        buts_marques_b = int(np.random.normal(self.niveaux, 1, 1) + 2)
+        if buts_marques_a < 0:
+            buts_marques_a = 0
+        if buts_marques_b < 0:
+            buts_marques_b = 0
 
-        if self.dom_ext[i][j] == 0:
-            self.dom_ext[i][j] = 1
+        # On actualise le nombre de points et de buts marqués de chaque équipe
+        # Lorsqu'un club gagne, il remporte 3 points, le perdant ne gagne aucun point.
+        # S'il y a égalité, chaque équipe remporte 1 point
+        points_a, points_b = 0, 0
+        if buts_marques_a > buts_marques_b: # Le club A gagne et le club B perd
+            points_a = 3
+        elif buts_marques_a < buts_marques_b: # Le club B gagne et le club A perd
+            points_b = 3
+        else: # Il y a égalité
+            points_a, points_b = 1, 1
+        self.Clubs[i].points_dom += points_a
+        self.Clubs[i].points += points_a
+        self.Clubs[j].points_exte += points_b
+        self.Clubs[j].points += points_b
+        self.Clubs[i].buts_marques += buts_marques_a
+        self.Clubs[i].buts_marques += buts_marques_b
 
-            # On définit le nombre de buts marqués et encaissés en fonction du niveau de l'équipe
-            buts_marques_a = int(np.random.normal(self.niveaux, 1, 1) + 2)
-            buts_marques_b = int(np.random.normal(self.niveaux, 1, 1) + 2)
-            if buts_marques_a < 0:
-                buts_marques_a = 0
-            if buts_marques_b < 0:
-                buts_marques_b = 0
+        if buts_marques_a > 0:
+            for nb_butsA in range(1, buts_marques_a + 1):
+                indice_buteur = np.random.randint(1, 11)
+                # On prend un buteur au hasard dans l'équipe (sauf le gardien d'indice 0)
+                buteur = self.noms_joueurs[i][indice_buteur]
+                buteurs_a.append(buteur)
+                joueur = self.Clubs[i].Joueurs[indice_buteur]
+                joueur.marquer_but()
+        if buts_marques_b > 0:
+            for nb_butsB in range(1, buts_marques_b + 1):
+                indice_buteur = np.random.randint(1, 11)
+                buteur = self.noms_joueurs[j][indice_buteur]
+                buteurs_b.append(buteur)
+                joueur = self.Clubs[j].Joueurs[indice_buteur]
+                joueur.marquer_but()
 
-            # On actualise le nombre de points et de buts marqués de chaque équipe
-            # Lorsqu'un club gagne, il remporte 3 points, le perdant ne gagne aucun point.
-            # S'il y a égalité, chaque équipe remporte 1 point
-            points_a, points_b = 0, 0
-            if buts_marques_a > buts_marques_b: # Le club A gagne et le club B perd
-                points_a = 3
-            elif buts_marques_a < buts_marques_b: # Le club B gagne et le club A perd
-                points_b = 3
-            else: # Il y a égalité
-                points_a, points_b = 1, 1
-            self.Clubs[i].points_dom += points_a
-            self.Clubs[i].points += points_a
-            self.Clubs[j].points_exte += points_b
-            self.Clubs[j].points += points_b
-            self.Clubs[i].buts_marques += buts_marques_a
-            self.Clubs[i].buts_marques += buts_marques_b
-
-            if buts_marques_a > 0:
-                for nb_butsA in range(1, buts_marques_a + 1):
-                    indice_buteur = np.random.randint(1, 11)
-                    # On prend un buteur au hasard dans l'équipe (sauf le gardien d'indice 0)
-                    buteur = self.noms_joueurs[i][indice_buteur]
-                    buteurs_a.append(buteur)
-                    joueur = self.Clubs[i].Joueurs[indice_buteur]
-                    joueur.marquer_but()
-            if buts_marques_b > 0:
-                for nb_butsB in range(1, buts_marques_b + 1):
-                    indice_buteur = np.random.randint(1, 11)
-                    buteur = self.noms_joueurs[j][indice_buteur]
-                    buteurs_b.append(buteur)
-                    joueur = self.Clubs[j].Joueurs[indice_buteur]
-                    joueur.marquer_but()
-
-            return [buts_marques_a, buts_marques_b, points_a, points_b, buteurs_a, buteurs_b]
+        return [buts_marques_a, buts_marques_b, points_a, points_b, buteurs_a, buteurs_b, self.Clubs[i].points, self.Clubs[j].points]
 
     def classement_journee(self):
         """On définit la méthode jouer_journee récapitulant les résultats des rencontres de la journée """
         self.nb_jours_restants -= 1
-        nb_rencontres = self.nb_rencontres_par_jour
-        equipes_dom, equipes_ext, buts_dom, buts_ext, pts_dom, pts_ext, buteurs_dom, buteurs_ext, indices = [], [], [], [], [], [], [], [], []
+        indices = [i for i in range(20)]
+        dico = {"Score dom": [], "Points dom" : [], "Buteurs dom": [],
+                "Clubs à domicile": [], "Buts dom": [],
+                "Buts exté": [], "Clubs à l'extérieur": [], "Buteurs exté": [],
+                "Points exté" : [], "Score exte": []}
 
-        if self.nb_jours_restants > 0:  # On vérifie bien que ce n'est pas la fin de la saison
+        if self.nb_jours_restants >= 0:  # On vérifie bien que ce n'est pas la fin de la saison
             equipes = self.noms_clubs
 
+            n = 10
         # On choisit les rencontres de la journée
-            while nb_rencontres > 0:
-                i = np.random.randint(0, 20)
-                j = np.random.randint(0, 20)
-
-                if (i not in indices) and (j not in indices) and (i != j) and (self.dom_ext[i][j] == 0):
-                    indices.append(i)
-                    indices.append(j)
-                    [buts_marques_a, buts_marques_b, points_a, points_b, buteurs_a, buteurs_b] = self.jouer_un_match(equipes[i], equipes[j])
-                    equipes_dom.append(equipes[i])
-                    equipes_ext.append(equipes[j])
-                    buts_dom.append(buts_marques_a)
-                    buts_ext.append(buts_marques_b)
-                    pts_dom.append(points_a)
-                    pts_ext.append(points_b)
-                    buteurs_dom.append(buteurs_a)
-                    buteurs_ext.append(buteurs_b)
-                    nb_rencontres -= 1
-
-            equipes_dom = np.array([equipes_dom]).reshape(10, )
-            equipes_ext = np.array([equipes_ext]).reshape(10, )
-            buts_dom = np.array([buts_dom]).reshape(10, )
-            buts_ext = np.array([buts_ext]).reshape(10, )
-            pts_dom = np.array([pts_dom]).reshape(10, )
-            pts_ext = np.array([pts_ext]).reshape(10, )
-            buteurs_dom = np.array([buteurs_dom]).reshape(10, )
-            buteurs_ext = np.array([buteurs_ext]).reshape(10, )
-
-            dico = {"Points dom" : pts_dom, "Buteurs dom" : buteurs_dom, "Clubs à domicile" : equipes_dom, "Buts dom" : buts_dom,
-                   "Buts exté": buts_ext, "Clubs à l'extérieur": equipes_ext, "Buteurs exté": buteurs_ext, "Points exté": pts_ext}
+            while n >= 0 and indices != []:
+                i = random.choice(indices)
+                indices2 = indices.copy()
+                indices2.remove(i)
+                J = [k for k in indices2 if ((self.dom_ext[i][k] == 0) and (k != i))]
+                if J != []:
+                    j = random.choice(J)
+                    # if (i != j):
+                    self.dom_ext[i][j] = 1
+                    n -= 1
+                    indices.remove(i)
+                    indices.remove(j)
+                    [buts_marques_a, buts_marques_b, points_a, points_b, buteurs_a, buteurs_b, score_a, score_b] = self.jouer_un_match(equipes[i], equipes[j])
+                    dico["Clubs à domicile"].append(equipes[i])
+                    dico["Clubs à l'extérieur"].append(equipes[j])
+                    dico["Buts dom"].append(buts_marques_a)
+                    dico["Buts exté"].append(buts_marques_b)
+                    dico["Points dom"].append(points_a)
+                    dico["Points exté"].append(points_b)
+                    dico["Buteurs dom"].append(buteurs_a)
+                    dico["Buteurs exté"].append(buteurs_b)
+                    dico["Score dom"].append(score_a)
+                    dico["Score exte"].append(score_b)
             res = pd.DataFrame(data=dico)
-            res = res.sort_values(by=["Points dom", "Buts dom"], ascending=False)
+            res = res.sort_values(by=["Buts dom", "Score dom"], ascending=False)
             return res
 
 if __name__ == "__main__":
     journee = Journee()
-    res = journee.jouer_un_match("PSG", "OM")
-    print(res)
+    classement = journee.classement_journee()
+    print(classement)
