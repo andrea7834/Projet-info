@@ -7,18 +7,19 @@ from Joueur import Joueur
 
 class Club:
     def __init__(self, nom_club, niveau, noms_joueurs):
+
         """ On définit la classe Club qui regroupe le nom de chaque club, ses joueurs,
         son nombre de points et le nombre de buts marqués lors de la saison (initialisés à 0)
         """
+
         self.noms_joueurs = noms_joueurs
         self.nom_club = nom_club
         self.Joueurs = []
         for nom in noms_joueurs:
             self.Joueurs.append(Joueur(nom))
+
         # On attribue un niveau à chaque club (en fonction des résultats de cette année)
         self.niveau = niveau
-        self.points_dom = 0
-        self.points_exte = 0
         self.points = 0
         self.buts_marques = 0
 
