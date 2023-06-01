@@ -77,6 +77,11 @@ class Ui_La_Ligue_1_Uber_Eats(QtWidgets.QMainWindow):
         self.titre1.setStyleSheet("border: 1px solid black;\n" "border-color: rgb(134, 230, 96);")
         self.titre1.setObjectName("titre1")
 
+        self.bouton_fin = QtWidgets.QPushButton(self.centralwidget)
+        self.bouton_fin.setGeometry(QtCore.QRect(1200, 225, 150, 100))
+        self.bouton_fin.setObjectName("bouton_fin")
+        self.bouton_fin.clicked.connect(self.afficher_final)
+
         self.quitter = QtWidgets.QPushButton(self.centralwidget)
         self.quitter.setGeometry(QtCore.QRect(625, 775, 93, 28))
         self.quitter.setObjectName("quitter")
@@ -380,6 +385,25 @@ class Ui_La_Ligue_1_Uber_Eats(QtWidgets.QMainWindow):
             boutons[i].clicked.connect(self.handle_button_clicked)
             boutons[i].setProperty('index', i + 1)
 
+    def afficher_final(self):
+        self.resultats = QtWidgets.QTableWidget(self.centralwidget)
+        self.resultats.setGeometry(QtCore.QRect(25, 400, 1333, 337))
+        self.resultats.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.resultats.setObjectName("resultats")
+        self.resultats.setHorizontalHeaderLabels(("Clubs", 'Points'))
+        self.resultats.setColumnCount(4)
+        self.resultats.setRowCount(10)
+        self.resultats.setColumnWidth(0, 400)
+        self.resultats.setColumnWidth(1, 100)
+        self.resultats.setColumnWidth(2, 400)
+        self.resultats.setColumnWidth(3, 100)
+        for ligne in range(10):
+            self.resultats.setItem(ligne, 0, Qt.QTableWidgetItem(str(self.classement_final['Clubs'][ligne])))
+            self.resultats.setItem(ligne, 1, Qt.QTableWidgetItem(str(self.classement_final['Points'][ligne])))
+            self.resultats.setItem(ligne, 2, Qt.QTableWidgetItem(str(self.classement_final['Clubs'][ligne+10])))
+            self.resultats.setItem(ligne, 3, Qt.QTableWidgetItem(str(self.classement_final['Points'][ligne+10])))
+        self.resultats.show()
+
     def handle_button_clicked(self):
         sender = self.sender()  # Obtenir le bouton qui a émis le signal
         index = sender.property('index')  # Obtenir la propriété 'index' du bouton
@@ -388,8 +412,6 @@ class Ui_La_Ligue_1_Uber_Eats(QtWidgets.QMainWindow):
         self.load_data(index)
 
     def load_data(self, no_jour):
-        # self.main_layout = QtWidgets.QVBoxLayout(self.centralwidget)
-
         self.workbook = load_workbook("jour{}.xlsx".format(no_jour))
         self.feuille = self.workbook.active
 
@@ -440,6 +462,7 @@ class Ui_La_Ligue_1_Uber_Eats(QtWidgets.QMainWindow):
                                        "</style></head><body style=\" font-family:\'Times New Roman\'; font-size:26pt; font-weight:72; font-style:normal;\">\n"
                                        "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">La Ligue 1 UberEats</p></body></html>"))
         self.quitter.setText(_translate("La_Ligue_1_Uber_Eats", "Quitter"))
+        self.bouton_fin.setText(_translate("La_Ligue_1_Uber_Eats", "Classement final"))
         self.jour1.setText(_translate("La_Ligue_1_Uber_Eats", "1"))
         self.jour2.setText(_translate("La_Ligue_1_Uber_Eats", "2"))
         self.jour3.setText(_translate("La_Ligue_1_Uber_Eats", "3"))
