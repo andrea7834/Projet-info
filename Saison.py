@@ -90,8 +90,3 @@ class Analyse(Saison):
         plt.ylabel('Avantages domiciles')
         plt.title('Les équipes avantagées par les matchs à domicile')
         plt.show()
-
-
-
-if __name__ == "__main__":
-    saison = Saison()

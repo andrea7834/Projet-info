@@ -3,24 +3,26 @@
 import numpy as np
 import pandas as pd
 import random
-from itertools import combinations
-
 from Club import Club
+from Joueur import Joueur
 
 
-class Journee:
+class Journee(list, Joueur, Club):
 
     def __init__(self):
         """On définit la classe Journee comprenant les rencontres de la journée """
+        super().__init__()
         noms_clubs = self.extraire_clubs()
         niveaux = self.niveaux()
         noms_joueurs = self.extraire_joueurs()
         self.noms_clubs = noms_clubs
         self.noms_joueurs = noms_joueurs
         self.niveaux = niveaux
-        # super().__init__()
+        for i in range(len(self.noms_joueurs)):
+            Joueur.__init__(self, nom_joueur=self.noms_joueurs[i])
         self.Clubs = []
         for i in range(20):
+            Club.__init__(self, self.noms_clubs[i], self.niveaux[i], self.noms_joueurs[i])
             self.Clubs.append(Club(self.noms_clubs[i], self.niveaux[i], self.noms_joueurs[i]))
         self.dom_ext = np.eye(20)  # On définit une matrice pour les matchs joués à domicile ou à l'extérieur
         # Les lignes correspondent aux équipes jouant à domicile et les colonnes à celles jouant à l'extérieur
@@ -156,10 +158,3 @@ class Journee:
             res = pd.DataFrame(data=dico)
             res = res.sort_values(by=["Buts dom", "Score dom"], ascending=False)
             return res
-
-
-
-if __name__ == "__main__":
-    journee = Journee()
-    classement = journee.classement_journee()
-    print(classement)
